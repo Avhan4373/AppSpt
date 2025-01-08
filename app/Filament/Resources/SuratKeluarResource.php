@@ -26,14 +26,17 @@ class SuratKeluarResource extends Resource
     protected static ?string $navigationGroup = "Management Surat";
     protected static ?string $navigationLabel = "Surat Keluar";
     protected static ?string $pluralLabel = "Surat Keluar";
+    protected static ?string $pluralModelLabel = "Surat Keluar";
+    protected static ?string $modelLabel = "Surat Keluar";
 
-    protected static ?string $navigationIcon = 'heroicon-o-envelope';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\Select::make('category_id')
+                    ->label('Kategori Surat')
                 ->relationship('category', 'nomor_kategori'),
                 Forms\Components\TextInput::make('nomor_surat')
                     ->required()
@@ -48,7 +51,8 @@ class SuratKeluarResource extends Resource
                         }
                     }),
                 Forms\Components\TextInput::make('tujuan_surat'),
-                Forms\Components\DatePicker::make('tanggal_surat'),
+                Forms\Components\DatePicker::make('tanggal_surat')
+                ->default(now()),
                 Forms\Components\Textarea::make('perihal'),
             ]);
     }
@@ -106,10 +110,7 @@ class SuratKeluarResource extends Resource
 //            ->filtersFormColumns(3)
             ->actions([
                 Tables\Actions\EditAction::make(),
-            ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-
+                Tables\Actions\DeleteAction::make(),
             ])
 
             ->bulkActions([

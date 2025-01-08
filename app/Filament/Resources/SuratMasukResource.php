@@ -23,8 +23,9 @@ class SuratMasukResource extends Resource
     protected static ?string $navigationGroup = "Management Surat";
     protected static ?string $navigationLabel = "Surat Masuk";
     protected static ?string $pluralLabel = "Surat Masuk";
+    protected static ?string $modelLabel = "Surat Masuk";
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-envelope';
 
     public static function form(Form $form): Form
     {
@@ -84,6 +85,8 @@ class SuratMasukResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make()->label('Hapus'),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
