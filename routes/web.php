@@ -9,3 +9,5 @@ Route::get('/', function () {
 Route::get('/surat-masuk', [App\Http\Controllers\PdfController::class, 'generatePdf'])->name('generate.pdf');
 
 Route::get('/generate-pdf',[App\Http\Controllers\PdfController::class, 'suratKeluarPdf'])->name('suratKeluar');
+Route::get('/perjalananPdf', [App\Http\Controllers\PdfController::class, 'perjalananPdf'])
+    ->name('perjalananPdf');
