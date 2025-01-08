@@ -7,6 +7,7 @@ use App\Filament\Resources\SuratKeluarResource\Pages;
 use App\Filament\Resources\SuratKeluarResource\RelationManagers;
 use App\Models\Category;
 use App\Models\SuratKeluar;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\ExportAction;
 use Filament\Actions\Exports\Models\Export;
 use Filament\Forms;
@@ -45,7 +46,7 @@ class SuratKeluarResource extends Resource
                         if ($lastSuratKeluar) {
                             $lastNumber = intval($lastSuratKeluar->nomor_surat);
                             $nextNumber = str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
-                            return $nextNumber. '/' . date('Y');;
+                            return $nextNumber. '/' . date('Y');
                         } else {
                             return '001/' . date('Y');
                         }
@@ -62,7 +63,34 @@ class SuratKeluarResource extends Resource
         return $table
             ->headerActions([
                 ExportAction::make()
-                    ->exporter(SuratKeluarExporter::class)
+                    ->exporter(SuratKeluarExporter::class),
+                Action::make('suratKeluar')
+                    ->label('Generate PDF')
+                    ->icon('heroicon-o-document-arrow-down')
+                    ->url(function () {
+                        // Ambil query parameter terkini
+                        $queryParams = request()->query('tableFilters');
+                        $newQueryParams = [];
+                        if ($queryParams) {
+                            foreach ($queryParams as $key => $filter) {
+                                if (is_array($filter)) {
+                                    if (isset($filter['value'])) {
+                                        $newQueryParams[$key] = $filter['value'];
+                                    }
+                                    if (isset($filter['from'])) {
+                                        $newQueryParams[$key . '_dari'] = $filter['from'];
+                                    }
+                                    if (isset($filter['to'])) {
+                                        $newQueryParams[$key . '_sampai'] = $filter['to'];
+                                    }
+                                }
+                            }
+                        }
+
+                        // Redirect ke route dengan query parameter terbaru
+                        return route('suratKeluar', $newQueryParams);
+                    })
+                    ->openUrlInNewTab()
             ])
             ->columns([
                 Tables\Columns\TextColumn::make('category.nomor_kategori')

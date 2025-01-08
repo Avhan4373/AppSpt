@@ -16,6 +16,9 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Actions\Action;
+use Illuminate\Support\Arr; // Import Arr class
+use Illuminate\Support\Facades\URL;
 
 class SuratMasukResource extends Resource
 {
@@ -43,7 +46,36 @@ class SuratMasukResource extends Resource
         return $table
             ->headerActions([
                 Tables\Actions\ExportAction::make()
-                    ->exporter(SuratMasukExporter::class)
+                    ->exporter(SuratMasukExporter::class),
+                    Action::make('generatePdf')
+                    ->label('Generate PDF')
+                    ->icon('heroicon-o-document-arrow-down')
+                    ->url(function () {
+                        // Ambil query parameter terkini
+                        $queryParams = request()->query('tableFilters');
+                        $newQueryParams = [];
+                        if ($queryParams) {
+                            foreach ($queryParams as $key => $filter) {
+                                if (is_array($filter)) {
+                                    if (isset($filter['value'])) {
+                                        $newQueryParams[$key] = $filter['value'];
+                                    }
+                                    if (isset($filter['from'])) {
+                                        $newQueryParams[$key . '_dari'] = $filter['from'];
+                                    }
+                                    if (isset($filter['to'])) {
+                                        $newQueryParams[$key . '_sampai'] = $filter['to'];
+                                    }
+                                }
+                            }
+                        }
+
+                        // Redirect ke route dengan query parameter terbaru
+                        return route('generate.pdf', $newQueryParams);
+                    })
+                    ->openUrlInNewTab()
+
+
             ])
             ->columns([
                 Tables\Columns\TextColumn::make('no')
@@ -55,10 +87,10 @@ class SuratMasukResource extends Resource
             ])
             ->filters([
                 SelectFilter::make('nomor_surat')
-                    ->label('Nomor Surat')
-                    ->options(fn(): array => SuratMasuk::distinct()->pluck('nomor_surat', 'nomor_surat')->toArray())
-                    ->searchable()
-                    ->preload(),
+                ->label('Nomor Surat')
+                ->options(fn(): array => SuratMasuk::distinct()->pluck('nomor_surat', 'nomor_surat')->toArray())
+                ->searchable()
+                ->preload(),
                 SelectFilter::make('pengirim')
                     ->label('Pengirim')
                     ->options(fn(): array => SuratMasuk::distinct()->pluck('pengirim', 'pengirim')->toArray())
@@ -93,6 +125,7 @@ class SuratMasukResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
+
     }
 
     public static function getRelations(): array
