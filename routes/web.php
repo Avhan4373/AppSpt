@@ -11,3 +11,5 @@ Route::get('/surat-masuk', [App\Http\Controllers\PdfController::class, 'generate
 Route::get('/generate-pdf',[App\Http\Controllers\PdfController::class, 'suratKeluarPdf'])->name('suratKeluar');
 Route::get('/perjalananPdf', [App\Http\Controllers\PdfController::class, 'perjalananPdf'])
     ->name('perjalananPdf');
+Route::get('/downloadSk', [App\Http\Controllers\PdfController::class, 'downloadSk'])
+    ->name('downloadSk');

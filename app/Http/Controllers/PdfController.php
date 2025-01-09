@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PerjalananDinas;
+use App\Models\Sk;
 use App\Models\SuratKeluar;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -175,6 +176,49 @@ class PdfController extends Controller
         // Download PDF dengan nama yang dinamis
         return $pdf->download('laporan-perjalanan-dinas-' . now()->format('d-m-Y') . '.pdf');
     }
+
+    public function downloadSk(Request $request) {
+        // Mulai query builder
+        $query = Sk::query()
+            ->orderBy('tanggal_sk', 'asc');
+
+        // Filter berdasarkan role
+        if (!Auth::user()->hasRole('super_admin')) {
+            $query->where('created_by', Auth::id());
+        }
+
+
+        if ($request->filled('tanggal_surat_dari')) {
+            $query->whereDate('tanggal_surat', '>=', $request->input('tanggal_surat_dari'));
+        }
+
+        if ($request->filled('tanggal_surat_sampai')) {
+            $query->whereDate('tanggal_surat', '<=', $request->input('tanggal_surat_sampai'));
+        }
+
+        $sks = $query->get();
+        // Generate PDF
+        $pdf = Pdf::loadView('pdf.laporan-sk', [
+            'data' => $sks,
+            'filters' => [
+                'no_spt' => $request->input('no_spt'),
+                'tgl_surat_dari' => $request->input('tgl_surat_dari'),
+                'tgl_sampai_dari' => $request->input('tgl_sampai_dari'),
+            ],
+            'user' => Auth::user(),
+            'tanggal_cetak' => now()->format('d-m-Y')
+        ]);
+
+        // Set paper
+        $pdf->setPaper('A4', 'portrait');
+        $pdf->getOptions()->set('isPhpEnabled', true);
+        $pdf->getOptions()->set('isHtml5ParserEnabled', true);
+
+        // Download PDF dengan nama yang dinamis
+        return $pdf->download('laporan-sk-' . now()->format('d-m-Y') . '.pdf');
+
+    }
+
 
 }
 
