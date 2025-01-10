@@ -69,7 +69,7 @@
     @foreach($data as $key => $surat)
         <tr>
             <td style="text-align: center">{{ $key + 1 }}</td>
-            <td>{{ $surat->category->nomor_kategori }}/{{ $surat['nomor_surat'] }}</td>
+            <td>{{ $surat->nomor_surat_lengkap }}</td>
             <td>{{ $surat['tujuan_surat'] }}</td>
             <td style="text-align: center">{{ date('d-M-Y', strtotime($surat['tanggal_surat'])) }}</td>
             <td>{{ $surat['perihal'] }}</td>

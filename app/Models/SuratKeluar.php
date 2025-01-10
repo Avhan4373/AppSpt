@@ -34,6 +34,31 @@ class SuratKeluar extends Model
 
     public function getCombinedNomorAttribute(): string
     {
-        return ($this->category ? $this->category->nomor_kategori : '') . '/' . $this->RincianKategori->nomor_rincian_kategori .'/'.$this->nomor_surat;
+        return ($this->category ? $this->category->nomor_kategori : '') . '/' . $this->RincianKategori->nomor_rincian_kategori . '/' . $this->nomor_surat;
+    }
+
+    public static function generateNomorSurat()
+    {
+        $latestSurat = self::whereYear('created_at', date('Y'))
+            ->latest()
+            ->first();
+
+        $currentNumber = $latestSurat ? intval(substr($latestSurat->nomor_surat, 0, 3)) + 1 : 1;
+
+        return sprintf('%03d/DISTAN/%s', $currentNumber, date('Y'));
+    }
+
+    public function getFullNomorSuratAttribute()
+    {
+        $kategori = $this->category ? $this->category->nomor_kategori : '';
+        $subKategori = $this->SubKategori ? $this->SubKategori->nomor_sub_kategori : '';
+        $rincianKategori = $this->RincianKategori ? $this->RincianKategori->nomor_rincian_kategori : '';
+
+        return sprintf('%s.%s.%s/%s',
+            $kategori,
+            $subKategori,
+            $rincianKategori,
+            $this->nomor_surat
+        );
     }
 }

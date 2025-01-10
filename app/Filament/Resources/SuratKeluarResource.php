@@ -21,6 +21,9 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Filters\Filter;
+//Model
+use App\Models\SubKategori;
+
 
 class SuratKeluarResource extends Resource
 {
@@ -35,14 +38,24 @@ class SuratKeluarResource extends Resource
 
     public static function form(Form $form): Form
     {
+        $defaultCategory = Category::first();
+        $defaultSubKategori = $defaultCategory ? SubKategori::where('category_id', $defaultCategory->id)->first() : null;
+        $defaultRincianKategori = $defaultSubKategori ? RincianKategori::where('sub_kategori_id', $defaultSubKategori->id)->first() : null;
         return $form
             ->schema([
                 Forms\Components\Select::make('category_id')
                     ->label('Kategori')
-                    ->relationship('category', 'nomor_kategori')
+                    ->options(function () {
+                        return \App\Models\Category::query()
+                            ->get()
+                            ->mapWithKeys(function ($category) {
+                                return [$category->id => $category->nomor_kategori . ' - ' . $category->nama_kategori];
+                            });
+                    })
+                    ->default($defaultCategory?->id)
                     ->reactive()
+                    ->searchable()
                     ->afterStateUpdated(fn (callable $set) => $set('sub_kategori_id', null)),
-
                 Forms\Components\Select::make('sub_kategori_id')
                     ->label('Sub Kategori')
                     ->options(function (callable $get) {
@@ -51,10 +64,15 @@ class SuratKeluarResource extends Resource
                             return [];
                         }
                         return \App\Models\SubKategori::where('category_id', $categoryId)
-                            ->pluck('nama_sub_kategori', 'id');
+                            ->get()
+                            ->mapWithKeys(function ($subKategori) {
+                                return [$subKategori->id => $subKategori->nomor_sub_kategori . ' - ' . $subKategori->nama_sub_kategori];
+                            });
                     })
+                    ->default($defaultSubKategori?->id)
                     ->reactive()
                     ->required()
+                    ->searchable()
                     ->afterStateUpdated(fn (callable $set) => $set('rincian_kategori_id', null)),
 
                 Forms\Components\Select::make('rincian_kategori_id')
@@ -65,11 +83,20 @@ class SuratKeluarResource extends Resource
                             return [];
                         }
                         return \App\Models\RincianKategori::where('sub_kategori_id', $subKategoriId)
-                            ->pluck('nama_rincian_kategori', 'id');
+                            ->get()
+                            ->mapWithKeys(function ($RincianKatgori) {
+                                return [$RincianKatgori->id => $RincianKatgori->nomor_rincian_kategori . ' - ' . $RincianKatgori->nama_rincian_kategori];
+                            });
+//                            ->pluck('nama_rincian_kategori', 'id');
                     })
+                    ->default($defaultRincianKategori?->id)
+                    ->searchable()
                     ->required(),
 
                 Forms\Components\TextInput::make('nomor_surat')
+                    ->default(fn () => SuratKeluar::generateNomorSurat())
+                    ->disabled()
+                    ->dehydrated()
                     ->required(),
 
                 Forms\Components\TextInput::make('tujuan_surat')
