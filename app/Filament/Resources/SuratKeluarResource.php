@@ -6,6 +6,7 @@ use App\Filament\Exports\SuratKeluarExporter;
 use App\Filament\Resources\SuratKeluarResource\Pages;
 use App\Filament\Resources\SuratKeluarResource\RelationManagers;
 use App\Models\Category;
+use App\Models\RincianKategori;
 use App\Models\SuratKeluar;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\ExportAction;
@@ -37,24 +38,48 @@ class SuratKeluarResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('category_id')
-                    ->label('Kategori Surat')
-                ->relationship('category', 'nomor_kategori'),
-                Forms\Components\TextInput::make('nomor_surat')
-                    ->required()
-                    ->default(function () {
-                        $lastSuratKeluar = SuratKeluar::latest('nomor_surat')->first();
-                        if ($lastSuratKeluar) {
-                            $lastNumber = intval($lastSuratKeluar->nomor_surat);
-                            $nextNumber = str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
-                            return $nextNumber. '/' . date('Y');
-                        } else {
-                            return '001/' . date('Y');
+                    ->label('Kategori')
+                    ->relationship('category', 'nomor_kategori')
+                    ->reactive()
+                    ->afterStateUpdated(fn (callable $set) => $set('sub_kategori_id', null)),
+
+                Forms\Components\Select::make('sub_kategori_id')
+                    ->label('Sub Kategori')
+                    ->options(function (callable $get) {
+                        $categoryId = $get('category_id');
+                        if (!$categoryId) {
+                            return [];
                         }
-                    }),
-                Forms\Components\TextInput::make('tujuan_surat'),
+                        return \App\Models\SubKategori::where('category_id', $categoryId)
+                            ->pluck('nama_sub_kategori', 'id');
+                    })
+                    ->reactive()
+                    ->required()
+                    ->afterStateUpdated(fn (callable $set) => $set('rincian_kategori_id', null)),
+
+                Forms\Components\Select::make('rincian_kategori_id')
+                    ->label('Rincian Kategori')
+                    ->options(function (callable $get) {
+                        $subKategoriId = $get('sub_kategori_id');
+                        if (!$subKategoriId) {
+                            return [];
+                        }
+                        return \App\Models\RincianKategori::where('sub_kategori_id', $subKategoriId)
+                            ->pluck('nama_rincian_kategori', 'id');
+                    })
+                    ->required(),
+
+                Forms\Components\TextInput::make('nomor_surat')
+                    ->required(),
+
+                Forms\Components\TextInput::make('tujuan_surat')
+                    ->required(),
+
                 Forms\Components\DatePicker::make('tanggal_surat')
-                ->default(now()),
-                Forms\Components\Textarea::make('perihal'),
+                    ->required(),
+
+                Forms\Components\TextInput::make('perihal')
+                    ->required(),
             ]);
     }
 
@@ -93,9 +118,15 @@ class SuratKeluarResource extends Resource
                     ->openUrlInNewTab()
             ])
             ->columns([
-                Tables\Columns\TextColumn::make('category.nomor_kategori')
-                ->sortable()
-                ->searchable(),
+                Tables\Columns\TextColumn::make('SubKategori.nomor_sub_kategori')
+                    ->label('Sub Kategori')
+                    ->formatStateUsing(function($record){
+                        return
+                            $record->Category->nomor_kategori .'.'.
+                            $record->SubKategori->nomor_sub_kategori . '.'.
+                            $record->RincianKategori->nomor_rincian_kategori
+                            ?? '-';
+                    }),
                 Tables\Columns\TextColumn::make('nomor_surat')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('tujuan_surat')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('tanggal_surat')->sortable()->searchable(),

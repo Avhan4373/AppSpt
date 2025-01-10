@@ -13,8 +13,23 @@ return [
     */
     'show_warnings' => false,   // Throw an Exception on warnings from dompdf
 
-    'public_path' => null,  // Override the public path if needed
-
+//    'public_path' => null,  // Override the public path if needed
+    'public_path' => base_path('public'),
+    'root' => base_path(),
+    'chroot' => realpath(base_path()),
+    'temp_dir' => sys_get_temp_dir(),
+    'font_dir' => storage_path('fonts'),
+    'font_cache' => storage_path('fonts'),
+    'enable_font_subsetting' => false,
+    'pdf_backend' => 'CPDF',
+    'default_media_type' => 'screen',
+    'default_paper_size' => 'a4',
+    'default_font' => 'sans-serif',
+    'dpi' => 96,
+    'enable_php' => true,
+    'enable_javascript' => true,
+    'enable_remote' => true,
+    'font_height_ratio' => 1.1,
     /*
      * Dejavu Sans font is missing glyphs for converted entities, turn it off if you need to show € and £.
      */

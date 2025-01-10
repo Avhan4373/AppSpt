@@ -27,10 +27,11 @@ class SuratKeluar extends BaseWidget
                 ->chart([1,3,5,10,20,40])
                 ->color('success'),
             Stat::make('Surat Keluar', $kode_kategori.'/'.$lastNomor)
-            ->description('Nomor Terakhir Surat Keluar')
-            ->descriptionIcon('heroicon-o-inbox')
+                ->description('Nomor Terakhir Surat Keluar')
+                ->descriptionIcon('heroicon-o-inbox')
                 ->chart([1,3,5,10,20,40])
-            ->color('danger'),
+                ->color('danger')
+                ->extraAttributes(['class' => 'text-xs']),
             Stat::make('Surat Masuk Terakhir', $nomorMasuk)
                 ->description('Nomor Terakhir Surat Masuk')
                 ->descriptionIcon('heroicon-o-inbox-arrow-down')
