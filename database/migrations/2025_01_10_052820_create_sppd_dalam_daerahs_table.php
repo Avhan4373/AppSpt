@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('perjalanan_dinas', function (Blueprint $table) {
+        Schema::create('sppd_dalam_daerahs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete(); // Relasi ke tabel users
-            $table->string('no_spt')->unique();
-            $table->text('uraian');
-            $table->date('tgl_berangkat');
-            $table->date('tgl_kembali');
+            $table->string('nomor_spt');
+            $table->string('tujuan_spt');
+            $table->date('tanggal_spt');
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('perjalanan_dinas');
+        Schema::dropIfExists('sppd_dalam_daerahs');
     }
 };
