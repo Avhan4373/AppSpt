@@ -13,12 +13,21 @@ class SppdDalamDaerah extends BaseWidget
         $lastSptDalamDaerah = \App\Models\SppdDalamDaerah::latest('created_at')
             ->first();
         $nomorSppdDalamDaerah = $lastSptDalamDaerah ? $lastSptDalamDaerah->nomor_spt : 'Belum ada SPT';
+        $lastSptLuarDaerah = \App\Models\SppdLuarDaerah::latest('created_at')
+            ->first();
+        $nomorSppdLuarDaerah = $lastSptLuarDaerah ? $lastSptLuarDaerah->nomor_spt : 'Belum ada SPT';
         return [
             Stat::make('SPT Dalam Daerah', $nomorSppdDalamDaerah)
                 ->description('Nomor Terakhir SPT Dalam Daerah')
                 ->descriptionIcon('heroicon-o-inbox-arrow-down')
                 ->chart([1,3,5,10,20,40])
-                ->color('primary'),
+                ->color('info'),
+            Stat::make('SPT Luar Daerah', $nomorSppdLuarDaerah)
+                ->description('Nomor Terakhir SPT Luar Daerah')
+                ->descriptionIcon('heroicon-o-inbox-arrow-down')
+                ->chart([1,3,5,10,20,40])
+                ->color('success'),
         ];
+
     }
 }

@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class SppdDalamDaerah extends Model
+class SppdLuarDaerah extends Model
 {
     use HasFactory;
     protected $fillable = [
@@ -15,7 +15,7 @@ class SppdDalamDaerah extends Model
         'tujuan_spt',
         'perihal',
         'tanggal_spt'
-        ];
+    ];
     protected $casts = [
         'tanggal_spt' => 'date',
     ];
@@ -25,14 +25,14 @@ class SppdDalamDaerah extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function sppdDalamDaerahs()
+    public function sppdLuarDaerahs()
     {
-        return $this->hasMany(SppdDalamDaerah::class);
+        return $this->hasMany(SppdLuarDaerah::class);
     }
     public static function generateNomorSpt()
     {
         // Ambil nomor terakhir dari database
-        $lastRecord = SppdDalamDaerah::orderBy('id', 'desc')->first();
+        $lastRecord = SppdLuarDaerah::orderBy('id', 'desc')->first();
 
         // Jika tidak ada data sebelumnya, mulai dari 001
         if (!$lastRecord || !$lastRecord->nomor_spt) {
@@ -50,7 +50,7 @@ class SppdDalamDaerah extends Model
         }
 
         // Format nomor sesuai kebutuhan
-        $nomorSpt = "800.1.11.1/{$newNumber}/DD/" . date('Y'); // Tahun dinamis
+        $nomorSpt = "800.1.11.1/{$newNumber}/LD/" . date('Y'); // Tahun dinamis
 
         return $nomorSpt;
     }
@@ -59,11 +59,9 @@ class SppdDalamDaerah extends Model
     protected static function boot()
     {
         parent::boot();
-
         // Generate nomor_spt secara otomatis sebelum data disimpan
         static::creating(function ($model) {
             $model->nomor_spt = self::generateNomorSpt();
         });
     }
-
 }

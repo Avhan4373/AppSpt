@@ -5,6 +5,7 @@
     use App\Models\PerjalananDinas;
     use App\Models\Sk;
     use App\Models\SppdDalamDaerah;
+    use App\Models\SppdLuarDaerah;
     use App\Models\SuratKeluar;
     use Illuminate\Http\Request;
     use Barryvdh\DomPDF\Facade\Pdf;
@@ -21,7 +22,7 @@
                 ->orderBy('tanggal_surat', 'asc');
 
             if (!Auth::user()->hasRole('super_admin')) {
-                $query->where('created_by', Auth::id());
+                $query->where('user_id', Auth::id());
             }
 
             if ($request->filled('nomor_surat')) {
@@ -75,7 +76,7 @@
                 ->orderBy('nomor_surat', 'asc');
 
             if (!Auth::user()->hasRole('super_admin')) {
-                $query->where('created_by', Auth::id());
+                $query->where('user_id', Auth::id());
             }
 
             if ($request->filled('category')) {
@@ -126,59 +127,6 @@
         }
 
 
-        public function perjalananPdf(Request $request) {
-            // Mulai query builder
-            $query = PerjalananDinas::query()
-                ->with('user') // Eager load relasi user
-                ->orderBy('tgl_berangkat', 'asc');
-
-            // Filter berdasarkan role
-            if (!Auth::user()->hasRole('super_admin')) {
-                $query->where('user_id', Auth::id());
-            }
-
-            // Apply filters if they exist
-            if ($request->filled('no_spt')) {
-                $query->where('no_spt', 'like', '%' . $request->input('no_spt') . '%');
-            }
-
-            if ($request->filled('tgl_berangkat_dari')) {
-                $query->whereDate('tgl_berangkat', '>=', $request->input('tgl_berangkat_dari'));
-            }
-
-            if ($request->filled('tgl_berangkat_sampai')) {
-                $query->whereDate('tgl_berangkat', '<=', $request->input('tgl_berangkat_sampai'));
-            }
-
-            if ($request->filled('user_id') && Auth::user()->hasRole('super_admin')) {
-                $query->where('user_id', $request->input('user_id'));
-            }
-
-            // Get data
-            $perjalanans = $query->get();
-
-            // Generate PDF
-            $pdf = Pdf::loadView('pdf.perjalanan-dinas', [
-                'perjalanans' => $perjalanans,
-                'filters' => [
-                    'no_spt' => $request->input('no_spt'),
-                    'tgl_berangkat_dari' => $request->input('tgl_berangkat_dari'),
-                    'tgl_berangkat_sampai' => $request->input('tgl_berangkat_sampai'),
-                    'user_id' => $request->input('user_id'),
-                ],
-                'user' => Auth::user(),
-                'tanggal_cetak' => now()->format('d-m-Y')
-            ]);
-
-            // Set paper
-            $pdf->setPaper('A4', 'landscape');
-            $pdf->getOptions()->set('isPhpEnabled', true);
-            $pdf->getOptions()->set('isHtml5ParserEnabled', true);
-
-            // Download PDF dengan nama yang dinamis
-            return $pdf->download('laporan-perjalanan-dinas-' . now()->format('d-m-Y') . '.pdf');
-        }
-
         public function downloadSk(Request $request) {
             // Mulai query builder
             $query = Sk::query()
@@ -186,7 +134,7 @@
 
             // Filter berdasarkan role
             if (!Auth::user()->hasRole('super_admin')) {
-                $query->where('created_by', Auth::id());
+                $query->where('user_id', Auth::id());
             }
 
 
@@ -231,7 +179,7 @@
 
             // Filter berdasarkan role
             if (!Auth::user()->hasRole('super_admin')) {
-                $query->where('created_by', Auth::id());
+                $query->where('user_id', Auth::id());
             }
 
             // Apply filters if they exist
@@ -277,6 +225,60 @@
             return $pdf->download('laporan-sppd-dalam-daerah-' . now()->format('d-m-Y') . '.pdf');
         }
 
+        public function pdfluardaerah(Request $request)
+        {
+            \Log::info('Query Parameters:', $request->all());
+            // Mulai query builder
+            $query = SppdLuarDaerah::query()
+                ->with('user') // Eager load relasi user
+                ->orderBy('tanggal_spt', 'asc');
 
+            // Filter berdasarkan role
+            if (!Auth::user()->hasRole('super_admin')) {
+                $query->where('user_id', Auth::id());
+            }
+
+            // Apply filters if they exist
+            if ($request->filled('nomor_spt')) {
+                $query->where('nomor_spt', 'like', '%' . $request->input('nomor_spt') . '%');
+            }
+
+            if ($request->filled('user_id')) {
+                $query->where('user_id', $request->input('user_id'));
+            }
+
+            if ($request->filled('tanggal_dari')) {
+                $query->whereDate('tanggal_spt', '>=', $request->input('tanggal_dari'));
+            }
+
+            if ($request->filled('tanggal_sampai')) {
+                $query->whereDate('tanggal_spt', '<=', $request->input('tanggal_sampai'));
+            }
+
+            // Get data
+            $sppdLuarDaerahs = $query->get();
+
+            \Log::info('Filtered Data:', $sppdLuarDaerahs->toArray());
+            // Generate PDF
+            $pdf = Pdf::loadView('pdf.sppd_luar_daerah', [
+                'sppdLuarDaerahs' => $sppdLuarDaerahs,
+                'filters' => [
+                    'nomor_spt' => $request->input('nomor_spt'),
+                    'user_id' => $request->input('user_id'),
+                    'tanggal_dari' => $request->input('tanggal_dari'),
+                    'tanggal_sampai' => $request->input('tanggal_sampai'),
+                ],
+                'user' => Auth::user(),
+                'tanggal_cetak' => now()->format('d-m-Y')
+            ]);
+
+            // Set paper
+            $pdf->setPaper('A4', 'portrait');
+            $pdf->getOptions()->set('isPhpEnabled', true);
+            $pdf->getOptions()->set('isHtml5ParserEnabled', true);
+
+            // Download PDF dengan nama yang dinamis
+            return $pdf->download('laporan-sppd-luar-daerah-' . now()->format('d-m-Y') . '.pdf');
+        }
     }
 

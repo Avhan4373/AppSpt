@@ -2,33 +2,32 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\SppdDalamDaerahResource\Pages;
-use App\Filament\Resources\SppdDalamDaerahResource\RelationManagers;
+use App\Filament\Resources\SppdLuarDaerahResource\Pages;
+use App\Filament\Resources\SppdLuarDaerahResource\RelationManagers;
 use App\Models\SppdDalamDaerah;
+use App\Models\SppdLuarDaerah;
+use App\Models\User;
 use Filament\Forms;
-use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Filters\Filter;
-use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Support\Facades\Auth;
 use Filament\Tables\Actions\Action;
 
-class SppdDalamDaerahResource extends Resource
+class SppdLuarDaerahResource extends Resource
 {
-    protected static ?string $model = SppdDalamDaerah::class;
+    protected static ?string $model = SppdLuarDaerah::class;
+
     protected static ?string $navigationGroup = "Perjalanan Dinas";
-    protected static ?string $navigationLabel = "SPT Dalam Daerah";
-    protected static ?string $pluralLabel = "SPT Dalam Daerah";
-    protected static ?string $pluralModelLabel = "SPT Dalam Daerah";
-    protected static ?string $modelLabel = "SPT Dalam Daerah";
+    protected static ?string $navigationLabel = "SPT Luar Daerah";
+    protected static ?string $pluralLabel = "SPT Luar Daerah";
+    protected static ?string $pluralModelLabel = "SPT Luar Daerah";
+    protected static ?string $modelLabel = "SPT Luar Daerah";
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -36,7 +35,6 @@ class SppdDalamDaerahResource extends Resource
     {
         $user = auth()->user();
         $isAdminOrSuper = $user->hasRole(['super_admin', 'admin']); // Cek apakah user adalah admin atau super_admin
-
         $userField = $isAdminOrSuper
             ? Forms\Components\Select::make('user_id')
                 ->label('User')
@@ -61,13 +59,11 @@ class SppdDalamDaerahResource extends Resource
             : Forms\Components\Hidden::make('user_id')
                 ->default($user->id)
                 ->required();
-
-
         return $form
             ->schema([
                 $userField,
                 Forms\Components\TextInput::make('nomor_spt')
-                    ->default(SppdDalamDaerah::generateNomorSpt()) // Generate nomor otomatis
+                    ->default(SppdLuarDaerah::generateNomorSpt()) // Generate nomor otomatis
                     ->required()
                     ->disabled() // Nonaktifkan input agar tidak bisa diubah manual
                     ->dehydrated(), // Pastikan nilai default dikirim ke database
@@ -77,7 +73,7 @@ class SppdDalamDaerahResource extends Resource
                     ->required(),
                 Forms\Components\Textarea::make('perihal')
                     ->required(),
-            ]);
+        ]);
     }
 
     public static function table(Table $table): Table
@@ -136,7 +132,7 @@ class SppdDalamDaerahResource extends Resource
                     }),
             ])
             ->headerActions([
-                Action::make('pdfdalamdaerah')
+                Action::make('pdfluardaerah')
                     ->label('Download PDF')
                     ->icon('heroicon-o-document-arrow-down')
                     ->url(function () {
@@ -162,13 +158,13 @@ class SppdDalamDaerahResource extends Resource
                         }
 
                         // Redirect ke route dengan query parameter terbaru
-                        return route('pdfdalamdaerah', $newQueryParams);
+                        return route('pdfluardaerah', $newQueryParams);
                     })
                     ->openUrlInNewTab(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
-                    ->visible(function (SppdDalamDaerah $record) {
+                    ->visible(function (SppdLuarDaerah $record) {
                         // Hanya tampilkan tombol edit jika user adalah pemilik data atau admin/super_admin
                         return auth()->user()->hasRole(['super_admin', 'admin']) || $record->user_id === auth()->id();
                     }),
@@ -176,11 +172,9 @@ class SppdDalamDaerahResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
-                ])
+                ]),
             ]);
-
     }
-
 
     public static function getRelations(): array
     {
@@ -192,11 +186,12 @@ class SppdDalamDaerahResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSppdDalamDaerahs::route('/'),
-            'create' => Pages\CreateSppdDalamDaerah::route('/create'),
-            'edit' => Pages\EditSppdDalamDaerah::route('/{record}/edit'),
+            'index' => Pages\ListSppdLuarDaerahs::route('/'),
+            'create' => Pages\CreateSppdLuarDaerah::route('/create'),
+            'edit' => Pages\EditSppdLuarDaerah::route('/{record}/edit'),
         ];
     }
+
     public static function getEloquentQuery(): Builder
     {
         $query = parent::getEloquentQuery();
@@ -208,5 +203,4 @@ class SppdDalamDaerahResource extends Resource
 
         return $query;
     }
-
 }

@@ -16,3 +16,4 @@ Route::get('/downloadSk', [App\Http\Controllers\PdfController::class, 'downloadS
     ->name('downloadSk');
 
 Route::get('/pdfdalamdaerah', [PdfController::class, 'pdfdalamdaerah'])->name('pdfdalamdaerah');
+Route::get('/pdfluardaerah', [PdfController::class, 'pdfluardaerah'])->name('pdfluardaerah');

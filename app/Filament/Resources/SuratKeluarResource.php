@@ -114,8 +114,8 @@ class SuratKeluarResource extends Resource
     {
         return $table
             ->headerActions([
-                Action::make('pdfdalamdaerah')
-                    ->label('Download PDF')
+                Action::make('suratKeluarPdf')
+                    ->label('Download Surat Keluar')
                     ->icon('heroicon-o-document-arrow-down')
                     ->url(function () {
                         // Ambil query parameter terkini
@@ -140,7 +140,7 @@ class SuratKeluarResource extends Resource
                         }
 
                         // Redirect ke route dengan query parameter terbaru
-                        return route('pdfdalamdaerah', $newQueryParams);
+                        return route('suratKeluar', $newQueryParams);
                     })
                     ->openUrlInNewTab(),
             ])

@@ -5,17 +5,19 @@ namespace App\Filament\Widgets;
 use App\Models\User;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
+use Illuminate\Support\HtmlString;
 
 class SuratKeluar extends BaseWidget
 {
     protected function getStats(): array
     {
-        $lastSuratKeluar = \App\Models\SuratKeluar::with('category')
+        // Ambil data surat keluar terakhir beserta relasinya
+        $lastSuratKeluar = \App\Models\SuratKeluar::with(['category', 'SubKategori', 'RincianKategori'])
             ->latest('created_at')
             ->first();
 
-        $lastNomor = $lastSuratKeluar ? $lastSuratKeluar->nomor_surat : 'Belum ada surat';
-        $kode_kategori = $lastSuratKeluar ? $lastSuratKeluar->category->nomor_kategori : 'Belum ada kategori';
+        // Gunakan method getFullNomorSuratAttribute untuk mendapatkan nomor lengkap
+        $nomorLengkap = $lastSuratKeluar ? "<span style='font-size: 25px;'>{$lastSuratKeluar->getFullNomorSuratAttribute()}</span>" : 'Belum ada surat';
 
         $lastSuratMasuk = \App\Models\SuratMasuk::latest('created_at')
             ->first();
@@ -27,12 +29,14 @@ class SuratKeluar extends BaseWidget
                 ->descriptionIcon('heroicon-o-users')
                 ->chart([1,3,5,10,20,40])
                 ->color('success'),
-            Stat::make('Surat Keluar', $kode_kategori.'/'.$lastNomor)
+            Stat::make('Surat Keluar', new HtmlString($nomorLengkap)) // Gunakan HtmlString untuk render HTML
                 ->description('Nomor Terakhir Surat Keluar')
                 ->descriptionIcon('heroicon-o-inbox')
                 ->chart([1,3,5,10,20,40])
                 ->color('danger')
-                ->extraAttributes(['class' => 'text-xs']),
+                ->extraAttributes([
+                    'class' => 'small-text', // Gunakan class CSS yang sudah dibuat
+                ]),
             Stat::make('Surat Masuk Terakhir', $nomorMasuk)
                 ->description('Nomor Terakhir Surat Masuk')
                 ->descriptionIcon('heroicon-o-inbox-arrow-down')
