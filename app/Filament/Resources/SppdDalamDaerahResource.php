@@ -35,42 +35,31 @@ class SppdDalamDaerahResource extends Resource
     public static function form(Form $form): Form
     {
         $user = auth()->user();
-        $isAdminOrSuper = $user->hasRole(['super_admin', 'admin']); // Cek apakah user adalah admin atau super_admin
+        $isAdminOrSuper = $user->hasRole(['super_admin', 'admin']);
 
-        $userField = $isAdminOrSuper
-            ? Forms\Components\Select::make('user_id')
-                ->label('User')
-                ->options(
-                    User::query()
-                        ->when($user->hasRole('admin'), function ($query) {
-                            // Jika admin, tampilkan hanya user biasa
-                            return $query->whereHas('roles', function ($q) {
-                                $q->where('name', 'user');
-                            });
-                        })
-                        ->when($user->hasRole('super_admin'), function ($query) {
-                            // Jika super_admin, tampilkan semua user kecuali super_admin lain
-                            return $query->whereHas('roles', function ($q) {
-                                $q->whereIn('name', ['admin', 'user']);
-                            });
-                        })
-                        ->pluck('name', 'id')
-                )
-                ->searchable()
-                ->required()
-            : Forms\Components\Hidden::make('user_id')
-                ->default($user->id)
-                ->required();
-
-
+        // Field untuk memilih user (single atau multiple)
+        $userField = Forms\Components\Select::make('user_ids')
+            ->label('Pilih User')
+            ->options(User::pluck('name', 'id'))
+            ->multiple()
+            ->searchable()
+            ->required()
+            ->afterStateHydrated(function ($component, $state) {
+                if (is_string($state)) {
+                    $decodedState = json_decode($state, true);
+                    if (is_array($decodedState)) {
+                        $component->state($decodedState);
+                    }
+                }
+            });
         return $form
             ->schema([
-                $userField,
+                $userField, // Field untuk memilih user
                 Forms\Components\TextInput::make('nomor_spt')
-                    ->default(SppdDalamDaerah::generateNomorSpt()) // Generate nomor otomatis
+                    ->default(SppdDalamDaerah::generateNomorSpt())
                     ->required()
-                    ->disabled() // Nonaktifkan input agar tidak bisa diubah manual
-                    ->dehydrated(), // Pastikan nilai default dikirim ke database
+                    ->disabled()
+                    ->dehydrated(),
                 Forms\Components\TextInput::make('tujuan_spt')
                     ->required(),
                 Forms\Components\DatePicker::make('tanggal_spt')
@@ -85,11 +74,36 @@ class SppdDalamDaerahResource extends Resource
         $isAdminOrSuper = auth()->user()->hasRole(['super_admin', 'admin']);
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user.name')->label('Nama')->searchable(),
+                Tables\Columns\TextColumn::make('user_ids')
+                    ->label('User Terpilih')
+                    ->formatStateUsing(function ($state) {
+                        // Jika state adalah string JSON, decode terlebih dahulu
+                        if (is_string($state)) {
+                            $userIds = json_decode($state, true);
+                        } elseif (is_array($state)) {
+                            $userIds = $state;
+                        } else {
+                            return 'Tidak ada user terpilih';
+                        }
+
+                        // Pastikan userIds adalah array dan tidak kosong
+                        if (!is_array($userIds) || empty($userIds)) {
+                            return 'Tidak ada user terpilih';
+                        }
+
+                        // Ambil data user
+                        $users = User::whereIn('id', $userIds)->get();
+
+                        if ($users->isEmpty()) {
+                            return 'Tidak ada user terpilih';
+                        }
+
+                        return $users->pluck('name')->join(', ');
+                    }),
                 Tables\Columns\TextColumn::make('nomor_spt')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('tujuan_spt')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('perihal')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('tanggal_spt')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('perihal')->sortable()->searchable(),
             ])
             ->filters([
                 // Filter untuk nomor_spt
@@ -172,6 +186,12 @@ class SppdDalamDaerahResource extends Resource
                         // Hanya tampilkan tombol edit jika user adalah pemilik data atau admin/super_admin
                         return auth()->user()->hasRole(['super_admin', 'admin']) || $record->user_id === auth()->id();
                     }),
+                // Tambahkan action untuk cetak
+                Action::make('print')
+                    ->label('Cetak')
+                    ->icon('heroicon-o-printer')
+                    ->url(fn (SppdDalamDaerah $record) => route('sppd.dalam-daerah.print', $record))
+                    ->openUrlInNewTab(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -201,9 +221,12 @@ class SppdDalamDaerahResource extends Resource
     {
         $query = parent::getEloquentQuery();
 
-        // Jika user bukan admin atau super_admin, batasi data berdasarkan user_id
         if (!auth()->user()->hasRole(['super_admin', 'admin'])) {
-            $query->where('user_id', auth()->id());
+            $userId = (string)auth()->id(); // Convert ke string untuk konsistensi
+            $query->where(function ($query) use ($userId) {
+                $query->where('user_id', $userId)
+                    ->orWhereRaw('JSON_CONTAINS(user_ids, ?)', ['"' . $userId . '"']);
+            });
         }
 
         return $query;

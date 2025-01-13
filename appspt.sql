@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 09 Jan 2025 pada 09.52
+-- Waktu pembuatan: 13 Jan 2025 pada 12.24
 -- Versi server: 10.4.28-MariaDB
 -- Versi PHP: 8.2.4
 
@@ -39,9 +39,9 @@ CREATE TABLE `cache` (
 
 INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
 ('illuminate:queue:restart', 'i:1736266345;', 2051626345),
-('livewire-rate-limiter:a17961fa74e9275d529f489537f179c05d50c2f3', 'i:1;', 1736397465),
-('livewire-rate-limiter:a17961fa74e9275d529f489537f179c05d50c2f3:timer', 'i:1736397465;', 1736397465),
-('spatie.permission.cache', 'a:3:{s:5:\"alias\";a:4:{s:1:\"a\";s:2:\"id\";s:1:\"b\";s:4:\"name\";s:1:\"c\";s:10:\"guard_name\";s:1:\"r\";s:5:\"roles\";}s:11:\"permissions\";a:78:{i:0;a:4:{s:1:\"a\";i:1;s:1:\"b\";s:9:\"view_role\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:1;a:4:{s:1:\"a\";i:2;s:1:\"b\";s:13:\"view_any_role\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:2;a:4:{s:1:\"a\";i:3;s:1:\"b\";s:11:\"create_role\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:3;a:4:{s:1:\"a\";i:4;s:1:\"b\";s:11:\"update_role\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:4;a:4:{s:1:\"a\";i:5;s:1:\"b\";s:11:\"delete_role\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:5;a:4:{s:1:\"a\";i:6;s:1:\"b\";s:15:\"delete_any_role\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:6;a:4:{s:1:\"a\";i:7;s:1:\"b\";s:13:\"view_category\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:7;a:4:{s:1:\"a\";i:8;s:1:\"b\";s:17:\"view_any_category\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:8;a:4:{s:1:\"a\";i:9;s:1:\"b\";s:15:\"create_category\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:9;a:4:{s:1:\"a\";i:10;s:1:\"b\";s:15:\"update_category\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:10;a:4:{s:1:\"a\";i:11;s:1:\"b\";s:16:\"restore_category\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:11;a:4:{s:1:\"a\";i:12;s:1:\"b\";s:20:\"restore_any_category\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:12;a:4:{s:1:\"a\";i:13;s:1:\"b\";s:18:\"replicate_category\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:13;a:4:{s:1:\"a\";i:14;s:1:\"b\";s:16:\"reorder_category\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:14;a:4:{s:1:\"a\";i:15;s:1:\"b\";s:15:\"delete_category\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:15;a:4:{s:1:\"a\";i:16;s:1:\"b\";s:19:\"delete_any_category\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:16;a:4:{s:1:\"a\";i:17;s:1:\"b\";s:21:\"force_delete_category\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:17;a:4:{s:1:\"a\";i:18;s:1:\"b\";s:25:\"force_delete_any_category\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:18;a:4:{s:1:\"a\";i:19;s:1:\"b\";s:22:\"view_perjalanan::dinas\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:19;a:4:{s:1:\"a\";i:20;s:1:\"b\";s:26:\"view_any_perjalanan::dinas\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:3:{i:0;i:1;i:1;i:2;i:2;i:3;}}i:20;a:4:{s:1:\"a\";i:21;s:1:\"b\";s:24:\"create_perjalanan::dinas\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:3:{i:0;i:1;i:1;i:2;i:2;i:3;}}i:21;a:4:{s:1:\"a\";i:22;s:1:\"b\";s:24:\"update_perjalanan::dinas\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:3:{i:0;i:1;i:1;i:2;i:2;i:3;}}i:22;a:4:{s:1:\"a\";i:23;s:1:\"b\";s:25:\"restore_perjalanan::dinas\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:23;a:4:{s:1:\"a\";i:24;s:1:\"b\";s:29:\"restore_any_perjalanan::dinas\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:24;a:4:{s:1:\"a\";i:25;s:1:\"b\";s:27:\"replicate_perjalanan::dinas\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:25;a:4:{s:1:\"a\";i:26;s:1:\"b\";s:25:\"reorder_perjalanan::dinas\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:26;a:4:{s:1:\"a\";i:27;s:1:\"b\";s:24:\"delete_perjalanan::dinas\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:27;a:4:{s:1:\"a\";i:28;s:1:\"b\";s:28:\"delete_any_perjalanan::dinas\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:28;a:4:{s:1:\"a\";i:29;s:1:\"b\";s:30:\"force_delete_perjalanan::dinas\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:29;a:4:{s:1:\"a\";i:30;s:1:\"b\";s:34:\"force_delete_any_perjalanan::dinas\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:30;a:4:{s:1:\"a\";i:31;s:1:\"b\";s:18:\"view_surat::keluar\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:31;a:4:{s:1:\"a\";i:32;s:1:\"b\";s:22:\"view_any_surat::keluar\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:32;a:4:{s:1:\"a\";i:33;s:1:\"b\";s:20:\"create_surat::keluar\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:33;a:4:{s:1:\"a\";i:34;s:1:\"b\";s:20:\"update_surat::keluar\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:34;a:4:{s:1:\"a\";i:35;s:1:\"b\";s:21:\"restore_surat::keluar\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:35;a:4:{s:1:\"a\";i:36;s:1:\"b\";s:25:\"restore_any_surat::keluar\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:36;a:4:{s:1:\"a\";i:37;s:1:\"b\";s:23:\"replicate_surat::keluar\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:37;a:4:{s:1:\"a\";i:38;s:1:\"b\";s:21:\"reorder_surat::keluar\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:38;a:4:{s:1:\"a\";i:39;s:1:\"b\";s:20:\"delete_surat::keluar\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:39;a:4:{s:1:\"a\";i:40;s:1:\"b\";s:24:\"delete_any_surat::keluar\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:40;a:4:{s:1:\"a\";i:41;s:1:\"b\";s:26:\"force_delete_surat::keluar\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:41;a:4:{s:1:\"a\";i:42;s:1:\"b\";s:30:\"force_delete_any_surat::keluar\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:42;a:4:{s:1:\"a\";i:43;s:1:\"b\";s:9:\"view_user\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:43;a:4:{s:1:\"a\";i:44;s:1:\"b\";s:13:\"view_any_user\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:44;a:4:{s:1:\"a\";i:45;s:1:\"b\";s:11:\"create_user\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:45;a:4:{s:1:\"a\";i:46;s:1:\"b\";s:11:\"update_user\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:46;a:4:{s:1:\"a\";i:47;s:1:\"b\";s:12:\"restore_user\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:47;a:4:{s:1:\"a\";i:48;s:1:\"b\";s:16:\"restore_any_user\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:48;a:4:{s:1:\"a\";i:49;s:1:\"b\";s:14:\"replicate_user\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:49;a:4:{s:1:\"a\";i:50;s:1:\"b\";s:12:\"reorder_user\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:50;a:4:{s:1:\"a\";i:51;s:1:\"b\";s:11:\"delete_user\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:51;a:4:{s:1:\"a\";i:52;s:1:\"b\";s:15:\"delete_any_user\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:52;a:4:{s:1:\"a\";i:53;s:1:\"b\";s:17:\"force_delete_user\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:53;a:4:{s:1:\"a\";i:54;s:1:\"b\";s:21:\"force_delete_any_user\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:54;a:4:{s:1:\"a\";i:55;s:1:\"b\";s:17:\"view_surat::masuk\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:2;}}i:55;a:4:{s:1:\"a\";i:56;s:1:\"b\";s:21:\"view_any_surat::masuk\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:2;}}i:56;a:4:{s:1:\"a\";i:57;s:1:\"b\";s:19:\"create_surat::masuk\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:2;}}i:57;a:4:{s:1:\"a\";i:58;s:1:\"b\";s:19:\"update_surat::masuk\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:2;}}i:58;a:4:{s:1:\"a\";i:59;s:1:\"b\";s:20:\"restore_surat::masuk\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:2;}}i:59;a:4:{s:1:\"a\";i:60;s:1:\"b\";s:24:\"restore_any_surat::masuk\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:2;}}i:60;a:4:{s:1:\"a\";i:61;s:1:\"b\";s:22:\"replicate_surat::masuk\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:2;}}i:61;a:4:{s:1:\"a\";i:62;s:1:\"b\";s:20:\"reorder_surat::masuk\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:2;}}i:62;a:4:{s:1:\"a\";i:63;s:1:\"b\";s:19:\"delete_surat::masuk\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:2;}}i:63;a:4:{s:1:\"a\";i:64;s:1:\"b\";s:23:\"delete_any_surat::masuk\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:2;}}i:64;a:4:{s:1:\"a\";i:65;s:1:\"b\";s:25:\"force_delete_surat::masuk\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:2;}}i:65;a:4:{s:1:\"a\";i:66;s:1:\"b\";s:29:\"force_delete_any_surat::masuk\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:2;}}i:66;a:3:{s:1:\"a\";i:67;s:1:\"b\";s:22:\"view_perjalanan::dinas\";s:1:\"c\";s:4:\"user\";}i:67;a:3:{s:1:\"a\";i:68;s:1:\"b\";s:26:\"view_any_perjalanan::dinas\";s:1:\"c\";s:4:\"user\";}i:68;a:3:{s:1:\"a\";i:69;s:1:\"b\";s:24:\"create_perjalanan::dinas\";s:1:\"c\";s:4:\"user\";}i:69;a:3:{s:1:\"a\";i:70;s:1:\"b\";s:24:\"update_perjalanan::dinas\";s:1:\"c\";s:4:\"user\";}i:70;a:3:{s:1:\"a\";i:71;s:1:\"b\";s:25:\"restore_perjalanan::dinas\";s:1:\"c\";s:4:\"user\";}i:71;a:3:{s:1:\"a\";i:72;s:1:\"b\";s:29:\"restore_any_perjalanan::dinas\";s:1:\"c\";s:4:\"user\";}i:72;a:3:{s:1:\"a\";i:73;s:1:\"b\";s:27:\"replicate_perjalanan::dinas\";s:1:\"c\";s:4:\"user\";}i:73;a:3:{s:1:\"a\";i:74;s:1:\"b\";s:25:\"reorder_perjalanan::dinas\";s:1:\"c\";s:4:\"user\";}i:74;a:3:{s:1:\"a\";i:75;s:1:\"b\";s:24:\"delete_perjalanan::dinas\";s:1:\"c\";s:4:\"user\";}i:75;a:3:{s:1:\"a\";i:76;s:1:\"b\";s:28:\"delete_any_perjalanan::dinas\";s:1:\"c\";s:4:\"user\";}i:76;a:3:{s:1:\"a\";i:77;s:1:\"b\";s:30:\"force_delete_perjalanan::dinas\";s:1:\"c\";s:4:\"user\";}i:77;a:3:{s:1:\"a\";i:78;s:1:\"b\";s:34:\"force_delete_any_perjalanan::dinas\";s:1:\"c\";s:4:\"user\";}}s:5:\"roles\";a:3:{i:0;a:3:{s:1:\"a\";i:1;s:1:\"b\";s:11:\"super_admin\";s:1:\"c\";s:3:\"web\";}i:1;a:3:{s:1:\"a\";i:2;s:1:\"b\";s:5:\"Admin\";s:1:\"c\";s:3:\"web\";}i:2;a:3:{s:1:\"a\";i:3;s:1:\"b\";s:4:\"user\";s:1:\"c\";s:3:\"web\";}}}', 1736430336);
+('livewire-rate-limiter:a17961fa74e9275d529f489537f179c05d50c2f3', 'i:1;', 1736746398),
+('livewire-rate-limiter:a17961fa74e9275d529f489537f179c05d50c2f3:timer', 'i:1736746398;', 1736746398),
+('spatie.permission.cache', 'a:3:{s:5:\"alias\";a:4:{s:1:\"a\";s:2:\"id\";s:1:\"b\";s:4:\"name\";s:1:\"c\";s:10:\"guard_name\";s:1:\"r\";s:5:\"roles\";}s:11:\"permissions\";a:138:{i:0;a:4:{s:1:\"a\";i:1;s:1:\"b\";s:9:\"view_role\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:1;a:4:{s:1:\"a\";i:2;s:1:\"b\";s:13:\"view_any_role\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:2;a:4:{s:1:\"a\";i:3;s:1:\"b\";s:11:\"create_role\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:3;a:4:{s:1:\"a\";i:4;s:1:\"b\";s:11:\"update_role\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:4;a:4:{s:1:\"a\";i:5;s:1:\"b\";s:11:\"delete_role\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:5;a:4:{s:1:\"a\";i:6;s:1:\"b\";s:15:\"delete_any_role\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:6;a:4:{s:1:\"a\";i:7;s:1:\"b\";s:13:\"view_category\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:7;a:4:{s:1:\"a\";i:8;s:1:\"b\";s:17:\"view_any_category\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:8;a:4:{s:1:\"a\";i:9;s:1:\"b\";s:15:\"create_category\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:9;a:4:{s:1:\"a\";i:10;s:1:\"b\";s:15:\"update_category\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:10;a:4:{s:1:\"a\";i:11;s:1:\"b\";s:16:\"restore_category\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:11;a:4:{s:1:\"a\";i:12;s:1:\"b\";s:20:\"restore_any_category\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:12;a:4:{s:1:\"a\";i:13;s:1:\"b\";s:18:\"replicate_category\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:13;a:4:{s:1:\"a\";i:14;s:1:\"b\";s:16:\"reorder_category\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:14;a:4:{s:1:\"a\";i:15;s:1:\"b\";s:15:\"delete_category\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:15;a:4:{s:1:\"a\";i:16;s:1:\"b\";s:19:\"delete_any_category\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:16;a:4:{s:1:\"a\";i:17;s:1:\"b\";s:21:\"force_delete_category\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:17;a:4:{s:1:\"a\";i:18;s:1:\"b\";s:25:\"force_delete_any_category\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:18;a:3:{s:1:\"a\";i:19;s:1:\"b\";s:22:\"view_perjalanan::dinas\";s:1:\"c\";s:3:\"web\";}i:19;a:3:{s:1:\"a\";i:20;s:1:\"b\";s:26:\"view_any_perjalanan::dinas\";s:1:\"c\";s:3:\"web\";}i:20;a:3:{s:1:\"a\";i:21;s:1:\"b\";s:24:\"create_perjalanan::dinas\";s:1:\"c\";s:3:\"web\";}i:21;a:3:{s:1:\"a\";i:22;s:1:\"b\";s:24:\"update_perjalanan::dinas\";s:1:\"c\";s:3:\"web\";}i:22;a:3:{s:1:\"a\";i:23;s:1:\"b\";s:25:\"restore_perjalanan::dinas\";s:1:\"c\";s:3:\"web\";}i:23;a:3:{s:1:\"a\";i:24;s:1:\"b\";s:29:\"restore_any_perjalanan::dinas\";s:1:\"c\";s:3:\"web\";}i:24;a:3:{s:1:\"a\";i:25;s:1:\"b\";s:27:\"replicate_perjalanan::dinas\";s:1:\"c\";s:3:\"web\";}i:25;a:3:{s:1:\"a\";i:26;s:1:\"b\";s:25:\"reorder_perjalanan::dinas\";s:1:\"c\";s:3:\"web\";}i:26;a:3:{s:1:\"a\";i:27;s:1:\"b\";s:24:\"delete_perjalanan::dinas\";s:1:\"c\";s:3:\"web\";}i:27;a:3:{s:1:\"a\";i:28;s:1:\"b\";s:28:\"delete_any_perjalanan::dinas\";s:1:\"c\";s:3:\"web\";}i:28;a:3:{s:1:\"a\";i:29;s:1:\"b\";s:30:\"force_delete_perjalanan::dinas\";s:1:\"c\";s:3:\"web\";}i:29;a:3:{s:1:\"a\";i:30;s:1:\"b\";s:34:\"force_delete_any_perjalanan::dinas\";s:1:\"c\";s:3:\"web\";}i:30;a:4:{s:1:\"a\";i:31;s:1:\"b\";s:18:\"view_surat::keluar\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:31;a:4:{s:1:\"a\";i:32;s:1:\"b\";s:22:\"view_any_surat::keluar\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:32;a:4:{s:1:\"a\";i:33;s:1:\"b\";s:20:\"create_surat::keluar\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:33;a:4:{s:1:\"a\";i:34;s:1:\"b\";s:20:\"update_surat::keluar\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:34;a:4:{s:1:\"a\";i:35;s:1:\"b\";s:21:\"restore_surat::keluar\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:35;a:4:{s:1:\"a\";i:36;s:1:\"b\";s:25:\"restore_any_surat::keluar\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:36;a:4:{s:1:\"a\";i:37;s:1:\"b\";s:23:\"replicate_surat::keluar\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:37;a:4:{s:1:\"a\";i:38;s:1:\"b\";s:21:\"reorder_surat::keluar\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:38;a:4:{s:1:\"a\";i:39;s:1:\"b\";s:20:\"delete_surat::keluar\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:39;a:4:{s:1:\"a\";i:40;s:1:\"b\";s:24:\"delete_any_surat::keluar\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:40;a:4:{s:1:\"a\";i:41;s:1:\"b\";s:26:\"force_delete_surat::keluar\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:41;a:4:{s:1:\"a\";i:42;s:1:\"b\";s:30:\"force_delete_any_surat::keluar\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:42;a:4:{s:1:\"a\";i:43;s:1:\"b\";s:9:\"view_user\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:43;a:4:{s:1:\"a\";i:44;s:1:\"b\";s:13:\"view_any_user\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:44;a:4:{s:1:\"a\";i:45;s:1:\"b\";s:11:\"create_user\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:45;a:4:{s:1:\"a\";i:46;s:1:\"b\";s:11:\"update_user\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:46;a:4:{s:1:\"a\";i:47;s:1:\"b\";s:12:\"restore_user\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:47;a:4:{s:1:\"a\";i:48;s:1:\"b\";s:16:\"restore_any_user\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:48;a:4:{s:1:\"a\";i:49;s:1:\"b\";s:14:\"replicate_user\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:49;a:4:{s:1:\"a\";i:50;s:1:\"b\";s:12:\"reorder_user\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:50;a:4:{s:1:\"a\";i:51;s:1:\"b\";s:11:\"delete_user\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:51;a:4:{s:1:\"a\";i:52;s:1:\"b\";s:15:\"delete_any_user\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:52;a:4:{s:1:\"a\";i:53;s:1:\"b\";s:17:\"force_delete_user\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:53;a:4:{s:1:\"a\";i:54;s:1:\"b\";s:21:\"force_delete_any_user\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:54;a:4:{s:1:\"a\";i:55;s:1:\"b\";s:17:\"view_surat::masuk\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:55;a:4:{s:1:\"a\";i:56;s:1:\"b\";s:21:\"view_any_surat::masuk\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:56;a:4:{s:1:\"a\";i:57;s:1:\"b\";s:19:\"create_surat::masuk\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:57;a:4:{s:1:\"a\";i:58;s:1:\"b\";s:19:\"update_surat::masuk\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:58;a:4:{s:1:\"a\";i:59;s:1:\"b\";s:20:\"restore_surat::masuk\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:59;a:4:{s:1:\"a\";i:60;s:1:\"b\";s:24:\"restore_any_surat::masuk\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:60;a:4:{s:1:\"a\";i:61;s:1:\"b\";s:22:\"replicate_surat::masuk\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:61;a:4:{s:1:\"a\";i:62;s:1:\"b\";s:20:\"reorder_surat::masuk\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:62;a:4:{s:1:\"a\";i:63;s:1:\"b\";s:19:\"delete_surat::masuk\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:63;a:4:{s:1:\"a\";i:64;s:1:\"b\";s:23:\"delete_any_surat::masuk\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:64;a:4:{s:1:\"a\";i:65;s:1:\"b\";s:25:\"force_delete_surat::masuk\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:65;a:4:{s:1:\"a\";i:66;s:1:\"b\";s:29:\"force_delete_any_surat::masuk\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:66;a:3:{s:1:\"a\";i:67;s:1:\"b\";s:22:\"view_perjalanan::dinas\";s:1:\"c\";s:4:\"user\";}i:67;a:3:{s:1:\"a\";i:68;s:1:\"b\";s:26:\"view_any_perjalanan::dinas\";s:1:\"c\";s:4:\"user\";}i:68;a:3:{s:1:\"a\";i:69;s:1:\"b\";s:24:\"create_perjalanan::dinas\";s:1:\"c\";s:4:\"user\";}i:69;a:3:{s:1:\"a\";i:70;s:1:\"b\";s:24:\"update_perjalanan::dinas\";s:1:\"c\";s:4:\"user\";}i:70;a:3:{s:1:\"a\";i:71;s:1:\"b\";s:25:\"restore_perjalanan::dinas\";s:1:\"c\";s:4:\"user\";}i:71;a:3:{s:1:\"a\";i:72;s:1:\"b\";s:29:\"restore_any_perjalanan::dinas\";s:1:\"c\";s:4:\"user\";}i:72;a:3:{s:1:\"a\";i:73;s:1:\"b\";s:27:\"replicate_perjalanan::dinas\";s:1:\"c\";s:4:\"user\";}i:73;a:3:{s:1:\"a\";i:74;s:1:\"b\";s:25:\"reorder_perjalanan::dinas\";s:1:\"c\";s:4:\"user\";}i:74;a:3:{s:1:\"a\";i:75;s:1:\"b\";s:24:\"delete_perjalanan::dinas\";s:1:\"c\";s:4:\"user\";}i:75;a:3:{s:1:\"a\";i:76;s:1:\"b\";s:28:\"delete_any_perjalanan::dinas\";s:1:\"c\";s:4:\"user\";}i:76;a:3:{s:1:\"a\";i:77;s:1:\"b\";s:30:\"force_delete_perjalanan::dinas\";s:1:\"c\";s:4:\"user\";}i:77;a:3:{s:1:\"a\";i:78;s:1:\"b\";s:34:\"force_delete_any_perjalanan::dinas\";s:1:\"c\";s:4:\"user\";}i:78;a:4:{s:1:\"a\";i:79;s:1:\"b\";s:22:\"view_rincian::kategori\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:79;a:4:{s:1:\"a\";i:80;s:1:\"b\";s:26:\"view_any_rincian::kategori\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:80;a:4:{s:1:\"a\";i:81;s:1:\"b\";s:24:\"create_rincian::kategori\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:81;a:4:{s:1:\"a\";i:82;s:1:\"b\";s:24:\"update_rincian::kategori\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:82;a:4:{s:1:\"a\";i:83;s:1:\"b\";s:25:\"restore_rincian::kategori\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:83;a:4:{s:1:\"a\";i:84;s:1:\"b\";s:29:\"restore_any_rincian::kategori\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:84;a:4:{s:1:\"a\";i:85;s:1:\"b\";s:27:\"replicate_rincian::kategori\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:85;a:4:{s:1:\"a\";i:86;s:1:\"b\";s:25:\"reorder_rincian::kategori\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:86;a:4:{s:1:\"a\";i:87;s:1:\"b\";s:24:\"delete_rincian::kategori\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:87;a:4:{s:1:\"a\";i:88;s:1:\"b\";s:28:\"delete_any_rincian::kategori\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:88;a:4:{s:1:\"a\";i:89;s:1:\"b\";s:30:\"force_delete_rincian::kategori\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:89;a:4:{s:1:\"a\";i:90;s:1:\"b\";s:34:\"force_delete_any_rincian::kategori\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:90;a:4:{s:1:\"a\";i:91;s:1:\"b\";s:7:\"view_sk\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:91;a:4:{s:1:\"a\";i:92;s:1:\"b\";s:11:\"view_any_sk\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:92;a:4:{s:1:\"a\";i:93;s:1:\"b\";s:9:\"create_sk\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:93;a:4:{s:1:\"a\";i:94;s:1:\"b\";s:9:\"update_sk\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:94;a:4:{s:1:\"a\";i:95;s:1:\"b\";s:10:\"restore_sk\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:95;a:4:{s:1:\"a\";i:96;s:1:\"b\";s:14:\"restore_any_sk\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:96;a:4:{s:1:\"a\";i:97;s:1:\"b\";s:12:\"replicate_sk\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:97;a:4:{s:1:\"a\";i:98;s:1:\"b\";s:10:\"reorder_sk\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:98;a:4:{s:1:\"a\";i:99;s:1:\"b\";s:9:\"delete_sk\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:99;a:4:{s:1:\"a\";i:100;s:1:\"b\";s:13:\"delete_any_sk\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:100;a:4:{s:1:\"a\";i:101;s:1:\"b\";s:15:\"force_delete_sk\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:101;a:4:{s:1:\"a\";i:102;s:1:\"b\";s:19:\"force_delete_any_sk\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:102;a:4:{s:1:\"a\";i:103;s:1:\"b\";s:24:\"view_sppd::dalam::daerah\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:3:{i:0;i:1;i:1;i:2;i:2;i:3;}}i:103;a:4:{s:1:\"a\";i:104;s:1:\"b\";s:28:\"view_any_sppd::dalam::daerah\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:3:{i:0;i:1;i:1;i:2;i:2;i:3;}}i:104;a:4:{s:1:\"a\";i:105;s:1:\"b\";s:26:\"create_sppd::dalam::daerah\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:3:{i:0;i:1;i:1;i:2;i:2;i:3;}}i:105;a:4:{s:1:\"a\";i:106;s:1:\"b\";s:26:\"update_sppd::dalam::daerah\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:3:{i:0;i:1;i:1;i:2;i:2;i:3;}}i:106;a:4:{s:1:\"a\";i:107;s:1:\"b\";s:27:\"restore_sppd::dalam::daerah\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:3:{i:0;i:1;i:1;i:2;i:2;i:3;}}i:107;a:4:{s:1:\"a\";i:108;s:1:\"b\";s:31:\"restore_any_sppd::dalam::daerah\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:3:{i:0;i:1;i:1;i:2;i:2;i:3;}}i:108;a:4:{s:1:\"a\";i:109;s:1:\"b\";s:29:\"replicate_sppd::dalam::daerah\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:3:{i:0;i:1;i:1;i:2;i:2;i:3;}}i:109;a:4:{s:1:\"a\";i:110;s:1:\"b\";s:27:\"reorder_sppd::dalam::daerah\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:3:{i:0;i:1;i:1;i:2;i:2;i:3;}}i:110;a:4:{s:1:\"a\";i:111;s:1:\"b\";s:26:\"delete_sppd::dalam::daerah\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:3:{i:0;i:1;i:1;i:2;i:2;i:3;}}i:111;a:4:{s:1:\"a\";i:112;s:1:\"b\";s:30:\"delete_any_sppd::dalam::daerah\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:3:{i:0;i:1;i:1;i:2;i:2;i:3;}}i:112;a:4:{s:1:\"a\";i:113;s:1:\"b\";s:32:\"force_delete_sppd::dalam::daerah\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:3:{i:0;i:1;i:1;i:2;i:2;i:3;}}i:113;a:4:{s:1:\"a\";i:114;s:1:\"b\";s:36:\"force_delete_any_sppd::dalam::daerah\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:3:{i:0;i:1;i:1;i:2;i:2;i:3;}}i:114;a:4:{s:1:\"a\";i:115;s:1:\"b\";s:18:\"view_sub::kategori\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:115;a:4:{s:1:\"a\";i:116;s:1:\"b\";s:22:\"view_any_sub::kategori\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:116;a:4:{s:1:\"a\";i:117;s:1:\"b\";s:20:\"create_sub::kategori\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:117;a:4:{s:1:\"a\";i:118;s:1:\"b\";s:20:\"update_sub::kategori\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:118;a:4:{s:1:\"a\";i:119;s:1:\"b\";s:21:\"restore_sub::kategori\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:119;a:4:{s:1:\"a\";i:120;s:1:\"b\";s:25:\"restore_any_sub::kategori\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:120;a:4:{s:1:\"a\";i:121;s:1:\"b\";s:23:\"replicate_sub::kategori\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:121;a:4:{s:1:\"a\";i:122;s:1:\"b\";s:21:\"reorder_sub::kategori\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:122;a:4:{s:1:\"a\";i:123;s:1:\"b\";s:20:\"delete_sub::kategori\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:123;a:4:{s:1:\"a\";i:124;s:1:\"b\";s:24:\"delete_any_sub::kategori\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:124;a:4:{s:1:\"a\";i:125;s:1:\"b\";s:26:\"force_delete_sub::kategori\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:125;a:4:{s:1:\"a\";i:126;s:1:\"b\";s:30:\"force_delete_any_sub::kategori\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:126;a:4:{s:1:\"a\";i:127;s:1:\"b\";s:23:\"view_sppd::luar::daerah\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:2;}}i:127;a:4:{s:1:\"a\";i:128;s:1:\"b\";s:27:\"view_any_sppd::luar::daerah\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:2;}}i:128;a:4:{s:1:\"a\";i:129;s:1:\"b\";s:25:\"create_sppd::luar::daerah\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:2;}}i:129;a:4:{s:1:\"a\";i:130;s:1:\"b\";s:25:\"update_sppd::luar::daerah\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:2;}}i:130;a:4:{s:1:\"a\";i:131;s:1:\"b\";s:26:\"restore_sppd::luar::daerah\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:2;}}i:131;a:4:{s:1:\"a\";i:132;s:1:\"b\";s:30:\"restore_any_sppd::luar::daerah\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:2;}}i:132;a:4:{s:1:\"a\";i:133;s:1:\"b\";s:28:\"replicate_sppd::luar::daerah\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:2;}}i:133;a:4:{s:1:\"a\";i:134;s:1:\"b\";s:26:\"reorder_sppd::luar::daerah\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:2;}}i:134;a:4:{s:1:\"a\";i:135;s:1:\"b\";s:25:\"delete_sppd::luar::daerah\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:2;}}i:135;a:4:{s:1:\"a\";i:136;s:1:\"b\";s:29:\"delete_any_sppd::luar::daerah\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:2;}}i:136;a:4:{s:1:\"a\";i:137;s:1:\"b\";s:31:\"force_delete_sppd::luar::daerah\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:2;}}i:137;a:4:{s:1:\"a\";i:138;s:1:\"b\";s:35:\"force_delete_any_sppd::luar::daerah\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:2;}}}s:5:\"roles\";a:3:{i:0;a:3:{s:1:\"a\";i:1;s:1:\"b\";s:11:\"super_admin\";s:1:\"c\";s:3:\"web\";}i:1;a:3:{s:1:\"a\";i:2;s:1:\"b\";s:5:\"admin\";s:1:\"c\";s:3:\"web\";}i:2;a:3:{s:1:\"a\";i:3;s:1:\"b\";s:4:\"user\";s:1:\"c\";s:3:\"web\";}}}', 1736825770);
 
 -- --------------------------------------------------------
 
@@ -81,8 +81,8 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `nomor_kategori`, `nama_kategori`, `created_at`, `updated_at`) VALUES
-(1, '100', 'aaasdad', '2025-01-07 02:17:03', '2025-01-07 02:17:03'),
-(2, '520', 'Kepegawaian', '2025-01-07 02:17:07', '2025-01-07 02:17:07');
+(3, '500.6', 'PERTANIAN', '2025-01-09 02:42:40', '2025-01-09 03:37:34'),
+(4, '500.7', 'PETERNAKAN', '2025-01-09 21:20:04', '2025-01-09 21:20:04');
 
 -- --------------------------------------------------------
 
@@ -341,14 +341,19 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (3, '0001_01_01_000002_create_jobs_table', 1),
 (4, '2025_01_07_034842_create_perjalanan_dinas_table', 1),
 (6, '2025_01_07_044048_create_categories_table', 1),
-(7, '2025_01_07_044049_create_surat_keluars_table', 1),
 (8, '2025_01_07_080254_create_notifications_table', 1),
 (9, '2025_01_07_080302_create_imports_table', 1),
 (10, '2025_01_07_080303_create_exports_table', 1),
 (11, '2025_01_07_080304_create_failed_import_rows_table', 1),
 (12, '2025_01_07_040115_create_permission_tables', 2),
 (13, '2025_01_07_111233_create_surat_masuks_table', 3),
-(16, '2025_01_09_022830_create_sks_table', 4);
+(16, '2025_01_09_022830_create_sks_table', 4),
+(24, '2025_01_09_103140_create_sub_kategoris_table', 5),
+(25, '2025_01_09_104850_create_rincian_kategoris_table', 5),
+(27, '2025_01_10_049049_create_surat_keluars_table', 6),
+(30, '2025_01_10_052820_create_sppd_dalam_daerahs_table', 7),
+(31, '2025_01_11_141329_update_nomor_spt_in_sppd_dalam_daerahs_table', 7),
+(33, '2025_01_13_030503_create_sppd_luar_daerahs_table', 8);
 
 -- --------------------------------------------------------
 
@@ -537,7 +542,91 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 (75, 'delete_perjalanan::dinas', 'user', '2025-01-08 05:40:50', '2025-01-08 05:40:50'),
 (76, 'delete_any_perjalanan::dinas', 'user', '2025-01-08 05:40:50', '2025-01-08 05:40:50'),
 (77, 'force_delete_perjalanan::dinas', 'user', '2025-01-08 05:40:50', '2025-01-08 05:40:50'),
-(78, 'force_delete_any_perjalanan::dinas', 'user', '2025-01-08 05:40:50', '2025-01-08 05:40:50');
+(78, 'force_delete_any_perjalanan::dinas', 'user', '2025-01-08 05:40:50', '2025-01-08 05:40:50'),
+(79, 'view_rincian::kategori', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(80, 'view_any_rincian::kategori', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(81, 'create_rincian::kategori', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(82, 'update_rincian::kategori', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(83, 'restore_rincian::kategori', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(84, 'restore_any_rincian::kategori', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(85, 'replicate_rincian::kategori', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(86, 'reorder_rincian::kategori', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(87, 'delete_rincian::kategori', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(88, 'delete_any_rincian::kategori', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(89, 'force_delete_rincian::kategori', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(90, 'force_delete_any_rincian::kategori', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(91, 'view_sk', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(92, 'view_any_sk', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(93, 'create_sk', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(94, 'update_sk', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(95, 'restore_sk', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(96, 'restore_any_sk', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(97, 'replicate_sk', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(98, 'reorder_sk', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(99, 'delete_sk', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(100, 'delete_any_sk', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(101, 'force_delete_sk', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(102, 'force_delete_any_sk', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(103, 'view_sppd::dalam::daerah', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(104, 'view_any_sppd::dalam::daerah', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(105, 'create_sppd::dalam::daerah', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(106, 'update_sppd::dalam::daerah', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(107, 'restore_sppd::dalam::daerah', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(108, 'restore_any_sppd::dalam::daerah', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(109, 'replicate_sppd::dalam::daerah', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(110, 'reorder_sppd::dalam::daerah', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(111, 'delete_sppd::dalam::daerah', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(112, 'delete_any_sppd::dalam::daerah', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(113, 'force_delete_sppd::dalam::daerah', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(114, 'force_delete_any_sppd::dalam::daerah', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(115, 'view_sub::kategori', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(116, 'view_any_sub::kategori', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(117, 'create_sub::kategori', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(118, 'update_sub::kategori', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(119, 'restore_sub::kategori', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(120, 'restore_any_sub::kategori', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(121, 'replicate_sub::kategori', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(122, 'reorder_sub::kategori', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(123, 'delete_sub::kategori', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(124, 'delete_any_sub::kategori', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(125, 'force_delete_sub::kategori', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(126, 'force_delete_any_sub::kategori', 'web', '2025-01-11 05:41:37', '2025-01-11 05:41:37'),
+(127, 'view_sppd::luar::daerah', 'web', '2025-01-12 19:36:09', '2025-01-12 19:36:09'),
+(128, 'view_any_sppd::luar::daerah', 'web', '2025-01-12 19:36:09', '2025-01-12 19:36:09'),
+(129, 'create_sppd::luar::daerah', 'web', '2025-01-12 19:36:09', '2025-01-12 19:36:09'),
+(130, 'update_sppd::luar::daerah', 'web', '2025-01-12 19:36:09', '2025-01-12 19:36:09'),
+(131, 'restore_sppd::luar::daerah', 'web', '2025-01-12 19:36:09', '2025-01-12 19:36:09'),
+(132, 'restore_any_sppd::luar::daerah', 'web', '2025-01-12 19:36:09', '2025-01-12 19:36:09'),
+(133, 'replicate_sppd::luar::daerah', 'web', '2025-01-12 19:36:09', '2025-01-12 19:36:09'),
+(134, 'reorder_sppd::luar::daerah', 'web', '2025-01-12 19:36:09', '2025-01-12 19:36:09'),
+(135, 'delete_sppd::luar::daerah', 'web', '2025-01-12 19:36:09', '2025-01-12 19:36:09'),
+(136, 'delete_any_sppd::luar::daerah', 'web', '2025-01-12 19:36:09', '2025-01-12 19:36:09'),
+(137, 'force_delete_sppd::luar::daerah', 'web', '2025-01-12 19:36:09', '2025-01-12 19:36:09'),
+(138, 'force_delete_any_sppd::luar::daerah', 'web', '2025-01-12 19:36:09', '2025-01-12 19:36:09');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `rincian_kategoris`
+--
+
+CREATE TABLE `rincian_kategoris` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `category_id` bigint(20) UNSIGNED NOT NULL,
+  `sub_kategori_id` bigint(20) UNSIGNED NOT NULL,
+  `nomor_rincian_kategori` varchar(255) NOT NULL,
+  `nama_rincian_kategori` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `rincian_kategoris`
+--
+
+INSERT INTO `rincian_kategoris` (`id`, `category_id`, `sub_kategori_id`, `nomor_rincian_kategori`, `nama_rincian_kategori`, `created_at`, `updated_at`) VALUES
+(1, 3, 1, '1', 'Perlindungan Tanaman Sayuran dan Tanaman Obat', '2025-01-09 05:35:21', '2025-01-09 05:35:21'),
+(3, 4, 3, '1', 'Perbibitan Ternak', '2025-01-09 21:21:23', '2025-01-09 21:21:23');
 
 -- --------------------------------------------------------
 
@@ -559,7 +648,7 @@ CREATE TABLE `roles` (
 
 INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
 (1, 'super_admin', 'web', '2025-01-07 02:15:37', '2025-01-07 02:15:37'),
-(2, 'Admin', 'web', '2025-01-08 05:32:16', '2025-01-08 05:32:16'),
+(2, 'admin', 'web', '2025-01-08 05:32:16', '2025-01-11 05:58:31'),
 (3, 'user', 'web', '2025-01-08 05:38:21', '2025-01-08 05:42:05');
 
 -- --------------------------------------------------------
@@ -585,56 +674,17 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (5, 1),
 (6, 1),
 (7, 1),
-(7, 2),
 (8, 1),
-(8, 2),
 (9, 1),
-(9, 2),
 (10, 1),
-(10, 2),
 (11, 1),
-(11, 2),
 (12, 1),
-(12, 2),
 (13, 1),
-(13, 2),
 (14, 1),
-(14, 2),
 (15, 1),
-(15, 2),
 (16, 1),
-(16, 2),
 (17, 1),
-(17, 2),
 (18, 1),
-(18, 2),
-(19, 1),
-(19, 2),
-(20, 1),
-(20, 2),
-(20, 3),
-(21, 1),
-(21, 2),
-(21, 3),
-(22, 1),
-(22, 2),
-(22, 3),
-(23, 1),
-(23, 2),
-(24, 1),
-(24, 2),
-(25, 1),
-(25, 2),
-(26, 1),
-(26, 2),
-(27, 1),
-(27, 2),
-(28, 1),
-(28, 2),
-(29, 1),
-(29, 2),
-(30, 1),
-(30, 2),
 (31, 1),
 (31, 2),
 (32, 1),
@@ -671,18 +721,126 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (52, 1),
 (53, 1),
 (54, 1),
+(55, 1),
 (55, 2),
+(56, 1),
 (56, 2),
+(57, 1),
 (57, 2),
+(58, 1),
 (58, 2),
+(59, 1),
 (59, 2),
+(60, 1),
 (60, 2),
+(61, 1),
 (61, 2),
+(62, 1),
 (62, 2),
+(63, 1),
 (63, 2),
+(64, 1),
 (64, 2),
+(65, 1),
 (65, 2),
-(66, 2);
+(66, 1),
+(66, 2),
+(79, 1),
+(80, 1),
+(81, 1),
+(82, 1),
+(83, 1),
+(84, 1),
+(85, 1),
+(86, 1),
+(87, 1),
+(88, 1),
+(89, 1),
+(90, 1),
+(91, 1),
+(91, 2),
+(92, 1),
+(92, 2),
+(93, 1),
+(93, 2),
+(94, 1),
+(94, 2),
+(95, 1),
+(95, 2),
+(96, 1),
+(96, 2),
+(97, 1),
+(97, 2),
+(98, 1),
+(98, 2),
+(99, 1),
+(99, 2),
+(100, 1),
+(100, 2),
+(101, 1),
+(101, 2),
+(102, 1),
+(102, 2),
+(103, 1),
+(103, 2),
+(103, 3),
+(104, 1),
+(104, 2),
+(104, 3),
+(105, 1),
+(105, 2),
+(105, 3),
+(106, 1),
+(106, 2),
+(106, 3),
+(107, 1),
+(107, 2),
+(107, 3),
+(108, 1),
+(108, 2),
+(108, 3),
+(109, 1),
+(109, 2),
+(109, 3),
+(110, 1),
+(110, 2),
+(110, 3),
+(111, 1),
+(111, 2),
+(111, 3),
+(112, 1),
+(112, 2),
+(112, 3),
+(113, 1),
+(113, 2),
+(113, 3),
+(114, 1),
+(114, 2),
+(114, 3),
+(115, 1),
+(116, 1),
+(117, 1),
+(118, 1),
+(119, 1),
+(120, 1),
+(121, 1),
+(122, 1),
+(123, 1),
+(124, 1),
+(125, 1),
+(126, 1),
+(127, 2),
+(128, 2),
+(129, 2),
+(130, 2),
+(131, 2),
+(132, 2),
+(133, 2),
+(134, 2),
+(135, 2),
+(136, 2),
+(137, 2),
+(138, 2);
 
 -- --------------------------------------------------------
 
@@ -704,12 +862,9 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('2sZ54JcpETWdRafCqMczKbjNAQsJAXaNFXlk6tWE', 1, '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36', 'YTo3OntzOjY6Il90b2tlbiI7czo0MDoiaElsWFdaTG1UMnFDdFB3UVd0VTNxSEtpalI1U0VSSzk4eDdPSEc3UCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTk6Imh0dHA6Ly9kYjc3LTE4MC0yNTEtMTU2LTEyNC5uZ3Jvay1mcmVlLmFwcC9hZG1pbi9za3MvY3JlYXRlIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czozOiJ1cmwiO2E6MDp7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoxNzoicGFzc3dvcmRfaGFzaF93ZWIiO3M6NjA6IiQyeSQxMiR4NHp1dW1PQXQ3R2hQaWVGWWhRd3dPZnNOaE5XWUtoUGJuTGNNelRLbXVLVS9heko2NFVUUyI7czo4OiJmaWxhbWVudCI7YTowOnt9fQ==', 1736397586),
-('GlrXzinVsTUOe9uS0XgjUDmXbyn2uheQuNy9pVJg', NULL, '127.0.0.1', 'WhatsApp/2.23.20.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiakJiOGdkMDBYb0lpT01JcTJ3eWQwNGtxaFV0SnU1SFhKVzEwSjlzOSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDI6Imh0dHA6Ly9kYjc3LTE4MC0yNTEtMTU2LTEyNC5uZ3Jvay1mcmVlLmFwcCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1736397308),
-('N1uox4aV7mVeV1jTfs3dGJ20ss4kvxR0tQv5h2mO', NULL, '127.0.0.1', 'WhatsApp/2.23.20.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiRHd4MEVjbGE3bU42dVJ3ZXRrek9zRHlrMjRON0pEUEhyeFpCRXRlTyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTQ6Imh0dHA6Ly9kYjc3LTE4MC0yNTEtMTU2LTEyNC5uZ3Jvay1mcmVlLmFwcC9hZG1pbi9sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1736397309),
-('ODNHDY73S7rkFrHP7LcVQnX1rXfcNzIPHErEwK4p', 1, '127.0.0.1', 'Mozilla/5.0 (Linux; Android 14; en; Infinix X6853 Build/SP1A.210812.016) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.129 HiBrowser/v2.24.2.1 UWS/ Mobile Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoicG9ZaVVwa29Ram1aNk1MZGhrbmtBcW9YQVdCRGc4NURPNnZrdVFTayI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDg6Imh0dHA6Ly9kYjc3LTE4MC0yNTEtMTU2LTEyNC5uZ3Jvay1mcmVlLmFwcC9hZG1pbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MzoidXJsIjthOjA6e31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MTc6InBhc3N3b3JkX2hhc2hfd2ViIjtzOjYwOiIkMnkkMTIkeDR6dXVtT0F0N0doUGllRlloUXd3T2ZzTmhOV1lLaFBibkxjTXpUS211S1UvYXpKNjRVVFMiO30=', 1736397594),
-('sAZJGuVN1mHPh86bBQLufZ7Ee81TbnEnSY1x1qbO', 1, '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36', 'YTo3OntzOjY6Il90b2tlbiI7czo0MDoibzBrcVlQWHJpWDAwTXYzMFhHZUVEMDNKdkZFM2FGZ3dRY0xPRWVmTSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9hZG1pbi9za3MiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjM6InVybCI7YTowOnt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjE3OiJwYXNzd29yZF9oYXNoX3dlYiI7czo2MDoiJDJ5JDEyJHg0enV1bU9BdDdHaFBpZUZZaFF3d09mc05oTldZS2hQYm5MY016VEttdUtVL2F6SjY0VVRTIjtzOjg6ImZpbGFtZW50IjthOjA6e319', 1736398033),
-('SnVEB9k6FEqavVvLocmbRmSIExcrysV2YEMDriz3', NULL, '127.0.0.1', 'WhatsApp/2.23.20.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoid1h0UFp6M240WUhWMGdOcnE4U0FUdWJVcUhBMUJic0toSXdOeGluNiI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo0ODoiaHR0cDovL2RiNzctMTgwLTI1MS0xNTYtMTI0Lm5ncm9rLWZyZWUuYXBwL2FkbWluIjt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDg6Imh0dHA6Ly9kYjc3LTE4MC0yNTEtMTU2LTEyNC5uZ3Jvay1mcmVlLmFwcC9hZG1pbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1736397308);
+('CQOJKbIUuOAc61pDfdjRbvxQ2rfx17g8x7S0IQku', 1, '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36', 'YTo3OntzOjY6Il90b2tlbiI7czo0MDoiQ3ZTTzBXaG9CaDlKVHVzb3ZPZ1F1OGh3SHI0a1EzWHpOQ0Y0TVBneiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDU6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9hZG1pbi9zcHBkLWx1YXItZGFlcmFocyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MzoidXJsIjthOjA6e31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MTc6InBhc3N3b3JkX2hhc2hfd2ViIjtzOjYwOiIkMnkkMTIkeDR6dXVtT0F0N0doUGllRlloUXd3T2ZzTmhOV1lLaFBibkxjTXpUS211S1UvYXpKNjRVVFMiO3M6ODoiZmlsYW1lbnQiO2E6MDp7fX0=', 1736751644),
+('OOiSuKQX0OtpArd3gAETApXRWAVPP4aZ4zW88j7z', 2, '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiNEV6OWt0OHZKNUlJVzRhVGhyQnNwVHMxZUxKbVRTY3NpemttRzBSaCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDU6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9hZG1pbi9zcHBkLWx1YXItZGFlcmFocyI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjI7czoxNzoicGFzc3dvcmRfaGFzaF93ZWIiO3M6NjA6IiQyeSQxMiRYTlRCZ01iSC9kODh4dHlzaURxTHplTExSSDFDNGV6L3lDYm5FRjAza2FLRUxELzhWN1R2ZSI7fQ==', 1736746344),
+('Z3xTz6daVgkahlfFEaQ2FIL5hWEpDObgmfYHS6aE', 2, '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiUXBhYUxZa0JiRUpmQWpkSklPWjVOMFY4c0pOb3dpbENTM1pCUjY3RyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDU6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9hZG1pbi9zcHBkLWx1YXItZGFlcmFocyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MzoidXJsIjthOjA6e31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToyO3M6MTc6InBhc3N3b3JkX2hhc2hfd2ViIjtzOjYwOiIkMnkkMTIkWE5UQmdNYkgvZDg4eHR5c2lEcUx6ZUxMUkgxQzRlei95Q2JuRUYwM2thS0VMRC84VjdUdmUiO30=', 1736739758);
 
 -- --------------------------------------------------------
 
@@ -737,12 +892,87 @@ INSERT INTO `sks` (`id`, `nomor_sk`, `tanggal_sk`, `perihal`, `created_at`, `upd
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `sppd_dalam_daerahs`
+--
+
+CREATE TABLE `sppd_dalam_daerahs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `nomor_spt` varchar(255) DEFAULT NULL,
+  `tujuan_spt` varchar(255) NOT NULL,
+  `perihal` text NOT NULL,
+  `tanggal_spt` date NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `sppd_dalam_daerahs`
+--
+
+INSERT INTO `sppd_dalam_daerahs` (`id`, `user_id`, `nomor_spt`, `tujuan_spt`, `perihal`, `tanggal_spt`, `created_at`, `updated_at`) VALUES
+(5, 4, '800.1.11.1/001/DD/2025', 'asdasdas', 'asdasdasd', '2025-01-12', '2025-01-12 19:46:58', '2025-01-12 19:46:58'),
+(6, 2, '800.1.11.1/002/DD/2025', 'Wawonii Timur', 'asdasdasd', '2025-01-13', '2025-01-12 21:23:31', '2025-01-12 21:23:31');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `sppd_luar_daerahs`
+--
+
+CREATE TABLE `sppd_luar_daerahs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `nomor_spt` varchar(255) NOT NULL,
+  `tujuan_spt` varchar(255) NOT NULL,
+  `perihal` text NOT NULL,
+  `tanggal_spt` date NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `sppd_luar_daerahs`
+--
+
+INSERT INTO `sppd_luar_daerahs` (`id`, `user_id`, `nomor_spt`, `tujuan_spt`, `perihal`, `tanggal_spt`, `created_at`, `updated_at`) VALUES
+(2, 2, '800.1.11.1/001/LD/2025', 'asdasdasd', 'asdasd', '2025-01-12', '2025-01-12 19:35:38', '2025-01-12 19:35:38'),
+(3, 4, '800.1.11.1/002/LD/2025', 'Wawonii Timur', 'asdasdasd', '2025-01-07', '2025-01-12 21:29:14', '2025-01-12 21:29:14');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `sub_kategoris`
+--
+
+CREATE TABLE `sub_kategoris` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `category_id` bigint(20) UNSIGNED NOT NULL,
+  `nomor_sub_kategori` varchar(255) NOT NULL,
+  `nama_sub_kategori` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `sub_kategoris`
+--
+
+INSERT INTO `sub_kategoris` (`id`, `category_id`, `nomor_sub_kategori`, `nama_sub_kategori`, `created_at`, `updated_at`) VALUES
+(1, 3, '1', 'Kebijakan di bidang Pertanian yang dilakukan oleh Pemerintah Daerah', '2025-01-09 05:34:55', '2025-01-09 05:34:55'),
+(3, 4, '1', 'Kebijakan di Bidang Peternakan', '2025-01-09 21:21:00', '2025-01-09 21:21:00');
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `surat_keluars`
 --
 
 CREATE TABLE `surat_keluars` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `category_id` bigint(20) UNSIGNED NOT NULL,
+  `sub_kategori_id` bigint(20) UNSIGNED NOT NULL,
+  `rincian_kategori_id` bigint(20) UNSIGNED NOT NULL,
   `nomor_surat` varchar(255) NOT NULL,
   `tujuan_surat` varchar(255) NOT NULL,
   `tanggal_surat` date NOT NULL,
@@ -755,8 +985,9 @@ CREATE TABLE `surat_keluars` (
 -- Dumping data untuk tabel `surat_keluars`
 --
 
-INSERT INTO `surat_keluars` (`id`, `category_id`, `nomor_surat`, `tujuan_surat`, `tanggal_surat`, `perihal`, `created_at`, `updated_at`) VALUES
-(5, 2, '001/2025', 'Dinas Kependudukan', '2025-01-09', 'Perjanjian Kerjasama', '2025-01-08 20:38:28', '2025-01-08 20:38:28');
+INSERT INTO `surat_keluars` (`id`, `category_id`, `sub_kategori_id`, `rincian_kategori_id`, `nomor_surat`, `tujuan_surat`, `tanggal_surat`, `perihal`, `created_at`, `updated_at`) VALUES
+(5, 3, 1, 1, '001/DISTAN/2025', 'Capil', '2025-01-09', 'asdasdasd', '2025-01-09 20:52:03', '2025-01-09 20:52:03'),
+(7, 4, 3, 3, '002/DISTAN/2025', 'Dinas Kependudukan', '2025-01-08', 'asdasdas', '2025-01-09 21:22:03', '2025-01-09 21:22:03');
 
 -- --------------------------------------------------------
 
@@ -805,9 +1036,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'admin', 'admin@admin.com', NULL, '$2y$12$x4zuumOAt7GhPieFYhQwwOfsNhNWYKhPbnLcMzTKmuKU/azJ64UTS', NULL, '2025-01-07 02:16:06', '2025-01-07 02:16:06'),
-(2, 'Riska', 'Riska@email.com', NULL, '$2y$12$2o1OHT90nTLpppdPZSBRMO0EvUvN88Q.GjO5AtgPYx0VPw5BlsPoi', NULL, '2025-01-08 05:32:49', '2025-01-08 05:32:49'),
+(2, 'Riska', 'Riska@email.com', NULL, '$2y$12$XNTBgMbH/d88xtysiDqLzeLLRH1C4ez/yCbnEF03kaKELD/8V7Tve', NULL, '2025-01-08 05:32:49', '2025-01-11 05:48:11'),
 (3, 'Darni', 'Darni@email.com', NULL, '$2y$12$Y.SyHDXghWQB8/hwmtWGvOE3LtQlBXQ1Rweq5ebQvrzgBBlkPDmua', NULL, '2025-01-08 05:38:41', '2025-01-08 05:38:41'),
-(4, 'Miki', 'miki@email.com', NULL, '$2y$12$j5AJ.jc5NqYgUwbF2YVqKu6j/Ww9iO.FYmwteenhggv.jg2Q8w5yO', NULL, '2025-01-08 05:53:01', '2025-01-08 05:53:01');
+(4, 'Miki', 'miki@email.com', NULL, '$2y$12$hNdbpMxfonm1f4Bo89tFWuCu.dzdEoDmzMfN7IqiaELyE87Dztsx.', NULL, '2025-01-08 05:53:01', '2025-01-11 06:38:58');
 
 --
 -- Indexes for dumped tables
@@ -921,6 +1152,14 @@ ALTER TABLE `permissions`
   ADD UNIQUE KEY `permissions_name_guard_name_unique` (`name`,`guard_name`);
 
 --
+-- Indeks untuk tabel `rincian_kategoris`
+--
+ALTER TABLE `rincian_kategoris`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `rincian_kategoris_category_id_foreign` (`category_id`),
+  ADD KEY `rincian_kategoris_sub_kategori_id_foreign` (`sub_kategori_id`);
+
+--
 -- Indeks untuk tabel `roles`
 --
 ALTER TABLE `roles`
@@ -949,11 +1188,34 @@ ALTER TABLE `sks`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indeks untuk tabel `sppd_dalam_daerahs`
+--
+ALTER TABLE `sppd_dalam_daerahs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `sppd_dalam_daerahs_user_id_foreign` (`user_id`);
+
+--
+-- Indeks untuk tabel `sppd_luar_daerahs`
+--
+ALTER TABLE `sppd_luar_daerahs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `sppd_luar_daerahs_user_id_foreign` (`user_id`);
+
+--
+-- Indeks untuk tabel `sub_kategoris`
+--
+ALTER TABLE `sub_kategoris`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `sub_kategoris_category_id_foreign` (`category_id`);
+
+--
 -- Indeks untuk tabel `surat_keluars`
 --
 ALTER TABLE `surat_keluars`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `surat_keluars_category_id_foreign` (`category_id`);
+  ADD KEY `surat_keluars_category_id_foreign` (`category_id`),
+  ADD KEY `surat_keluars_sub_kategori_id_foreign` (`sub_kategori_id`),
+  ADD KEY `surat_keluars_rincian_kategori_id_foreign` (`rincian_kategori_id`);
 
 --
 -- Indeks untuk tabel `surat_masuks`
@@ -976,7 +1238,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `exports`
@@ -1012,7 +1274,7 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT untuk tabel `perjalanan_dinas`
@@ -1024,7 +1286,13 @@ ALTER TABLE `perjalanan_dinas`
 -- AUTO_INCREMENT untuk tabel `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=139;
+
+--
+-- AUTO_INCREMENT untuk tabel `rincian_kategoris`
+--
+ALTER TABLE `rincian_kategoris`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `roles`
@@ -1039,10 +1307,28 @@ ALTER TABLE `sks`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT untuk tabel `sppd_dalam_daerahs`
+--
+ALTER TABLE `sppd_dalam_daerahs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT untuk tabel `sppd_luar_daerahs`
+--
+ALTER TABLE `sppd_luar_daerahs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT untuk tabel `sub_kategoris`
+--
+ALTER TABLE `sub_kategoris`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT untuk tabel `surat_keluars`
 --
 ALTER TABLE `surat_keluars`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `surat_masuks`
@@ -1097,6 +1383,13 @@ ALTER TABLE `perjalanan_dinas`
   ADD CONSTRAINT `perjalanan_dinas_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
+-- Ketidakleluasaan untuk tabel `rincian_kategoris`
+--
+ALTER TABLE `rincian_kategoris`
+  ADD CONSTRAINT `rincian_kategoris_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `rincian_kategoris_sub_kategori_id_foreign` FOREIGN KEY (`sub_kategori_id`) REFERENCES `sub_kategoris` (`id`) ON DELETE CASCADE;
+
+--
 -- Ketidakleluasaan untuk tabel `role_has_permissions`
 --
 ALTER TABLE `role_has_permissions`
@@ -1104,10 +1397,30 @@ ALTER TABLE `role_has_permissions`
   ADD CONSTRAINT `role_has_permissions_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
 
 --
+-- Ketidakleluasaan untuk tabel `sppd_dalam_daerahs`
+--
+ALTER TABLE `sppd_dalam_daerahs`
+  ADD CONSTRAINT `sppd_dalam_daerahs_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `sppd_luar_daerahs`
+--
+ALTER TABLE `sppd_luar_daerahs`
+  ADD CONSTRAINT `sppd_luar_daerahs_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `sub_kategoris`
+--
+ALTER TABLE `sub_kategoris`
+  ADD CONSTRAINT `sub_kategoris_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE;
+
+--
 -- Ketidakleluasaan untuk tabel `surat_keluars`
 --
 ALTER TABLE `surat_keluars`
-  ADD CONSTRAINT `surat_keluars_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `surat_keluars_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `surat_keluars_rincian_kategori_id_foreign` FOREIGN KEY (`rincian_kategori_id`) REFERENCES `rincian_kategoris` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `surat_keluars_sub_kategori_id_foreign` FOREIGN KEY (`sub_kategori_id`) REFERENCES `sub_kategoris` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
