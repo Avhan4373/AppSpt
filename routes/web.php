@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PdfController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -13,3 +14,5 @@ Route::get('/perjalananPdf', [App\Http\Controllers\PdfController::class, 'perjal
     ->name('perjalananPdf');
 Route::get('/downloadSk', [App\Http\Controllers\PdfController::class, 'downloadSk'])
     ->name('downloadSk');
+
+Route::get('/pdfdalamdaerah', [PdfController::class, 'pdfdalamdaerah'])->name('pdfdalamdaerah');

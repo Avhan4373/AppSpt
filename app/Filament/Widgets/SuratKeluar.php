@@ -20,6 +20,7 @@ class SuratKeluar extends BaseWidget
         $lastSuratMasuk = \App\Models\SuratMasuk::latest('created_at')
             ->first();
         $nomorMasuk = $lastSuratMasuk ? $lastSuratMasuk->nomor_surat : 'Belum ada Surat masuk';
+
         return [
             Stat::make('Total User', User::count())
                 ->description('Jumlah User Terdaftar')
@@ -37,6 +38,7 @@ class SuratKeluar extends BaseWidget
                 ->descriptionIcon('heroicon-o-inbox-arrow-down')
                 ->chart([1,3,5,10,20,40])
                 ->color('primary'),
+
 
         ];
     }

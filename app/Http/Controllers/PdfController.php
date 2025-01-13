@@ -4,6 +4,7 @@
 
     use App\Models\PerjalananDinas;
     use App\Models\Sk;
+    use App\Models\SppdDalamDaerah;
     use App\Models\SuratKeluar;
     use Illuminate\Http\Request;
     use Barryvdh\DomPDF\Facade\Pdf;
@@ -218,6 +219,62 @@
             // Download PDF dengan nama yang dinamis
             return $pdf->download('laporan-sk-' . now()->format('d-m-Y') . '.pdf');
 
+        }
+
+        public function pdfdalamdaerah(Request $request)
+        {
+            \Log::info('Query Parameters:', $request->all());
+            // Mulai query builder
+            $query = SppdDalamDaerah::query()
+                ->with('user') // Eager load relasi user
+                ->orderBy('tanggal_spt', 'asc');
+
+            // Filter berdasarkan role
+            if (!Auth::user()->hasRole('super_admin')) {
+                $query->where('created_by', Auth::id());
+            }
+
+            // Apply filters if they exist
+            if ($request->filled('nomor_spt')) {
+                $query->where('nomor_spt', 'like', '%' . $request->input('nomor_spt') . '%');
+            }
+
+            if ($request->filled('user_id')) {
+                $query->where('user_id', $request->input('user_id'));
+            }
+
+            if ($request->filled('tanggal_dari')) {
+                $query->whereDate('tanggal_spt', '>=', $request->input('tanggal_dari'));
+            }
+
+            if ($request->filled('tanggal_sampai')) {
+                $query->whereDate('tanggal_spt', '<=', $request->input('tanggal_sampai'));
+            }
+
+            // Get data
+            $sppdDalamDaerahs = $query->get();
+
+            \Log::info('Filtered Data:', $sppdDalamDaerahs->toArray());
+            // Generate PDF
+            $pdf = Pdf::loadView('pdf.sppd_dalam_daerah', [
+                'sppdDalamDaerahs' => $sppdDalamDaerahs,
+                'filters' => [
+                    'nomor_spt' => $request->input('nomor_spt'),
+                    'user_id' => $request->input('user_id'),
+                    'tanggal_dari' => $request->input('tanggal_dari'),
+                    'tanggal_sampai' => $request->input('tanggal_sampai'),
+                ],
+                'user' => Auth::user(),
+                'tanggal_cetak' => now()->format('d-m-Y')
+            ]);
+
+            // Set paper
+            $pdf->setPaper('A4', 'portrait');
+            $pdf->getOptions()->set('isPhpEnabled', true);
+            $pdf->getOptions()->set('isHtml5ParserEnabled', true);
+
+            // Download PDF dengan nama yang dinamis
+            return $pdf->download('laporan-sppd-dalam-daerah-' . now()->format('d-m-Y') . '.pdf');
         }
 
 

@@ -114,15 +114,15 @@ class SuratKeluarResource extends Resource
     {
         return $table
             ->headerActions([
-                ExportAction::make()
-                    ->exporter(SuratKeluarExporter::class),
-                Action::make('suratKeluar')
-                    ->label('Generate PDF')
+                Action::make('pdfdalamdaerah')
+                    ->label('Download PDF')
                     ->icon('heroicon-o-document-arrow-down')
                     ->url(function () {
                         // Ambil query parameter terkini
                         $queryParams = request()->query('tableFilters');
                         $newQueryParams = [];
+
+                        // Format ulang parameter filter
                         if ($queryParams) {
                             foreach ($queryParams as $key => $filter) {
                                 if (is_array($filter)) {
@@ -140,9 +140,9 @@ class SuratKeluarResource extends Resource
                         }
 
                         // Redirect ke route dengan query parameter terbaru
-                        return route('suratKeluar', $newQueryParams);
+                        return route('pdfdalamdaerah', $newQueryParams);
                     })
-                    ->openUrlInNewTab()
+                    ->openUrlInNewTab(),
             ])
             ->columns([
                 Tables\Columns\TextColumn::make('SubKategori.nomor_sub_kategori')

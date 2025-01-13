@@ -47,4 +47,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return true; // Atau sesuaikan dengan logika Anda
+    }
+    public function isAdmin(): bool
+    {
+        return in_array($this->role, ['super_admin', 'Admin']);
+    }
 }
