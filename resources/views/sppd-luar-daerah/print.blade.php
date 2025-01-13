@@ -116,7 +116,7 @@
 
 <!-- Judul Surat dan Nomor Surat -->
 <h2 class="judul-surat">SURAT TUGAS</h2>
-<p class="nomor-surat">NOMOR : {{ $sppdDalamDaerah->nomor_spt }}</p>
+<p class="nomor-surat">NOMOR : {{ $sppdLuarDaerah->nomor_spt }}</p>
 
 <!-- Tabel Informasi Surat -->
 <table>
@@ -149,9 +149,9 @@
         <td>
             <ol class="pegawai-list">
                 @php
-                    $userIds = is_string($sppdDalamDaerah->user_ids)
-                        ? json_decode($sppdDalamDaerah->user_ids, true)
-                        : $sppdDalamDaerah->user_ids;
+                    $userIds = is_string($sppdLuarDaerah->user_ids)
+                        ? json_decode($sppdLuarDaerah->user_ids, true)
+                        : $sppdLuarDaerah->user_ids;
                     $users = \App\Models\User::whereIn('id', $userIds)->get();
                 @endphp
 
@@ -173,7 +173,7 @@
         <td>:</td>
         <td>
             <ol class="nomor-urut">
-                <li>{{ $sppdDalamDaerah->tujuan_spt }}</li>
+                <li>{{ $sppdLuarDaerah->tujuan_spt }}</li>
                 <li>Biaya yang diperlukan akibat dikeluarkannya surat perintah ini dibebankan pada APBD Kab. Konawe Kepulauan T.A 2025</li>
                 <li>Surat perintah ini diberikan kepada yang bersangkutan untuk dilaksanakan dengan penuh tanggung jawab.</li>
             </ol>
@@ -185,9 +185,9 @@
         <td>Lamanya Bertugas</td>
         <td>:</td>
         <td>
-            @if ($sppdDalamDaerah->tanggal_mulai && $sppdDalamDaerah->tanggal_selesai)
-                {{ $sppdDalamDaerah->lama_tugas }} hari, mulai tanggal {{ $sppdDalamDaerah->tanggal_mulai->format('d-m-Y') }} s/d {{ $sppdDalamDaerah->tanggal_selesai->format('d-m-Y') }}<br>
-                Tempat : {{ $sppdDalamDaerah->tempat }}
+            @if ($sppdLuarDaerah->tanggal_mulai && $sppdLuarDaerah->tanggal_selesai)
+                {{ $sppdLuarDaerah->lama_tugas }} hari, mulai tanggal {{ $sppdLuarDaerah->tanggal_mulai->format('d-m-Y') }} s/d {{ $sppdLuarDaerah->tanggal_selesai->format('d-m-Y') }}<br>
+                Tempat : {{ $sppdLuarDaerah->tempat }}
             @else
                 Tanggal tidak tersedia.
             @endif

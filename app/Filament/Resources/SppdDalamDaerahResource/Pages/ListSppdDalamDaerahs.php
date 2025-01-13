@@ -12,8 +12,15 @@ class ListSppdDalamDaerahs extends ListRecords
 
     protected function getHeaderActions(): array
     {
-        return [
-            Actions\CreateAction::make(),
-        ];
+        try {
+            $user = auth()->user();
+            $isAdminOrSuper = $user && $user->hasRole(['super_admin', 'admin']);
+        } catch (\Exception $e) {
+            $isAdminOrSuper = false;
+        }
+
+        return $isAdminOrSuper ? [
+            \Filament\Actions\CreateAction::make(),
+        ] : [];
     }
 }

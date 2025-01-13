@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Laporan SPPD Dalam Daerah</title>
+    <title>Laporan SPPD Luar Daerah</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -40,6 +40,17 @@
             margin-top: 30px;
             text-align: right;
         }
+        .user-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .user-list li {
+            margin-bottom: 3px;
+        }
+        .user-list li:last-child {
+            margin-bottom: 0;
+        }
     </style>
 </head>
 <body>
@@ -65,8 +76,8 @@
     <tr>
         <th style="width: 5%">No</th>
         <th style="width: 15%">Nomor SPT</th>
-        <th style="width: 20%">Nama User</th>
-        <th style="width: 20%">Tujuan SPT</th>
+        <th style="width: 25%">Nama User</th>
+        <th style="width: 35%">Tujuan SPT</th>
         <th style="width: 20%">Tanggal SPT</th>
     </tr>
     </thead>
@@ -75,7 +86,24 @@
         <tr>
             <td style="text-align: center">{{ $index + 1 }}</td>
             <td>{{ $sppd->nomor_spt }}</td>
-            <td>{{ $sppd->user->name ?? 'N/A' }}</td>
+            <td>
+                @php
+                    $userIds = is_string($sppd->user_ids)
+                        ? json_decode($sppd->user_ids, true)
+                        : $sppd->user_ids;
+
+                    if (empty($userIds)) {
+                        echo 'N/A';
+                    } else {
+                        $users = \App\Models\User::whereIn('id', $userIds)->get();
+                        echo '<ul class="user-list">';
+                        foreach ($users as $user) {
+                            echo '<li>' . $user->name . '</li>';
+                        }
+                        echo '</ul>';
+                    }
+                @endphp
+            </td>
             <td>{{ $sppd->tujuan_spt }}</td>
             <td>{{ \Carbon\Carbon::parse($sppd->tanggal_spt)->format('d-M-Y') }}</td>
         </tr>
