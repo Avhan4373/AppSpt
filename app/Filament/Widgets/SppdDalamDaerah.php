@@ -7,7 +7,7 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 
 class SppdDalamDaerah extends BaseWidget
 {
-    protected static ?int $sort = 5;
+    protected static ?int $sort = 4;
     protected function getStats(): array
     {
         $lastSptDalamDaerah = \App\Models\SppdDalamDaerah::latest('created_at')
