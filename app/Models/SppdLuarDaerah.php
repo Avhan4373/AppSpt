@@ -15,11 +15,13 @@ class SppdLuarDaerah extends Model
         'nomor_spt',
         'tujuan_spt',
         'perihal',
-        'tanggal_spt'
+        'tanggal_berangkat',
+        'tanggal_kembali'
     ];
     protected $casts = [
         'user_ids' => 'array', // Cast kolom user_ids ke tipe array
-        'tanggal_spt' => 'date',
+        'tanggal_berangkat' => 'date',
+        'tanggal_kembali' => 'date',
     ];
 
     public function user(): BelongsTo
