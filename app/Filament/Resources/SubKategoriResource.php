@@ -42,7 +42,35 @@ class SubKategoriResource extends Resource
                     })
                     ->default($defaultCategory?->id)
                     ->reactive()
+                    ->afterStateUpdated(function ($state, Forms\Set $set) {
+                        if ($state) {
+                            // Mengambil kategori yang dipilih
+                            $selectedCategory = Category::find($state);
+
+                            // Mengambil sub kategori terakhir berdasarkan kategori
+                            $lastSubKategori = SubKategori::where('category_id', $state)
+                                ->orderByRaw('CAST(nomor_sub_kategori AS UNSIGNED) DESC')
+                                ->first();
+
+                            if ($lastSubKategori) {
+                                // Jika ada sub kategori sebelumnya, increment nomor terakhir
+                                $nextNumber = intval($lastSubKategori->nomor_sub_kategori) + 1;
+                            } else {
+                                // Jika belum ada sub kategori, mulai dari 1
+                                $nextNumber = 1;
+                            }
+
+                            // Format nomor dengan padding 2 digit
+                            $formattedNumber = str_pad($nextNumber, 2, '0', STR_PAD_LEFT);
+
+                            // Set nomor sub kategori
+                            $set('nomor_sub_kategori', $formattedNumber);
+                        }
+                    })
+                    ->required()
                     ->searchable(),
+//                Forms\Components\TextInput::make('nomor_sub_kategori')
+//                    ->disabled(), // Nonaktifkan input nomor sub kategori karena diisi otomatis
                 Forms\Components\TextInput::make('nomor_sub_kategori'),
                 Forms\Components\TextInput::make('nama_sub_kategori'),
             ]);

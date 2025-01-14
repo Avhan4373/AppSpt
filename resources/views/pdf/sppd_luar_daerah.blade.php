@@ -77,8 +77,9 @@
         <th style="width: 5%">No</th>
         <th style="width: 15%">Nomor SPT</th>
         <th style="width: 25%">Nama User</th>
-        <th style="width: 35%">Tujuan SPT</th>
-        <th style="width: 20%">Tanggal SPT</th>
+        <th style="width: 20%">Tujuan SPT</th>
+        <th style="width: 20%">Tanggal Berangkat</th>
+        <th style="width: 20%">Tanggal Kembali</th>
     </tr>
     </thead>
     <tbody>
@@ -105,14 +106,15 @@
                 @endphp
             </td>
             <td>{{ $sppd->tujuan_spt }}</td>
-            <td>{{ \Carbon\Carbon::parse($sppd->tanggal_spt)->format('d-M-Y') }}</td>
+            <td>{{ \Carbon\Carbon::parse($sppd->tanggal_berangkat)->format('d-M-Y') }}</td>
+            <td>{{ \Carbon\Carbon::parse($sppd->tanggal_kembali)->format('d-M-Y') }}</td>
         </tr>
     @endforeach
     </tbody>
 </table>
 
 <div class="footer">
-    <p>Dicetak oleh: {{ $user->name }}</p>
+    <p>Dicetak oleh: {{ $userLogin->name }}</p>
     <p>Dicetak pada: {{ $tanggal_cetak }}</p>
 </div>
 </body>
