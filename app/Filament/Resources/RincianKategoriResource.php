@@ -4,7 +4,9 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\RincianKategoriResource\Pages;
 use App\Filament\Resources\RincianKategoriResource\RelationManagers;
+use App\Models\Category;
 use App\Models\RincianKategori;
+use App\Models\SubKategori;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -25,24 +27,41 @@ class RincianKategoriResource extends Resource
 
     public static function form(Form $form): Form
     {
+        $defaultCategory = Category::first();
+        $defaultSubKategori = $defaultCategory ? SubKategori::where('category_id', $defaultCategory->id)->first() : null;
         return $form
             ->schema([
+                Forms\Components\Select::make('category_id')
+                    ->label('Kategori')
+                    ->options(function () {
+                        return \App\Models\Category::query()
+                            ->get()
+                            ->mapWithKeys(function ($category) {
+                                return [$category->id => $category->nomor_kategori . ' - ' . $category->nama_kategori];
+                            });
+                    })
+                    ->default($defaultCategory?->id)
+                    ->reactive()
+                    ->searchable()
+                    ->afterStateUpdated(fn (callable $set) => $set('sub_kategori_id', null)),
                 Forms\Components\Select::make('sub_kategori_id')
                     ->label('Sub Kategori')
-                    ->relationship('subkategori', 'nomor_sub_kategori')
-                    ->getOptionLabelFromRecordUsing(fn ($record) =>
-                        $record->category->nomor_kategori . '.' .
-                        $record->nomor_sub_kategori
-                    )
-                    ->afterStateUpdated(function ($state, callable $set) {
-                        if ($state) {
-                            $subKategori = \App\Models\SubKategori::find($state);
-                            if ($subKategori) {
-                                $set('category_id', $subKategori->category_id);
-                            }
+                    ->options(function (callable $get) {
+                        $categoryId = $get('category_id');
+                        if (!$categoryId) {
+                            return [];
                         }
+                        return \App\Models\SubKategori::where('category_id', $categoryId)
+                            ->get()
+                            ->mapWithKeys(function ($subKategori) {
+                                return [$subKategori->id => $subKategori->nomor_sub_kategori . ' - ' . $subKategori->nama_sub_kategori];
+                            });
                     })
-                    ->reactive(),
+                    ->default($defaultSubKategori?->id)
+                    ->reactive()
+                    ->required()
+                    ->searchable()
+                    ->afterStateUpdated(fn (callable $set) => $set('rincian_kategori_id', null)),
                 Forms\Components\Hidden::make('category_id'),
 //                Forms\Components\Select::make('sub_kategori_id')
 //                    ->label('Sub Kategori')

@@ -28,11 +28,21 @@ class SubKategoriResource extends Resource
 
     public static function form(Form $form): Form
     {
+        $defaultCategory = Category::first();
         return $form
             ->schema([
                 Forms\Components\Select::make('category_id')
                     ->label('Kategori')
-                    ->relationship('category', 'nomor_kategori'),
+                    ->options(function () {
+                        return \App\Models\Category::query()
+                            ->get()
+                            ->mapWithKeys(function ($category) {
+                                return [$category->id => $category->nomor_kategori . ' - ' . $category->nama_kategori];
+                            });
+                    })
+                    ->default($defaultCategory?->id)
+                    ->reactive()
+                    ->searchable(),
                 Forms\Components\TextInput::make('nomor_sub_kategori'),
                 Forms\Components\TextInput::make('nama_sub_kategori'),
             ]);
