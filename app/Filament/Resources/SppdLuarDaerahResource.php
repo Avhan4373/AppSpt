@@ -73,6 +73,7 @@ class SppdLuarDaerahResource extends Resource
             $userIdField->default($user->id);
         }
 
+
         return $form
             ->schema([
                 $userIdField,
@@ -87,9 +88,13 @@ class SppdLuarDaerahResource extends Resource
                 Forms\Components\DatePicker::make('tanggal_berangkat')
                     ->required(),
                 Forms\Components\DatePicker::make('tanggal_kembali')
+                    ->rules(['after_or_equal:tanggal_berangkat'])
                     ->required(),
                 Forms\Components\Textarea::make('perihal')
                     ->required(),
+                Forms\Components\TextInput::make('dasar_surat')
+                    ->label('Dasar Surat')
+                    ->nullable(),
             ]);
     }
 

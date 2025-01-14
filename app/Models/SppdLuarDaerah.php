@@ -16,7 +16,8 @@ class SppdLuarDaerah extends Model
         'tujuan_spt',
         'perihal',
         'tanggal_berangkat',
-        'tanggal_kembali'
+        'tanggal_kembali',
+        'dasar_surat', // Add this new field
     ];
     protected $casts = [
         'user_ids' => 'array', // Cast kolom user_ids ke tipe array
