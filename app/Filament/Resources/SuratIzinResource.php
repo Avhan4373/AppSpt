@@ -100,8 +100,10 @@ class SuratIzinResource extends Resource
                     ->label('Alasan')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('dari_tanggal')
+                    ->date('j F Y')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('sampai_tanggal')
+                    ->date('j F Y')
                     ->sortable(),
             ])
             ->filters([

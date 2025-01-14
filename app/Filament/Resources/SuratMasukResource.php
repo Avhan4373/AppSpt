@@ -82,7 +82,7 @@ class SuratMasukResource extends Resource
                     ->rowIndex(),
                 Tables\Columns\TextColumn::make('nomor_surat'),
                 Tables\Columns\TextColumn::make('pengirim'),
-                Tables\Columns\TextColumn::make('tanggal_surat'),
+                Tables\Columns\TextColumn::make('tanggal_surat')->date('j F Y'),
                 Tables\Columns\TextColumn::make('perihal'),
             ])
             ->filters([

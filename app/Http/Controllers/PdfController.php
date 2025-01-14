@@ -212,7 +212,7 @@
                     'tanggal_dari' => $request->input('tanggal_dari'),
                     'tanggal_sampai' => $request->input('tanggal_sampai'),
                 ],
-                'user' => Auth::user(),
+                'userLogin' => Auth::user(),
                 'tanggal_cetak' => now()->format('d-m-Y')
             ]);
 

@@ -156,7 +156,7 @@ class SuratKeluarResource extends Resource
                     }),
                 Tables\Columns\TextColumn::make('nomor_surat')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('tujuan_surat')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('tanggal_surat')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('tanggal_surat')->sortable()->searchable()->date('j F Y'),
                 Tables\Columns\TextColumn::make('perihal')->sortable()->searchable(),
             ])
             ->filters([

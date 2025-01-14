@@ -71,7 +71,7 @@
             <td style="text-align: center">{{ $key + 1 }}</td>
             <td>{{ $surat['nomor_surat'] }}</td>
             <td>{{ $surat['pengirim'] }}</td>
-            <td style="text-align: center">{{ date('d-M-Y', strtotime($surat['tanggal_surat'])) }}</td>
+            <td style="text-align: center">{{ date('j M Y', strtotime($surat['tanggal_surat'])) }}</td>
             <td>{{ $surat['perihal'] }}</td>
         </tr>
     @endforeach

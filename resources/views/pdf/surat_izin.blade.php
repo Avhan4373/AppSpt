@@ -70,10 +70,10 @@
     @foreach($data as $key => $surat)
         <tr>
             <td style="text-align: center">{{ $key + 1 }}</td>
-            <td>{{ $surat['user_id'] }}</td> <!-- Tampilkan nama user -->
             <td style="text-align: center">{{ $surat['nomor_surat'] }}</td>
-            <td style="text-align: center">{{ date('d-M-Y', strtotime($surat['dari_tanggal'])) }}</td>
-            <td style="text-align: center">{{ date('d-M-Y', strtotime($surat['sampai_tanggal'])) }}</td>
+            <td>{{ $surat['user_id'] }}</td> <!-- Tampilkan nama user -->
+            <td style="text-align: center">{{ date('j M Y', strtotime($surat['dari_tanggal'])) }}</td>
+            <td style="text-align: center">{{ date('j M Y', strtotime($surat['sampai_tanggal'])) }}</td>
             <td>{{ $surat['alasan'] }}</td>
         </tr>
     @endforeach

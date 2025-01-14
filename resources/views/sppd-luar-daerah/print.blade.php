@@ -248,7 +248,7 @@
         <td class="no-wrap" id="tulisanBold">Lamanya Bertugas</td>
         <td>:</td>
         <td>
-            @if ($sppdLuarDaerah->tanggal_berangkat && $sppdLuarDaerah->tanggal_kembali)
+            @if ($sppdLuarDaerah->tanggal_spt && $sppdLuarDaerah->tanggal_spt)
                 @if ($sppdLuarDaerah->lama_tugas > 0)
                     {{ $sppdLuarDaerah->lama_tugas }} ({{ ucfirst($sppdLuarDaerah->lama_tugas_terbilang) }}) hari, mulai tanggal
 

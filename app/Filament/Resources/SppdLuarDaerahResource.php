@@ -17,6 +17,8 @@ use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\CreateAction;
+use Filament\Tables\Columns\DateTimeColumn;
+
 
 class SppdLuarDaerahResource extends Resource
 {
@@ -131,8 +133,10 @@ class SppdLuarDaerahResource extends Resource
                     }),
                 Tables\Columns\TextColumn::make('nomor_spt')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('tujuan_spt')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('tanggal_berangkat')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('tanggal_kembali')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('tanggal_berangkat')->sortable()->searchable()
+                    ->date('j F Y'),
+                Tables\Columns\TextColumn::make('tanggal_kembali')->sortable()->searchable()
+                    ->date('j F Y'),
                 Tables\Columns\TextColumn::make('perihal')->sortable()->searchable()->limit(20),
             ])
             ->filters([

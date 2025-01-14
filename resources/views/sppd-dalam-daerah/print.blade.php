@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+@php use Carbon\Carbon; @endphp
+    <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -43,12 +44,13 @@
         .judul-surat {
             text-decoration: underline;
             text-align: center;
-            margin-bottom: 10px;
+            /*margin-bottom: 10px;*/
         }
 
         .nomor-surat {
             text-align: center;
-            margin-bottom: 20px;
+            margin-top: -20px;
+            /*margin-bottom: 20px;*/
         }
 
         /* Gaya untuk tabel */
@@ -79,13 +81,32 @@
         }
 
         /* Gaya untuk tanda tangan */
-        .signature {
-            text-align: right;
+        .signature-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
             margin-top: 40px;
         }
 
-        .signature p {
-            margin: 5px 0;
+        .signature-text {
+            text-align: center;
+            margin-bottom: 100px;
+        }
+
+        .signature-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .signature-line {
+            width: 200px;
+            border-top: 2px solid #000;
+            margin-bottom: 20px;
+        }
+
+        .signature-signature {
+            text-align: center;
         }
 
         .underline {
@@ -99,7 +120,35 @@
         }
 
         .pegawai-item {
+            list-style-type: decimal;
             margin-bottom: 15px;
+        }
+
+        .label-value {
+            display: flex;
+            align-items: baseline;
+        }
+
+        .label {
+            flex: 1;
+            text-align: left;
+            margin-right: 5px;
+        }
+
+        .value {
+            flex: 3;
+        }
+        td.centered {
+            text-align: center;
+        }
+        .no-wrap {
+            white-space: nowrap;
+        }
+        #tulisanBold{
+            font-weight: normal;
+        }
+        #ttd{
+            margin-top: -20px;
         }
     </style>
 </head>
@@ -110,9 +159,12 @@
     <div class="header-text">
         <h2>PEMERINTAH KABUPATEN KONAWE KEPULAUAN</h2>
         <h3>DINAS PERTANIAN</h3>
-        <p>Jl. Poros Langara Lampeapi KM. 3, Wawonii Barat, Konawe Kepulauan, Sulawesi Tenggara</p>
+        <p style="font-size: small">Jl. Poros Langara Lampeapi KM. 3, Wawonii Barat, Konawe Kepulauan, Sulawesi Tenggara</p>
+
     </div>
+
 </div>
+<hr style="border: 2px solid #000; margin: 5px 0;">
 
 <!-- Judul Surat dan Nomor Surat -->
 <h2 class="judul-surat">SURAT TUGAS</h2>
@@ -121,30 +173,29 @@
 <!-- Tabel Informasi Surat -->
 <table>
     <!-- Dasar Surat -->
-    <tr>
-        <td>Dasar</td>
-        <td>:</td>
-        <td>
-            <ol class="nomor-urut">
-                <li>Undang-Undang Nomor 13 Tahun 2013 tentang Pembentukan Kabupaten Konawe Kepulauan di Provinsi Sulawesi Tenggara;</li>
-                <li>Peraturan Pemerintah Nomor 18 Tahun 2016 tentang Perangkat Daerah sebagaimana telah diubah dengan Peraturan Pemerintah Nomor 72 Tahun 2019 tentang Perubahan atas Peraturan Pemerintah Nomor 18 Tahun 2016 tentang Perangkat Daerah;</li>
-                <li>Peraturan Bupati, Kabupaten Konawe Kepulauan Nomor 9 Tahun 2022 tentang Susunan Organisasi dan Tata Kerja Sekretariat Daerah Kabupaten Konawe Kepulauan;</li>
-                <li>DPA Dinas Pertanian Kabupaten Konawe Kepulauan T.A 2025;</li>
-                <li>Surat Kabag SDM Kepolisian Resor Kota Kendari Nomor B/16/I/BIN.2.1/2025 Perihal Undangan Rapat Koordinasi Ketahanan Pangan.</li>
-            </ol>
-        </td>
-    </tr>
+    <!-- Dasar Surat -->
+    @if ($dasar)
+        <tr>
+            <td id="tulisanBold">Dasar</td>
+            <td>:</td>
+            <td>
+                <ol class="nomor-urut">
+                    @foreach ($dasar as $point)
+                        <li>{{ $point }}</li>
+                    @endforeach
+                </ol>
+            </td>
+        </tr>
+    @endif
 
     <!-- Memerintahkan -->
     <tr>
-        <td>MEMERINTAHKAN</td>
-        <td>:</td>
-        <td></td>
+        <td colspan="3" class="centered">MEMERINTAHKAN</td>
     </tr>
 
     <!-- Kepada -->
     <tr>
-        <td>Kepada</td>
+        <td id="tulisanBold">Kepada</td>
         <td>:</td>
         <td>
             <ol class="pegawai-list">
@@ -157,10 +208,22 @@
 
                 @foreach($users as $index => $user)
                     <li class="pegawai-item">
-                        Nama : <strong>{{ $user->name }}</strong><br>
-                        Pangkat/Gol : {{ $user->pangkat_gol ?? '-' }}<br>
-                        NIP : {{ $user->nip ?? '-' }}<br>
-                        Jabatan : {{ $user->jabatan ?? '-' }}
+                        <div class="label-value">
+                            <span class="label">Nama </span>
+                            <span class="value">: <strong>{{ $user->name }} </strong></span>
+                        </div>
+                        <div class="label-value">
+                            <span class="label">Pangkat/Gol </span>
+                            <span class="value">: {{ $user->pangkat_gol ?? '-' }}</span>
+                        </div>
+                        <div class="label-value">
+                            <span class="label">NIP </span>
+                            <span class="value">: {{ $user->nip ?? '-' }}</span>
+                        </div>
+                        <div class="label-value">
+                            <span class="label">Jabatan </span>
+                            <span class="value">: {{ $user->jabatan ?? '-' }}</span>
+                        </div>
                     </li>
                 @endforeach
             </ol>
@@ -169,11 +232,11 @@
 
     <!-- Untuk -->
     <tr>
-        <td>Untuk</td>
+        <td id="tulisanBold">Untuk</td>
         <td>:</td>
         <td>
             <ol class="nomor-urut">
-                <li>{{ $sppdDalamDaerah->tujuan_spt }}</li>
+                <li>Mengikuti Kegiatan {{ $sppdDalamDaerah->perihal }}</li>
                 <li>Biaya yang diperlukan akibat dikeluarkannya surat perintah ini dibebankan pada APBD Kab. Konawe Kepulauan T.A 2025</li>
                 <li>Surat perintah ini diberikan kepada yang bersangkutan untuk dilaksanakan dengan penuh tanggung jawab.</li>
             </ol>
@@ -182,16 +245,31 @@
 
     <!-- Lamanya Bertugas -->
     <tr>
-        <td>Lamanya Bertugas</td>
+        <td class="no-wrap" id="tulisanBold">Lamanya Bertugas</td>
         <td>:</td>
         <td>
-            @if ($sppdDalamDaerah->tanggal_mulai && $sppdDalamDaerah->tanggal_selesai)
-                {{ $sppdDalamDaerah->lama_tugas }} hari, mulai tanggal {{ $sppdDalamDaerah->tanggal_mulai->format('d-m-Y') }} s/d {{ $sppdDalamDaerah->tanggal_selesai->format('d-m-Y') }}<br>
-                Tempat : {{ $sppdDalamDaerah->tempat }}
+            @if ($sppdDalamDaerah->tanggal_spt && $sppdDalamDaerah->tanggal_spt)
+                @if ($sppdDalamDaerah->lama_tugas > 0)
+                    {{ $sppdDalamDaerah->lama_tugas }} ({{ ucfirst($sppdDalamDaerah->lama_tugas_terbilang) }}) hari, mulai tanggal
+
+                    @php
+                        Carbon::setLocale('id'); // Set locale ke bahasa Indonesia
+                    @endphp
+
+                    {{ $sppdDalamDaerah->tanggal_spt->translatedFormat('j F Y') }}
+                @else
+                    Periode tidak valid.<br>
+                @endif
+
             @else
                 Tanggal tidak tersedia.
             @endif
         </td>
+    </tr>
+    <tr>
+        <td id="tulisanBold">Tempat</td>
+        <td>:</td>
+        <td>{{ $sppdDalamDaerah->tujuan_spt }}</td>
     </tr>
 </table>
 
@@ -199,12 +277,19 @@
 <p>Demikian Surat Tugas ini diberikan agar dilaksanakan sebaik-baiknya dengan penuh rasa tanggung jawab.</p>
 
 <!-- Tanda Tangan -->
-<div class="signature">
-    <p>Langara, {{ now()->format('d F Y') }}</p>
-    <p>Kepala Dinas Pertanian</p>
-    <p>Kab. Konawe Kepulauan</p>
-    <p><strong class="underline">NAJAMUDIN, S.Pd</strong></p>
-    <p>19760425 200604 1 006</p>
+<div class="signature-container">
+    <div class="signature-text">
+        <p>Langara, {{ now()->translatedFormat('d F Y') }}</p>
+        <p>Kepala Dinas Pertanian</p>
+        <p id="ttd">Kab. Konawe Kepulauan</p>
+    </div>
+    <div class="signature-right">
+        {{--        <div class="signature-line"></div>--}}
+        <div class="signature-signature">
+            <p id="ttd"><strong class="underline">NAJAMUDIN, S.Pd</strong></p>
+            <p id="ttd">NIP. 19760425 200604 1 006</p>
+        </div>
+    </div>
 </div>
 
 <!-- Script untuk Auto Print -->

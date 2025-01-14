@@ -21,6 +21,7 @@
     use Illuminate\Support\Facades\Auth;
     use Filament\Tables\Actions\Action;
     use Filament\Tables\Actions\CreateAction;
+    use Filament\Tables\Columns\DateTimeColumn;
 
     class SppdDalamDaerahResource extends Resource
     {
@@ -110,7 +111,7 @@
                         }),
                     Tables\Columns\TextColumn::make('nomor_spt')->sortable()->searchable(),
                     Tables\Columns\TextColumn::make('tujuan_spt')->sortable()->searchable(),
-                    Tables\Columns\TextColumn::make('tanggal_spt')->sortable()->searchable(),
+                    Tables\Columns\TextColumn::make('tanggal_spt')->sortable()->searchable()->date('j F Y'),
                     Tables\Columns\TextColumn::make('perihal')->sortable()->searchable(),
                 ])
                 ->filters([

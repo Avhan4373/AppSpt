@@ -1,3 +1,4 @@
+@php use Carbon\Carbon; @endphp
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,11 +66,14 @@
     </tr>
     </thead>
     <tbody>
+    @php
+        Carbon::setLocale('id'); // Set locale ke bahasa Indonesia
+    @endphp
     @foreach($data as $key => $surat)
         <tr>
             <td style="text-align: center">{{ $key + 1 }}</td>
             <td style="text-align: center">{{ $surat['nomor_sk'] }}</td>
-            <td style="text-align: center">{{ date('d-M-Y', strtotime($surat['tanggal_sk'])) }}</td>
+            <td style="text-align: center">{{ date('j F Y', strtotime($surat['tanggal_sk'])) }}</td>
             <td>{{ $surat['perihal'] }}</td>
         </tr>
     @endforeach
