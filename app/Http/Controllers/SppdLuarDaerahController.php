@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\SppdLuarDaerah;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;  // Add this import
 
 class SppdLuarDaerahController extends Controller
 {
@@ -52,34 +53,36 @@ class SppdLuarDaerahController extends Controller
             $sppdLuarDaerah->lama_tugas_terbilang = 'Zero';
         }
 
-//        dd($sppdLuarDaerah->lama_tugas);
+    //    dd($sppdLuarDaerah->lama_tugas);
         return view('sppd-luar-daerah.print', compact('sppdLuarDaerah', 'dasar'));
     }
 
-    private function terbilang($angka)
-    {
-        $angka = abs($angka);
-        $bilangan = ['', 'Satu', 'Dua', 'Tiga', 'Empat', 'Lima', 'Enam', 'Tujuh', 'Delapan', 'Sembilan', 'Sepuluh', 'Sebelas'];
-        $terbilang = '';
+  
 
-        if ($angka < 12) {
-            $terbilang = ' ' . $bilangan[$angka];
-        } elseif ($angka < 20) {
-            $terbilang = $this->terbilang($angka - 10) . ' Belas';
-        } elseif ($angka < 100) {
-            $terbilang = $this->terbilang($angka / 10) . ' Puluh' . $this->terbilang($angka % 10);
-        } elseif ($angka < 200) {
-            $terbilang = ' Seratus' . $this->terbilang($angka - 100);
-        } elseif ($angka < 1000) {
-            $terbilang = $this->terbilang($angka / 100) . ' Ratus' . $this->terbilang($angka % 100);
-        } elseif ($angka < 2000) {
-            $terbilang = ' Seribu' . $this->terbilang($angka - 1000);
-        } elseif ($angka < 1000000) {
-            $terbilang = $this->terbilang($angka / 1000) . ' Ribu' . $this->terbilang($angka % 1000);
-        } elseif ($angka < 1000000000) {
-            $terbilang = $this->terbilang($angka / 1000000) . ' Juta' . $this->terbilang($angka % 1000000);
-        }
+private function terbilang($angka)
+{
+    $angka = abs($angka);
+    $bilangan = ['', 'Satu', 'Dua', 'Tiga', 'Empat', 'Lima', 'Enam', 'Tujuh', 'Delapan', 'Sembilan', 'Sepuluh', 'Sebelas'];
+    $terbilang = '';
 
-        return $terbilang;
+    if ($angka < 12) {
+        $terbilang = ' ' . $bilangan[$angka];
+    } elseif ($angka < 20) {
+        $terbilang = $this->terbilang($angka - 10) . ' Belas';
+    } elseif ($angka < 100) {
+        $terbilang = $this->terbilang($angka / 10) . ' Puluh' . $this->terbilang($angka % 10);
+    } elseif ($angka < 200) {
+        $terbilang = ' Seratus' . $this->terbilang($angka - 100);
+    } elseif ($angka < 1000) {
+        $terbilang = $this->terbilang($angka / 100) . ' Ratus' . $this->terbilang($angka % 100);
+    } elseif ($angka < 2000) {
+        $terbilang = ' Seribu' . $this->terbilang($angka - 1000);
+    } elseif ($angka < 1000000) {
+        $terbilang = $this->terbilang($angka / 1000) . ' Ribu' . $this->terbilang($angka % 1000);
+    } elseif ($angka < 1000000000) {
+        $terbilang = $this->terbilang($angka / 1000000) . ' Juta' . $this->terbilang($angka % 1000000);
     }
+
+    return $terbilang;
+}
 }

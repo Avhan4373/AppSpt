@@ -16,8 +16,11 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Actions\Action;
+use Filament\Support\Actions;
 use Filament\Tables\Actions\CreateAction;
 use Filament\Tables\Columns\DateTimeColumn;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection as BaseCollection;
 
 
 class SppdLuarDaerahResource extends Resource
@@ -97,6 +100,7 @@ class SppdLuarDaerahResource extends Resource
                 Forms\Components\TextInput::make('dasar_surat')
                     ->label('Dasar Surat')
                     ->nullable(),
+                    
             ]);
     }
 
@@ -224,7 +228,7 @@ class SppdLuarDaerahResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make()
                         ->visible($isAdminOrSuper),
-                ]),
+                                ]),
             ]);
     }
 

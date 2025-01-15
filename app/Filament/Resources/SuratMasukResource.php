@@ -45,8 +45,6 @@ class SuratMasukResource extends Resource
     {
         return $table
             ->headerActions([
-                Tables\Actions\ExportAction::make()
-                    ->exporter(SuratMasukExporter::class),
                     Action::make('generatePdf')
                     ->label('Generate PDF')
                     ->icon('heroicon-o-document-arrow-down')

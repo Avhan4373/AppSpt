@@ -14,6 +14,11 @@ class ListSppdLuarDaerahs extends ListRecords
     {
         return [
             Actions\CreateAction::make(),
+            Actions\CreateAction::make('back')
+                ->label('Kembali')
+                ->color('gray')
+                ->url(SppdLuarDaerahResource::getUrl('index')),
         ];
+        
     }
 }
