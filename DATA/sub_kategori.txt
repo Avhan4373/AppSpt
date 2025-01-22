@@ -1,0 +1,642 @@
+Berikut adalah daftar lengkap sub_kategori beserta nomor kategorinya, diurutkan dari awal sesuai dokumen yang diberikan:
+
+---
+
+000.1 KETATAUSAHAAN DAN KERUMAHTANGGAAN  
+1. Telekomunikasi  
+2. Perjalanan Dinas Dalam Negeri  
+3. Perjalanan Dinas Luar Negeri  
+4. Penggunaan Fasilitas Kantor  
+5. Rapat Pimpinan  
+6. Penyediaan Konsumsi  
+7. Pengurusan Kendaraan Dinas  
+8. Pemeliharaan Gedung, Taman, dan Peralatan Kantor  
+9. Pengelolaan Jaringan Listrik, Air, Telepon, dan Komputer  
+10. Ketertiban dan Keamanan  
+11. Administrasi Pengelolaan Parkir  
+12. Administrasi Pakaian Dinas Pegawai  
+
+---
+
+000.2 PERLENGKAPAN  
+1. Inventarisasi dan Penyimpanan  
+2. Pemeliharaan Peralatan Kantor  
+3. Distribusi  
+4. Penghapusan Barang Milik Daerah  
+5. Pengelolaan Database Barang Milik Daerah  
+
+---
+
+000.3 PENGADAAN  
+1. Rencana Pengadaan Barang dan Jasa  
+2. Pengadaan Langsung  
+3. Pengadaan Tidak Langsung/Lelang  
+4. Swakelola  
+5. Pengolahan Sistem Informasi Pengadaan  
+6. Monitoring dan Evaluasi Pelaksanaan Kebijakan dan Pelaksanaan Pengadaan  
+
+---
+
+000.4 PERPUSTAKAAN  
+1. Kebijakan di Bidang Perpustakaan  
+2. Deposit Bahan Pustaka  
+3. Koleksi Pustaka  
+4. Pengolahan Bahan Pustaka  
+5. Pangkalan Data Katalog Koleksi  
+6. Layanan Perpustakaan  
+7. Kerjasama Perpustakaan  
+8. Pengembangan Implementasi Teknologi Informasi Perpustakaan  
+9. Pangkalan Data Layanan Perpustakaan  
+10. Konservasi  
+11. Reprografi  
+12. Transformasi Digital  
+13. Kurasi Digital  
+14. Pengembangan Perpustakaan  
+
+---
+
+000.5 KEARSIPAN  
+1. Kebijakan di Bidang Kearsipan  
+2. Pembinaan Kearsipan  
+3. Pengelolaan Arsip Dinamis  
+4. Program Arsip Vital  
+5. Pengelolaan Arsip Terjaga  
+6. Penyusutan Arsip  
+7. Alih Media Arsip  
+8. Data Base Pengelolaan Arsip Dinamis  
+9. Pengelolaan Arsip Statis  
+10. Jasa Kearsipan  
+11. Pengelolaan SIKN dan JIKN  
+12. Pelindungan dan Penyelamatan Arsip Akibat Bencana  
+13. Penyelamatan Arsip Perangkat Daerah  
+14. Penerbitan Izin Penggunaan Arsip yang Bersifat Tertutup  
+15. Pengawasan Kearsipan  
+
+---
+
+000.6 PERSANDIAN  
+1. Kebijakan di Bidang Persandian  
+2. Pengamanan Persandian  
+3. Pengkajian Persandian  
+4. Pembinaan dan Pengendalian Persandian  
+5. Layanan Sertifikasi Elektronik  
+
+---
+
+000.7 PERENCANAAN PEMBANGUNAN  
+1. Musyawarah Perencanaan Pembangunan (Musrenbang)  
+2. Perencanaan Pembangunan Daerah  
+3. Koordinasi dan Sinkronisasi Perencanaan Pembangunan  
+4. Konsultasi Perencanaan Pembangunan  
+5. Pemantauan, Evaluasi, Penilaian, dan Pelaporan Perencanaan Pembangunan  
+6. Aksi Strategis Daerah  
+7. Perencanaan Pendanaan Pembangunan  
+
+---
+
+000.8 ORGANISASI DAN TATA LAKSANA  
+1. Struktur Organisasi di Lingkungan Pemerintahan Daerah Kab/Kota  
+2. Uraian Jabatan  
+3. Ketatalaksanaan  
+4. Standar Kompetensi Jabatan Struktural dan Fungsional  
+5. Evaluasi Kelembagaan  
+6. Koordinasi Penguatan Reformasi dan Birokrasi  
+
+---
+
+000.9 PENELITIAN, PENGKAJIAN, DAN PENGEMBANGAN  
+1. Kebijakan di Bidang Penelitian, Pengkajian, dan Pengembangan  
+2. Penelitian, Pengkajian, dan Pengembangan  
+3. Sosialisasi dan Desiminasi Hasil Penelitian, Pengkajian, dan Pengembangan  
+4. Bimbingan Teknis Penelitian, Pengkajian, dan Pengembangan  
+5. Forum Komunikasi Penelitian, Pengembangan, dan Penerapan Ilmu Pengetahuan dan Teknologi  
+6. Data dan Informasi Hasil Penelitian, Pengembangan, dan Penerapan Ilmu Pengetahuan dan Teknologi  
+7. Master Proceeding/Jurnal Penelitian, Pengembangan, dan Penerapan Ilmu Pengetahuan dan Teknologi  
+8. Hak Atas Kekayaan Intelektual (HaKI)  
+9. Evaluasi Pelaksanaan Kebijakan  
+10. Seminar, Lokakarya, Temukarya, Workshop  
+
+---
+
+100.1 OTONOMI DAERAH  
+1. Kebijakan di Bidang Otonomi Daerah  
+2. Penyelenggaraan Pemerintah Daerah  
+3. Penataan Daerah, Pembinaan Daerah Pemekaran, Otonomi Khusus, Daerah Istimewa, dan Dewan Pertimbangan Otonomi Daerah  
+4. Pemilihan Kepala Daerah, DPRD, dan Hubungan Antar Lembaga  
+5. Otonomi Khusus dan Daerah Istimewa  
+6. Peningkatan Kapasitas dan Evaluasi Kinerja Daerah  
+7. LKPJ/LKPJAMJ dan LPPD  
+
+---
+
+100.2 PEMERINTAHAN UMUM  
+1. Kebijakan di Bidang Pemerintahan Umum  
+2. Dekonsentrasi dan Kerjasama  
+3. Wilayah Administrasi dan Perbatasan  
+
+---
+
+100.3 HUKUM  
+1. Program Legislasi  
+2. Rancangan Peraturan Perundang-Undangan  
+3. Keputusan/Ketetapan Pimpinan Pemerintah  
+4. Instruksi/Surat Edaran  
+5. Surat Perintah  
+6. Standar/Pedoman/Prosedur Kerja/Petunjuk Pelaksanaan/Petunjuk Teknis  
+7. Nota Kesepakatan/Memorandum of Understanding (MOU)/Kontrak/Perjanjian Kerjasama  
+8. Dokumentasi Hukum  
+9. Sosialisasi/Penyuluhan/Pembinaan Hukum  
+10. Bantuan/Konsultasi Hukum/Advokasi  
+11. Kasus/Sengketa Hukum  
+
+---
+
+200.1 TATA USAHA NEGARA  
+1. Kebijakan di Bidang Tata Usaha Negara  
+
+---
+
+200.2 PERBURUHAN  
+1. Kebijakan di Bidang Perburuhan  
+
+---
+
+200.3 ARBITRASE  
+1. Kebijakan di Bidang Arbitrase  
+
+---
+
+200.4 SENGKETA ADAT  
+1. Kebijakan di Bidang Sengketa Adat  
+
+---
+
+200.5 PERIJINAN  
+1. Kebijakan di Bidang Perijinan  
+
+---
+
+200.6 HAK ATAS KEKAYAAN INTELEKTUAL (HAKI)  
+1. Hak Cipta  
+2. Hak Paten  
+3. Hak Desain Industri  
+4. Hak Rahasia Dagang  
+5. Hak Merk  
+6. Permohonan HAKI yang Ditolak  
+
+---
+
+200.7 KESATUAN BANGSA DAN POLITIK  
+1. Kebijakan di Bidang Kesatuan Bangsa dan Politik  
+2. Bina Ideologi dan Wawasan Kebangsaan  
+3. Kewaspadaan Nasional  
+4. Ketahanan Seni, Budaya, Adat, Agama, dan Kemasyarakatan  
+5. Politik Dalam Negeri  
+6. Ketahanan Ekonomi  
+
+---
+
+200.8 PEMILU  
+1. Kebijakan di Bidang Pemilu  
+2. Pemutakhiran dan Penyusunan Daftar Pemilih  
+3. Pendaftaran dan Verifikasi Peserta Pemilu  
+4. Penetapan Peserta Pemilu  
+5. Pencalonan Pemilu  
+6. Kampanye Pemilu  
+7. Dana Kampanye  
+8. Pemungutan dan Penghitungan Suara  
+9. Penetapan Hasil Pemilu  
+10. Perselisihan Hasil Pemilu  
+11. Laporan Hasil Penyelenggaraan Pemilu  
+
+---
+
+300.1 SATUAN POLISI PAMONG PRAJA  
+1. Kebijakan di Bidang Polisi Pamong Praja  
+2. Tata Operasional dan Prasarana Sarana Polisi Pamong Praja  
+3. Peningkatan Kapasitas SDM Polisi Pamong Praja  
+4. Perlindungan Masyarakat  
+5. Penyidik Pegawai Negeri Sipil  
+6. Perlindungan Hak-Hak Sipil dan Hak Asasi Manusia  
+
+---
+
+300.2 PENANGGULANGAN BENCANA, PENCARIAN, DAN PERTOLONGAN  
+1. Kebijakan di Bidang Penanggulangan Bencana  
+2. Perencanaan Penanggulangan Bencana, Pencarian, dan Pertolongan  
+3. Pencegahan dan Kesiapsiagaan  
+4. Potensi Pencarian dan Pertolongan  
+5. Bina Ketenagaan dan Pemasyarakatan  
+6. Operasi Pencarian dan Pertolongan  
+7. Rencana Pengembangan dan Standardisasi Komunikasi  
+8. Operasi Komunikasi  
+9. Inventarisasi dan Pemeliharaan  
+10. Pengembangan Sistem Informasi  
+11. Penyajian dan Layanan Informasi  
+12. Pelaporan dan Evaluasi  
+
+---
+
+400.1 PEMBANGUNAN DAERAH TERTINGGAL  
+1. Kebijakan di Bidang Pembangunan Daerah Tertinggal  
+2. Pembangunan Sumber Daya  
+3. Peningkatan Infrastruktur  
+4. Pembinaan Ekonomi dan Dunia Usaha  
+5. Pembinaan Lembaga Sosial dan Budaya  
+6. Pengembangan Daerah Khusus  
+
+---
+
+400.2 PEMBERDAYAAN PEREMPUAN DAN PERLINDUNGAN ANAK  
+1. Kebijakan di Bidang Pemberdayaan Perempuan dan Perlindungan Anak  
+2. Pengarusutamaan Gender Ekonomi, Politik, Sosial, dan Hukum  
+3. Perlindungan Perempuan  
+4. Perlindungan Anak  
+5. Tumbuh Kembang Anak  
+
+---
+Berikut adalah lanjutannya:
+
+---
+
+400.3 PENDIDIKAN  
+1. Kebijakan di Bidang Pendidikan  
+2. Pendidikan Anak Usia Dini (PAUD) Nonformal, Informal  
+3. Pendidikan Masyarakat  
+4. Kursus/Pelatihan Pendidik dan Tenaga Pendidik  
+5. Pendidikan Dasar dan Menengah Pertama  
+6. Pendidikan Khusus/Layanan Khusus  
+7. Pembinaan Pendidik dan Tenaga Pendidik  
+8. Sekolah Menengah Atas  
+9. Pendidikan Khusus-Layanan Khusus  
+10. Pendidik dan Tenaga Pendidik  
+11. Penilaian Pendidikan  
+12. Data dan Statistik Pendidikan  
+13. Prasarana dan Sarana Pendidikan  
+
+---
+
+400.4 KEOLAHRAGAAN  
+1. Kebijakan di Bidang Keolahragaan  
+2. Pengelolaan Olahraga Pendidikan  
+3. Pengelolaan Olahraga Rekreasi  
+4. Pengelolaan Pembinaan Sentra dan Sekolah Khusus Olahraga  
+5. Pengembangan Olahraga Tradisional dan Layanan Khusus  
+6. Kemitraan dan Penghargaan Olahraga  
+7. Pembibitan dan IPTEK Olahraga  
+8. Peningkatan Tenaga dan Organisasi Keolahragaan  
+9. Industri dan Promosi Olahraga  
+10. Olahraga Prestasi  
+11. Standardisasi dan Infrastruktur Olahraga  
+
+---
+
+400.5 KEPEMUDAAN  
+1. Kebijakan di Bidang Kepemudaan  
+2. Peningkatan Tenaga dan Sumber Daya Pemuda  
+3. Peningkatan Wawasan Pemuda  
+4. Peningkatan Kapasitas Pemuda  
+5. Peningkatan Kreativitas Pemuda  
+6. Kepemimpinan dan Kepeloporan Pemuda  
+7. Kewirausahaan  
+8. Organisasi Kepemudaan dan Pengawasan Kepramukaan  
+9. Standardisasi dan Infrastruktur Pemuda  
+10. Kemitraan dan Penghargaan Pemuda  
+
+---
+
+400.6 KEBUDAYAAN  
+1. Kebijakan di Bidang Kebudayaan  
+2. Pelestarian Cagar Budaya dan Permuseuman  
+3. Pembinaan Kesenian dan Perfilman  
+4. Sejarah dan Nilai Budaya  
+5. Internalisasi Nilai dan Diplomasi Budaya  
+
+---
+
+400.7 KESEHATAN  
+1. Kebijakan di Bidang Kesehatan  
+2. Upaya Kesehatan Dasar  
+3. Upaya Kesehatan Rujukan  
+4. Keperawatan dan Keteknisian Medik  
+5. Penunjang Medik dan Sarana Kesehatan  
+6. Kesehatan Jiwa  
+7. Surveilans, Imunisasi, Karantina, dan Kesehatan Matra  
+8. Pengendalian Penyakit Menular Langsung  
+9. Pengendalian Penyakit Bersumber Binatang  
+10. Pengendalian Penyakit Tidak Menular  
+11. Penyehatan Lingkungan  
+12. Pengembangan dan Penapisan Teknologi Pengendalian Penyakit dan Pengendalian Lingkungan  
+13. Gizi  
+14. Kesehatan Ibu  
+15. Kesehatan Anak  
+16. Kesehatan Tradisional Alternatif dan Komplementer  
+17. Kesehatan Kerja dan Olahraga  
+18. Obat Publik dan Perbekalan Kesehatan  
+19. Produksi dan Distribusi Alat Kesehatan  
+20. Kefarmasian  
+21. Produksi dan Distribusi Kefarmasian  
+22. Surat Keterangan, Sertifikasi, dan Perijinan  
+23. Penanggulangan Krisis Kesehatan  
+24. Pengembangan dan Jaminan Kesehatan  
+25. Intelegensia Kesehatan  
+26. Kesehatan Haji  
+27. Promosi Kesehatan  
+28. Data dan Informasi  
+29. Pengawasan Obat Tradisional, Kosmetik, dan Produk Komplimen  
+30. Pengawasan Keamanan Pangan dan Bahan Berbahaya  
+31. Rekam Medis  
+
+---
+
+400.8 AGAMA DAN KEPERCAYAAN  
+1. Kebijakan di Bidang Agama dan Kepercayaan  
+2. Fasilitasi  
+3. Pembinaan Kepercayaan Kepada Tuhan YME  
+
+---
+
+400.9 SOSIAL  
+1. Kebijakan di Bidang Sosial  
+2. Kesejahteraan Sosial Anak  
+3. Rehabilitasi Sosial  
+4. Rehabilitasi Sosial Tuna Sosial  
+5. Rehabilitasi Sosial Korban Penyalahgunaan NAPZA  
+6. Pelayanan Sosial Lanjut Usia  
+7. Pengumpulan dan Pengelolaan Sumber Dana Bantuan Sosial  
+8. Perlindungan Sosial Korban Tindak Kekerasan dan Pekerja Migran  
+9. Perlindungan Sosial Korban Bencana Sosial  
+10. Perlindungan Sosial Korban Bencana Alam  
+11. Jaminan Sosial  
+12. Pemberdayaan Keluarga dan Kelembagaan Sosial  
+13. Pemberdayaan Komunitas Adat Terpencil  
+14. Penanggulangan Kemiskinan Perkotaan dan Perdesaan  
+15. Kepahlawanan, Keperintisan, dan Kesetiakawanan Sosial  
+
+---
+
+400.10 PEMBERDAYAAN MASYARAKAT DESA  
+1. Kebijakan di Bidang Pemberdayaan Masyarakat Desa  
+2. Pemerintahan Desa dan Kelurahan  
+3. Kelembagaan dan Pelatihan Masyarakat  
+4. Pemberdayaan Adat dan Sosial Budaya Masyarakat  
+5. Usaha Ekonomi Masyarakat  
+6. Sumberdaya Alam dan Teknologi Tepat Guna Perdesaan  
+7. Badan Usaha Milik Desa (Bumdes)  
+
+---
+
+400.11 PERTAMANAN DAN PEMAKAMAN  
+1. Kebijakan di Bidang Pertamanan dan Pemakaman  
+2. Pertamanan  
+3. Pemakaman  
+4. Jalur Hijau  
+
+---
+
+400.12 KEPENDUDUKAN DAN CATATAN SIPIL  
+1. Kebijakan di Bidang Kependudukan dan Catatan Sipil  
+2. Pendaftaran Penduduk  
+3. Pencatatan Sipil  
+4. Pengelolaan Informasi Administrasi Kependudukan  
+5. Pengembangan Kebijakan Kependudukan  
+6. Penyerasian Kependudukan  
+
+---
+
+400.13 KELUARGA BERENCANA  
+1. Kebijakan di Bidang Keluarga Berencana  
+2. Analisis Pengaduan Kebijakan Pengendalian Penduduk  
+3. Fasilitas Pengaduan Kebijakan Pengendalian Penduduk  
+4. Profil dan Proyeksi Penduduk  
+5. Penetapan Parameter Pengendalian Penduduk  
+6. Pemanfaatan Perencanaan Pengendalian Penduduk  
+7. Pengembangan Sistem  
+8. Pengembangan Materi  
+9. Monitoring dan Evaluasi  
+10. Analisis Sosial  
+11. Analisis Ekonomi  
+12. Analisis Dampak Politik, Pertahanan, dan Keamanan  
+13. Analisis Daya Dukung dan Daya Tampung Lingkungan  
+14. Bina Keluarga Berencana Rumah Sakit dan Klinik Pemerintah  
+15. Jaminan Pelayanan dan Penyediaan Sarana Keluarga Berencana  
+16. Kualitas Pelayanan Keluarga Berencana Pemerintah  
+17. Bina Keluarga Berencana Rumah Sakit dan Klinik Swasta  
+18. Jaminan dan Ketersediaan Sarana Keluarga Berencana Swasta  
+19. Kualitas Pelayanan Keluarga Berencana Swasta  
+20. Akses dan Kualitas Pelayanan Keluarga Berencana Jalur Wilayah Tertinggal, Terpencil, dan Perbatasan  
+21. Akses dan Kualitas Pelayanan Keluarga Berencana Wilayah Miskin Perkotaan  
+22. Kesertaan Keluarga Berencana Pria  
+23. Kelangsungan Hidup Ibu, Bayi, dan Anak  
+24. Pencegahan PMS dan HIV/AIDS  
+25. Pencegahan Kanker Alat Reproduksi dan Penanggulangan Infertilitas  
+26. Pelembagaan Bina Keluarga Balita dan Anak  
+27. Monitoring dan Evaluasi Bina Keluarga Balita dan Anak  
+28. Pelembagaan Bina Ketahanan Remaja  
+29. Monitoring dan Evaluasi Bina Ketahanan Remaja  
+30. Pengembangan Program Bina Ketahanan Keluarga Lansia dan Rentan  
+31. Pelembagaan Bina Ketahanan Keluarga Lansia dan Rentan  
+32. Monitoring dan Evaluasi Bina Ketahanan Keluarga Lansia dan Rentan  
+33. Pengembangan Program Usaha Ekonomi Keluarga  
+34. Peningkatan Teknologi dan Permodalan Usaha Ekonomi Keluarga  
+35. Peningkatan Manajemen Usaha Ekonomi Keluarga  
+36. Monitoring dan Evaluasi Usaha Ekonomi Keluarga  
+37. Pengembangan Program Pusat Pelayanan Keluarga Sejahtera  
+38. Pelembagaan Pusat Pelayanan Keluarga Sejahtera  
+39. Monitoring dan Evaluasi Pusat Pelayanan Keluarga Sejahtera  
+40. Pengembangan Advokasi dan Komunikasi, Informasi, Edukasi  
+41. Advokasi dan Pencitraan  
+42. Komunikasi, Informasi, dan Edukasi  
+43. Hubungan dengan Lembaga Pemerintah Pusat dan Provinsi  
+44. Hubungan dengan Lembaga Pemerintah Kabupaten dan Kota  
+45. Hubungan dengan Lembaga Nonpemerintah  
+46. Tenaga Lini Lapangan  
+47. Institusi Masyarakat Pedesaan  
+48. Mekanisme Operasional Lini Lapangan  
+49. Pengembangan Sistem Pencatatan dan Pelaporan  
+50. Pengumpulan dan Pengolahan Data  
+51. Analisis dan Evaluasi  
+52. Sistem Aplikasi dan Bank Data  
+53. Infrastruktur Teknologi Informasi  
+54. Dokumentasi dan Penyebarluasan Informasi  
+
+---
+
+400.14 HUBUNGAN MASYARAKAT  
+1. Keprotokolan  
+2. Daftar Nama/Alamat Kantor/Pejabat  
+3. Dokumentasi/Liputan Kegiatan Dinas Pimpinan, Acara Kedinasan, dan Peristiwa-Peristiwa Bidang Masing-Masing  
+4. Pengumpulan, Pengolahan, dan Penyajian Informasi Kelembagaan  
+5. Hubungan Antar Lembaga dan Pemerintahan Daerah  
+6. Dengar Pendapat/Hearing DPRD  
+7. Bahan/Materi Pidato/Sidang Muspida Provinsi/Kota/Kabupaten  
+8. Penerbitan Majalah, Buletin, Koran, dan Jurnal  
+9. Publikasi Melalui Media Cetak Maupun Elektronik  
+10. Pameran/Sayembara/Lomba/Festival, Pembuatan Spanduk dan Iklan  
+11. Penghargaan/Tanda Kenang-Kenangan  
+12. Ucapan Terima Kasih, Ucapan Selamat, Bela Sungkawa, Permohonan Maaf  
+
+---
+
+500.1 KETAHANAN PANGAN  
+1. Kebijakan di Bidang Ketahanan Pangan  
+2. Ketersediaan dan Kerawanan Pangan  
+3. Distribusi dan Cadangan Pangan  
+4. Penganekaragaman Konsumsi dan Ketahanan Pangan  
+5. Penguatan Kelembagaan Ketahanan Pangan  
+6. Swasembada Pangan (Kearifan Lokal)  
+7. Bimbingan Teknis  
+8. Evaluasi  
+
+---
+
+500.2 PERDAGANGAN  
+1. Kebijakan di Bidang Perdagangan  
+2. Perdagangan Dalam Negeri  
+3. Standarisasi dan Perlindungan Konsumen  
+4. Perdagangan Berjangka Komoditi  
+5. Bimbingan Teknis  
+6. Evaluasi  
+
+---
+
+500.3 KOPERASI DAN USAHA KECIL MENENGAH  
+1. Kebijakan di Bidang Koperasi dan Usaha Kecil Menengah  
+2. Kelembagaan Koperasi dan UKM  
+3. Produksi  
+4. Pembiayaan  
+5. Pemasaran dan Jaringan Usaha  
+6. Pengembangan Sumber Daya Manusia  
+7. Pengembangan dan Restrukturisasi Usaha  
+8. Pengkajian Sumber Daya UKMK  
+9. Kerja Sama Hubungan Antar Lembaga  
+10. Pedagang Kaki Lima (PKL)  
+11. Monitoring dan Evaluasi  
+
+---
+
+500.4 KEHUTANAN  
+1. Kebijakan di Bidang Kehutanan  
+2. Penyuluhan  
+3. Planologi Kehutanan  
+4. Bina Usaha Kehutanan  
+5. Standardisasi dan Lingkungan  
+6. Perlindungan Hutan dan Konservasi Alam  
+7. Bina Pengelolaan Daerah Aliran Sungai dan Perhutanan Sosial  
+8. Penelitian dan Pengembangan Kehutanan  
+
+---
+
+500.5 KELAUTAN DAN PERIKANAN  
+1. Kebijakan di Bidang Kelautan dan Perikanan  
+2. Perikanan Tangkap  
+3. Perikanan Budidaya  
+4. Pengolahan dan Pemasaran Hasil Perikanan  
+5. Kelautan, Pesisir, dan Pulau-Pulau Kecil  
+6. Pengawasan Sumber Daya Kelautan dan Perikanan  
+7. Karantina Ikan  
+
+---
+
+500.6 PERTANIAN  
+1. Kebijakan di Bidang Pertanian  
+2. Perlindungan Hortikultura  
+3. Perbenihan Hortikultura  
+4. Perluasan dan Pengelolaan Lahan  
+5. Pengelolaan Air Irigasi  
+6. Pembiayaan Pertanian  
+7. Pupuk Pestisida  
+8. Alat dan Mesin Pertanian  
+9. Perbenihan Tanaman Pangan  
+10. Budidaya Serealia  
+11. Budidaya Aneka Kacang dan Umbi  
+12. Tanaman Pangan  
+13. Pascapanen Tanaman Pangan  
+14. Pengolahan Hasil Pertanian  
+15. Mutu dan Standarisasi  
+16. Pengembangan Usaha dan Investasi  
+17. Pemasaran Domestik  
+18. Administrasi Penelitian, Pengkajian, dan Pengembangan  
+19. Hasil Penelitian, Pengkajian, dan Pengembangan  
+20. Diseminasi  
+21. Publikasi Hasil Penelitian/Pengkajian  
+22. Bimbingan Teknis Penelitian, Pengkajian, dan Pengembangan  
+23. Forum Komunikasi Penelitian dan Pengembangan  
+24. Data Penelitian dan Pengembangan  
+25. Evaluasi Penelitian/Pengkajian dan Pengembangan  
+26. Hak Atas Kekayaan Intelektual (HAKI)  
+27. Pelayanan Perijinan Pertanian  
+28. Pelayanan Hukum  
+29. Karantina Pertanian  
+30. Bimbingan Teknis  
+31. Evaluasi  
+
+---
+
+500.7 PETERNAKAN  
+1. Kebijakan di Bidang Peternakan  
+2. Peternakan dan Kesehatan Hewan  
+3. Bimbingan Teknis  
+4. Evaluasi  
+
+---
+
+500.8 PERKEBUNAN  
+1. Kebijakan di Bidang Perkebunan  
+2. Tanaman Semusim  
+3. Tanaman Rempah & Penyegar  
+4. Tanaman Tahunan  
+5. Perlindungan Perkebunan  
+6. Pascapanen dan Pembinaan Usaha  
+7. Bimbingan Teknis Perkebunan  
+8. Evaluasi Perkebunan  
+
+---
+
+500.9 PERINDUSTRIAN  
+1. Kebijakan di Bidang Perindustrian  
+2. Iklim Usaha dan Kerja Sama  
+3. Promosi Industri  
+4. Standarisasi dan Teknologi  
+5. Hak dan Kekayaan Intelektual  
+6. Industri Hijau  
+7. Analisis Kerja Sama Industri Unggulan Kabupaten/Kota  
+8. Monitoring dan Evaluasi Kompetensi Inti Industri (Provinsi dan Kabupaten/Kota)  
+9. Pengembangan Infrastruktur Pendukung Pengembangan Kawasan Industri  
+10. Fasilitasi Pengembangan Kawasan Industri  
+11. Kerja Sama Ketahanan Industri Internasional  
+12. Standarisasi  
+13. Pengkajian Kebijakan dan Iklim Usaha Industri  
+14. Pengkajian Industri Hijau dan Lingkungan Hidup  
+15. Teknologi dan Hak Kekayaan Intelektual  
+16. Monitoring dan Evaluasi Kompetensi Industri  
+
+---
+
+500.10 ENERGI DAN SUMBER DAYA MINERAL  
+1. Kebijakan di Bidang Energi dan Sumber Daya Mineral  
+2. Rekomendasi Kegeologian  
+3. Penelitian Kegeologian  
+4. Inventarisasi dan Evaluasi Kegeologian  
+5. Administrasi Pelayanan Kegeologian dan Penyajian Data dan Informasi  
+6. Pembinaan Program Minyak dan Gas Bumi  
+7. Pembinaan Usaha Hulu Minyak dan Gas Bumi  
+8. Pembinaan Usaha Hilir Minyak dan Gas Bumi  
+9. Teknik dan Lingkungan  
+10. Infrastruktur Minyak dan Gas Bumi  
+11. Penyiapan Program Energi Terbarukan dan Konservasi Energi  
+12. Panas Bumi  
+13. Bioenergi  
+14. Aneka Energi  
+15. Konservasi Energi  
+16. Perencanaan dan Pembangunan Infrastruktur EBTKE  
+17. Bina Program Tenaga Listrik  
+18. Bina Usaha Ketenagalistrikan  
+19. Teknik dan Lingkungan Ketenagalistrikan  
+20. Sertifikasi  
+21. Akreditasi Ketenagalistrikan  
+22. Standarisasi Kompetensi  
+23. Standardisasi Nasional Indonesia (SNI) Bidang Ketenagalistrikan  
+24. Standardisasi Usaha Penunjang Ketenagalistrikan  
+25. Bina Program Mineral dan Batubara  
+26. Pembinaan Pengusahaan Mineral  

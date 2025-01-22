@@ -29,7 +29,7 @@ class SuratKeluar extends Model
 
     public function RincianKategori()
     {
-        return $this->belongsTo(RincianKategori::class);
+        return $this->belongsTo(RincianKategori::class, 'rincian_kategori_id')->withDefault();
     }
 
     public function getCombinedNomorAttribute(): string
