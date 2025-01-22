@@ -97,7 +97,7 @@ class SkResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('nomor_sk')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('tanggal_sk')->sortable()->searchable()
-                    ->formatStateUsing(fn ($state) => date('d-M-Y', strtotime($state))),
+                    ->date('j F Y'),
                 Tables\Columns\TextColumn::make('perihal')->sortable()->searchable(),
             ])
             ->filters([

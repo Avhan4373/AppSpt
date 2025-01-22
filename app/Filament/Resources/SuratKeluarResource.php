@@ -90,12 +90,11 @@ class SuratKeluarResource extends Resource
 //                            ->pluck('nama_rincian_kategori', 'id');
                     })
                     ->default($defaultRincianKategori?->id)
-                    ->searchable()
-                    ->required(),
-
+                    ->nullable()
+                    ->searchable(),
                 Forms\Components\TextInput::make('nomor_surat')
                     ->default(fn () => SuratKeluar::generateNomorSurat())
-                    ->disabled()
+//                    ->disabled()
                     ->dehydrated()
                     ->required(),
 
@@ -149,14 +148,14 @@ class SuratKeluarResource extends Resource
                     ->label('Sub Kategori')
                     ->formatStateUsing(function($record){
                         return
-                            $record->Category->nomor_kategori .'.'.
-                            $record->SubKategori->nomor_sub_kategori . '.'.
-                            $record->RincianKategori->nomor_rincian_kategori
+                            $record->Category->nomor_kategori . '.' .
+                            $record->SubKategori->nomor_sub_kategori . '.' .
+                            ($record->RincianKategori->nomor_rincian_kategori ?? '-')
                             ?? '-';
                     }),
                 Tables\Columns\TextColumn::make('nomor_surat')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('tujuan_surat')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('tanggal_surat')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('tanggal_surat')->sortable()->searchable()->date('j F Y'),
                 Tables\Columns\TextColumn::make('perihal')->sortable()->searchable(),
             ])
             ->filters([

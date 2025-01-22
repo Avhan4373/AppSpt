@@ -4,6 +4,7 @@ use App\Filament\Resources\SppdDalamDaerahResource;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\SppdDalamDaerahController;
 use App\Http\Controllers\SppdLuarDaerahController;
+use App\Http\Controllers\SuratIzinController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -28,3 +29,8 @@ Route::middleware(['auth', 'role:super_admin|admin']) // Middleware dari Shield
     Route::get('/sppd-dalam-daerah/create', [SppdDalamDaerahResource::class, 'create'])
         ->name('sppd-dalam-daerah.create');
 });
+
+// Surat Izin
+Route::get('/surat-izin/download-pdf', [SuratIzinController::class, 'downloadPdf'])
+    ->name('surat-izin.download-pdf');
+

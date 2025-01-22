@@ -212,7 +212,7 @@
                     'tanggal_dari' => $request->input('tanggal_dari'),
                     'tanggal_sampai' => $request->input('tanggal_sampai'),
                 ],
-                'user' => Auth::user(),
+                'userLogin' => Auth::user(),
                 'tanggal_cetak' => now()->format('d-m-Y')
             ]);
 
@@ -227,16 +227,16 @@
 
         public function pdfluardaerah(Request $request)
         {
-            \Log::info('Query Parameters:', $request->all());
             // Mulai query builder
             $query = SppdLuarDaerah::query()
                 ->with('user') // Eager load relasi user
-                ->orderBy('tanggal_spt', 'asc');
+                ->orderBy('tanggal_berangkat', 'asc');
 
             // Filter berdasarkan role
             if (!Auth::user()->hasRole('super_admin')) {
                 $query->where('user_id', Auth::id());
             }
+
 
             // Apply filters if they exist
             if ($request->filled('nomor_spt')) {
@@ -248,11 +248,11 @@
             }
 
             if ($request->filled('tanggal_dari')) {
-                $query->whereDate('tanggal_spt', '>=', $request->input('tanggal_dari'));
+                $query->whereDate('tanggal_berangkat', '>=', $request->input('tanggal_dari'));
             }
 
             if ($request->filled('tanggal_sampai')) {
-                $query->whereDate('tanggal_spt', '<=', $request->input('tanggal_sampai'));
+                $query->whereDate('tanggal_kembali', '<=', $request->input('tanggal_sampai'));
             }
 
             // Get data
@@ -268,7 +268,7 @@
                     'tanggal_dari' => $request->input('tanggal_dari'),
                     'tanggal_sampai' => $request->input('tanggal_sampai'),
                 ],
-                'user' => Auth::user(),
+                'userLogin' => Auth::user(),
                 'tanggal_cetak' => now()->format('d-m-Y')
             ]);
 

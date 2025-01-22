@@ -16,7 +16,12 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Actions\Action;
+use Filament\Support\Actions;
 use Filament\Tables\Actions\CreateAction;
+use Filament\Tables\Columns\DateTimeColumn;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection as BaseCollection;
+
 
 class SppdLuarDaerahResource extends Resource
 {
@@ -42,6 +47,12 @@ class SppdLuarDaerahResource extends Resource
             ->multiple()
             ->searchable()
             ->required()
+            ->live()
+            ->afterStateUpdated(function ($state, Forms\Set $set) {
+                if (is_array($state) && !empty($state)) {
+                    $set('user_id', $state[0]); // Immediately set user_id when user_ids changes
+                }
+            })
             ->afterStateHydrated(function ($component, $state) {
                 if (is_string($state)) {
                     $decodedState = json_decode($state, true);
@@ -51,15 +62,26 @@ class SppdLuarDaerahResource extends Resource
                 }
             });
 
+        // Hidden field for user_id with immediate default value
+        $userIdField = Forms\Components\Hidden::make('user_id')
+            ->default(function (Forms\Get $get) {
+                $userIds = $get('user_ids');
+                return is_array($userIds) && !empty($userIds) ? $userIds[0] : auth()->id();
+            })
+            ->required();
+
         // Jika bukan admin/super admin, set default value dan disable field
         if (!$isAdminOrSuper) {
             $userField->default([$user->id])
                 ->disabled()
                 ->dehydrated();
+            $userIdField->default($user->id);
         }
+
 
         return $form
             ->schema([
+                $userIdField,
                 $userField,
                 Forms\Components\TextInput::make('nomor_spt')
                     ->default(SppdLuarDaerah::generateNomorSpt())
@@ -68,10 +90,17 @@ class SppdLuarDaerahResource extends Resource
                     ->dehydrated(),
                 Forms\Components\TextInput::make('tujuan_spt')
                     ->required(),
-                Forms\Components\DatePicker::make('tanggal_spt')
+                Forms\Components\DatePicker::make('tanggal_berangkat')
+                    ->required(),
+                Forms\Components\DatePicker::make('tanggal_kembali')
+                    ->rules(['after_or_equal:tanggal_berangkat'])
                     ->required(),
                 Forms\Components\Textarea::make('perihal')
                     ->required(),
+                Forms\Components\TextInput::make('dasar_surat')
+                    ->label('Dasar Surat')
+                    ->nullable(),
+                    
             ]);
     }
 
@@ -108,8 +137,11 @@ class SppdLuarDaerahResource extends Resource
                     }),
                 Tables\Columns\TextColumn::make('nomor_spt')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('tujuan_spt')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('tanggal_spt')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('perihal')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('tanggal_berangkat')->sortable()->searchable()
+                    ->date('j F Y'),
+                Tables\Columns\TextColumn::make('tanggal_kembali')->sortable()->searchable()
+                    ->date('j F Y'),
+                Tables\Columns\TextColumn::make('perihal')->sortable()->searchable()->limit(20),
             ])
             ->filters([
                 Filter::make('nomor_spt')
@@ -196,7 +228,7 @@ class SppdLuarDaerahResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make()
                         ->visible($isAdminOrSuper),
-                ]),
+                                ]),
             ]);
     }
 

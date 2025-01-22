@@ -105,14 +105,14 @@
                 @endphp
             </td>
             <td>{{ $sppd->tujuan_spt }}</td>
-            <td>{{ \Carbon\Carbon::parse($sppd->tanggal_spt)->format('d-M-Y') }}</td>
+            <td>{{ \Carbon\Carbon::parse($sppd->tanggal_spt)->format('j M Y') }}</td>
         </tr>
     @endforeach
     </tbody>
 </table>
 
 <div class="footer">
-    <p>Dicetak oleh: {{ $user->name }}</p>
+    <p>Dicetak oleh: {{ $userLogin->name }}</p>
     <p>Dicetak pada: {{ $tanggal_cetak }}</p>
 </div>
 </body>

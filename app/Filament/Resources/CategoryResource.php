@@ -36,8 +36,8 @@ class CategoryResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('nomor_kategori'),
-                Tables\Columns\TextColumn::make('nama_kategori'),
+                Tables\Columns\TextColumn::make('nomor_kategori')->searchable(),
+                Tables\Columns\TextColumn::make('nama_kategori')->searchable(),
             ])
             ->filters([
                 //
