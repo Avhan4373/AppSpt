@@ -106,6 +106,16 @@ class SuratKeluarResource extends Resource
 
                 Forms\Components\TextInput::make('perihal')
                     ->required(),
+                // Pilih User (kolom yang baru ditambahkan)
+            Forms\Components\Select::make('user_id')
+                ->label('Pilih User')
+                ->options(function () {
+                    return \App\Models\User::all()->mapWithKeys(function ($user) {
+                        return [$user->id => $user->name];
+                    });
+                })
+                ->searchable()
+                ->required(), // Ini memastikan user harus dipilih
             ]);
     }
 
@@ -144,6 +154,12 @@ class SuratKeluarResource extends Resource
                     ->openUrlInNewTab(),
             ])
             ->columns([
+                Tables\Columns\TextColumn::make('user.name')
+        ->label('Nama')  // Label untuk kolom
+        ->sortable()
+        ->searchable(),
+                
+                
                 Tables\Columns\TextColumn::make('SubKategori.nomor_sub_kategori')
                     ->label('Sub Kategori')
                     ->formatStateUsing(function($record){

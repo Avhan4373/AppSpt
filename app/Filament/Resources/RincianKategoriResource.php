@@ -86,6 +86,7 @@ class RincianKategoriResource extends Resource
 //                    ->searchable(),
                 Tables\Columns\TextColumn::make('SubKategori.nomor_sub_kategori')
                 ->label('Sub Kategori')
+                ->searchable()
                 ->formatStateUsing(function($record){
                     return
                         $record->Category->nomor_kategori .'.'.
@@ -94,7 +95,8 @@ class RincianKategoriResource extends Resource
                         ?? '-';
                 }),
 //                Tables\Columns\TextColumn::make('nomor_rincian_kategori'),
-                Tables\Columns\TextColumn::make('nama_rincian_kategori'),
+                Tables\Columns\TextColumn::make('nama_rincian_kategori')
+                ->searchable(),
             ])
             ->filters([
                 //

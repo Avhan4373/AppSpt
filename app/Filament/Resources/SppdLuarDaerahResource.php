@@ -86,7 +86,6 @@ class SppdLuarDaerahResource extends Resource
                 Forms\Components\TextInput::make('nomor_spt')
                     ->default(SppdLuarDaerah::generateNomorSpt())
                     ->required()
-                    ->disabled()
                     ->dehydrated(),
                 Forms\Components\TextInput::make('tujuan_spt')
                     ->required(),
@@ -100,7 +99,7 @@ class SppdLuarDaerahResource extends Resource
                 Forms\Components\TextInput::make('dasar_surat')
                     ->label('Dasar Surat')
                     ->nullable(),
-                    
+                                    
             ]);
     }
 
@@ -221,8 +220,62 @@ class SppdLuarDaerahResource extends Resource
                 Action::make('print')
                     ->label('Cetak')
                     ->icon('heroicon-o-printer')
-                    ->url(fn (SppdLuarDaerah $record) => route('sppd.luar-daerah.print', $record))
-                    ->openUrlInNewTab(),
+                    ->requiresConfirmation()
+                    ->modalHeading('Pilih Tanggal Cetak')
+                    ->modalButton('Cetak')
+                    ->form([
+                        Forms\Components\DatePicker::make('tanggal_cetak')
+                            ->label('Tanggal Cetak')
+                            ->native(false)
+                            ->displayFormat('d/m/Y')
+                            ->required(),
+                        Forms\Components\Select::make('tanda_tangan')
+                            ->label('Pilih Tanda Tangan')
+                            ->options(function () {
+                                $user = auth()->user();
+                                $pangkatPembina = 'Pembina'; // Sesuaikan dengan pangkat pembina
+                                $similarPangkat = ['Pembina TK I, IV/b','Pembina', 'Pembina, IV/a']; // Tambahkan pangkat mirip lainnya
+                                
+                                // Ambil semua user dengan pangkat yang sesuai
+                                $users = User::whereHas('detailUser', function ($query) use ($similarPangkat) {
+                                $query->whereIn('pangkat_gol', $similarPangkat); // Filter berdasarkan pangkat
+                                })
+                                ->pluck('name', 'id') // Ambil nama dan ID user
+                                ->toArray();
+
+                                return $users;
+                            })
+                          ->default(function () {
+        // Pilih Kepala Dinas jika ada
+        $kepalaDinas = User::whereHas('detailUser', function ($query) {
+            $query->where('jabatan', 'Kepala Dinas');
+        })->first(); // Ambil Kepala Dinas pertama
+
+        if ($kepalaDinas) {
+            return $kepalaDinas->id; // Set default ke id Kepala Dinas
+        }
+
+        // Jika tidak ada Kepala Dinas, kembalikan user pertama dengan pangkat pembina
+        $pangkatPembina = 'Pembina';
+        $similarPangkat = ['Pembina TK I, IV/b', 'Pembina', 'Pembina, IV/a']; 
+        $user = User::whereHas('detailUser', function ($query) use ($similarPangkat) {
+            $query->whereIn('pangkat_gol', $similarPangkat);
+        })->first();
+
+        return $user ? $user->id : null; // Set default ke user pertama atau null
+    })
+    ->required()
+    ->reactive(), 
+                    ])
+                    ->openUrlInNewTab()
+                    ->action(function (SppdLuarDaerah $record, array $data) {
+                        $url = route('sppd.luar-daerah.print', [
+                            'sppdLuarDaerah' => $record->id,
+                            'tanggal_cetak' => $data['tanggal_cetak'],
+                            'tanda_tangan' => $data['tanda_tangan'], // Pass tanda tangan ke URL
+                        ]);
+                        return redirect()->away($url);
+                    })
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

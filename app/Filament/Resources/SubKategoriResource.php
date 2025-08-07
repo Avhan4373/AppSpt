@@ -90,7 +90,29 @@ class SubKategoriResource extends Resource
                 Tables\Columns\TextColumn::make('nama_sub_kategori'),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('category_id')
+        ->label('Nomor Kategori')
+        ->options(function () {
+            return Category::query()
+                ->get()
+                ->mapWithKeys(function ($category) {
+                    return [$category->id => $category->nomor_kategori . ' - ' . $category->nama_kategori];
+                });
+        })
+        ->searchable(),
+    Tables\Filters\Filter::make('nomor_sub_kategori')
+        ->form([
+            Forms\Components\TextInput::make('nomor_sub_kategori')
+                ->label('Nomor Sub Kategori')
+                ->numeric()
+                ->placeholder('Masukkan nomor sub kategori'),
+        ])
+        ->query(function (Builder $query, array $data): Builder {
+            return $query->when(
+                $data['nomor_sub_kategori'],
+                fn (Builder $query, $nomor): Builder => $query->where('nomor_sub_kategori', 'like', "%{$nomor}%")
+            );
+        }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

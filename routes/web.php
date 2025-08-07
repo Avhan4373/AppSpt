@@ -21,8 +21,14 @@ Route::get('/downloadSk', [App\Http\Controllers\PdfController::class, 'downloadS
 
 Route::get('/pdfdalamdaerah', [PdfController::class, 'pdfdalamdaerah'])->name('pdfdalamdaerah');
 Route::get('/pdfluardaerah', [PdfController::class, 'pdfluardaerah'])->name('pdfluardaerah');
-Route::get('/sppd-dalam-daerah/{sppdDalamDaerah}/print', [SppdDalamDaerahController::class, 'print'])->name('sppd.dalam-daerah.print');
-Route::get('/sppd-luar-daerah/{sppdLuarDaerah}/print', [SppdLuarDaerahController::class, 'print'])->name('sppd.luar-daerah.print');
+// Route::get('/sppd-dalam-daerah/{sppdDalamDaerah}/print', [SppdDalamDaerahController::class, 'print'])->name('sppd.dalam-daerah.print');
+Route::get('sppd/dalam-daerah/{sppdDalamDaerah}/print', [SppdDalamDaerahController::class, 'print'])->name('sppd.dalam-daerah.print');
+Route::get('sppd/luar-daerah/{sppdLuarDaerah}/print', [SppdLuarDaerahController::class, 'print'])
+    ->name('sppd.luar-daerah.print');
+    
+// Route::get('/pdf-dalam-daerah', [SppdDalamDaerahController::class, 'downloadFilteredPdf'])->name('pdfdalamdaerah');
+Route::get('/pdf-dalam-daerah', [SppdDalamDaerahController::class, 'downloadFilteredPdf'])->name('pdfdalamdaerah');
+
 
 Route::middleware(['auth', 'role:super_admin|admin']) // Middleware dari Shield
 ->group(function () {

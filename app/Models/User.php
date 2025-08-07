@@ -51,6 +51,12 @@ class User extends Authenticatable
     {
         return true; // Atau sesuaikan dengan logika Anda
     }
+
+    
+    public function detailUser()
+    {
+        return $this->hasOne(DetailUsers::class);
+    }
     public function isAdmin(): bool
     {
         return in_array($this->role, ['super_admin', 'Admin']);

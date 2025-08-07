@@ -15,6 +15,7 @@ use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Cache;
 
 class SkResource extends Resource
 {
@@ -31,25 +32,24 @@ class SkResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('nomor_sk')
-                    ->default(function () {
-                        // Mengambil nomor SK terakhir
-                        $lastSk = Sk::whereYear('tanggal_sk', date('Y'))
-                            ->orderBy('id', 'desc')
-                            ->first();
-
-                        // Jika belum ada SK di tahun ini
-                        if (!$lastSk) {
-                            return '001 TAHUN ' . date('Y');
-                        }
-
-                        // Mengambil nomor urut dari nomor SK terakhir
-                        $lastNumber = (int) substr($lastSk->nomor_sk, 0, 3);
-                        $nextNumber = str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
-
-                        return $nextNumber . ' TAHUN ' . date('Y');
-                    })
-                    ->disabled()
-                    ->dehydrated(true), // Pastikan nilai tetap disimpan meskipun disabled
+                        ->default(function () {
+                            $cacheKey = 'last_sk_number_' . date('Y');
+                            $lastSk = Cache::remember($cacheKey, 60, function () {
+                                return Sk::whereYear('tanggal_sk', date('Y'))
+                                    ->orderBy('id', 'desc')
+                                    ->first();
+                            });
+                    
+                            if (!$lastSk) {
+                                return '001 TAHUN ' . date('Y');
+                            }
+                    
+                            $lastNumber = (int) substr($lastSk->nomor_sk, 0, 3);
+                            $nextNumber = str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
+                            return $nextNumber . ' TAHUN ' . date('Y');
+                        })
+                        // ->disabled()
+                        ->dehydrated(true), // Pastikan nilai tetap disimpan meskipun disabled
                 Forms\Components\DatePicker::make('tanggal_sk')
                     ->default(now())
                     ->required(),

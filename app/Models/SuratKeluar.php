@@ -14,9 +14,17 @@ class SuratKeluar extends Model
         'nomor_surat',
         'tujuan_surat',
         'tanggal_surat',
-        'perihal'
+        'perihal',
+         'user_id', // Pastikan user_id ada di fillable
     ];
 
+
+     public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    
     public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Category::class);
@@ -45,7 +53,7 @@ class SuratKeluar extends Model
 
         $currentNumber = $latestSurat ? intval(substr($latestSurat->nomor_surat, 0, 3)) + 1 : 1;
 
-        return sprintf('%03d/DISTAN/%s', $currentNumber, date('Y'));
+        return sprintf('%03d/%s', $currentNumber, date('Y'));
     }
 
     public function getFullNomorSuratAttribute()

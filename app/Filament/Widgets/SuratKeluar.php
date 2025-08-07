@@ -17,7 +17,7 @@ class SuratKeluar extends BaseWidget
             ->first();
 
         // Gunakan method getFullNomorSuratAttribute untuk mendapatkan nomor lengkap
-        $nomorLengkap = $lastSuratKeluar ? "<span style='font-size: 25px;'>{$lastSuratKeluar->getFullNomorSuratAttribute()}</span>" : 'Belum ada surat';
+        $nomorLengkap = $lastSuratKeluar ? "<span style='font-size: 20px;'>{$lastSuratKeluar->getFullNomorSuratAttribute()}</span>" : 'Belum ada surat';
 
         $lastSuratMasuk = \App\Models\SuratMasuk::latest('created_at')
             ->first();
@@ -37,11 +37,16 @@ class SuratKeluar extends BaseWidget
                 ->extraAttributes([
                     'class' => 'small-text', // Gunakan class CSS yang sudah dibuat
                 ]),
-            Stat::make('Surat Masuk Terakhir', $nomorMasuk)
-                ->description('Nomor Terakhir Surat Masuk')
-                ->descriptionIcon('heroicon-o-inbox-arrow-down')
-                ->chart([1,3,5,10,20,40])
-                ->color('primary'),
+            Stat::make('Surat Masuk Terakhir', new HtmlString($lastSuratMasuk 
+                    ? "<span style='font-size: 20px;'>{$lastSuratMasuk->nomor_surat}</span>" 
+                    : "<span style='font-size: 20px;'>Belum ada Surat masuk</span>"))
+                    ->description('Nomor Terakhir Surat Masuk')
+                    ->descriptionIcon('heroicon-o-inbox-arrow-down')
+                    ->chart([1, 3, 5, 10, 20, 40])
+                    ->color('primary')
+                    ->extraAttributes([
+                        'class' => 'small-text', // Gunakan class CSS jika diperlukan
+                    ]),
 
 
         ];

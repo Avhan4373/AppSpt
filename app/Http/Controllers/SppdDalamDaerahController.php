@@ -5,18 +5,25 @@ namespace App\Http\Controllers;
 use App\Models\SppdDalamDaerah;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;  // Add this import
+use Illuminate\Support\Facades\Validator; // Add this import
+use App\Models\User;
 
 class SppdDalamDaerahController extends Controller
 {
-    public function print(SppdDalamDaerah $sppdDalamDaerah)
+    public function print(SppdDalamDaerah $sppdDalamDaerah, Request $request)
     {
         // Define static dasar points
         $static_dasar = [
             'Undang-Undang Nomor 13 Tahun 2013 tentang Pembentukan Kabupaten Konawe Kepulauan;',
             'Peraturan Pemerintah Nomor 18 Tahun 2016 tentang Perangkat Daerah sebagaimana telah diubah dengan Peraturan Pemerintah Nomor 72 Tahun 2019 tentang Perubahan atas Peraturan Pemerintah Nomor 18 Tahun 2016 tentang Perangkat Daerah;',
-            'Peraturan Bupati, Kabupaten Konawe Kepulauan Nomor 9 Tahun 2022 tentang Susunan Organisasi dan Tata Kerja Sekretariat Daerah Kabupaten Konawe Kepulauan;',
+            'Peraturan Bupati, Kabupaten Konawe Kepulauan Nomor 20 Tahun 2022 tentang Susunan Organisasi dan Tata Kerja Dinas Pertanian Kabupaten Konawe Kepulauan;',
             'DPA Dinas Pertanian Kabupaten Konawe Kepulauan Tahun Anggaran 2025;',
         ];
+
+        // Ambil ID tanda tangan yang dipilih dari query string
+        $tandaTanganId = $request->input('tanda_tangan');
+        $userTandaTangan = User::find($tandaTanganId);
 
         // Check if the fifth point is provided
         if ($sppdDalamDaerah->dasar_surat) {
@@ -44,8 +51,19 @@ class SppdDalamDaerahController extends Controller
             $sppdDalamDaerah->lama_tugas = 0;
             $sppdDalamDaerah->lama_tugas_terbilang = 'Nol';
         }
-
-        return view('sppd-dalam-daerah.print', compact('sppdDalamDaerah', 'dasar'));
+        $validator = Validator::make($request->all(), [
+            'tanggal_cetak' => 'nullable|date_format:Y-m-d', // Validasi input dalam format YYYY-MM-DD
+        ]);
+    
+        if ($validator->fails()) {
+            // Jika validasi gagal, gunakan tanggal saat ini sebagai default
+            $tanggalCetak = Carbon::now()->format('d-m-Y');
+        } else {
+            // Jika validasi berhasil, konversi input ke format d-m-Y
+            $tanggalCetak = Carbon::createFromFormat('Y-m-d', $request->query('tanggal_cetak'))->translatedFormat('j F Y');
+        }
+            
+        return view('sppd-dalam-daerah.print', compact('sppdDalamDaerah', 'dasar','tanggalCetak','userTandaTangan'));
     }
 
     private function terbilang($angka)
@@ -78,4 +96,49 @@ class SppdDalamDaerahController extends Controller
 
         return $terbilang;
     }
+    
+    public function downloadFilteredPdf(Request $request)
+{
+    $query = SppdDalamDaerah::query();
+
+    $filters = $request->input('tableFilters', []);
+    
+    // dd($filters);
+
+    // Filter nomor_spt
+    if (!empty($filters['nomor_spt']['value'])) {
+        $query->where('nomor_spt', 'like', '%' . $filters['nomor_spt']['value'] . '%');
+    }
+
+    // Filter tanggal_spt
+    if (!empty($filters['tanggal_spt']['tanggal_dari'])) {
+        $query->whereDate('tanggal_spt', '>=', $filters['tanggal_spt']['tanggal_dari']);
+    }
+    if (!empty($filters['tanggal_spt']['tanggal_sampai'])) {
+        $query->whereDate('tanggal_spt', '<=', $filters['tanggal_spt']['tanggal_sampai']);
+    }
+
+    // Jika Anda ingin filter berdasarkan user_id
+    if (!empty($filters['user_id']['value'])) {
+        $userId = $filters['user_id']['value'];
+        $query->where(function ($q) use ($userId) {
+            $q->where('user_id', $userId)
+                ->orWhereRaw('JSON_CONTAINS(user_ids, ?)', ['"' . $userId . '"']);
+        });
+    }
+
+    $sppdList = $query->get();
+
+
+// Kirim ke PDF view
+// $pdf = \PDF::loadView('sppd-dalam-daerah.filtered-pdf', compact('sppdList', 'formattedFilters'));
+
+    // Generate PDF dari view
+    $pdf = \PDF::loadView('sppd-dalam-daerah.filtered-pdf', compact('sppdList'));
+
+    // return $pdf->download('SPPD-Dalam-Daerah-Terfilter.pdf');
+    return $pdf->stream('SPPD-Dalam-Daerah-Terfilter.pdf');
+}
+
+
 }

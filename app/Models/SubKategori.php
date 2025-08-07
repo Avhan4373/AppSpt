@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class SubKategori extends Model
 {
@@ -17,7 +18,7 @@ class SubKategori extends Model
     {
         return $this->hasMany(SubKategori::class);
     }
-    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function category() 
     {
         return $this->belongsTo(Category::class);
     }

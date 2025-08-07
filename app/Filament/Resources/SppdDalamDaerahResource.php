@@ -80,7 +80,7 @@
 
         public static function table(Table $table): Table
         {
-            $isAdminOrSuper = auth()->user()->hasRole(['super_admin', 'admin']);
+            $isAdminOrSuper = auth()->user()->hasRole(['super_admin', 'admin','user']);
             return $table
                 ->columns([
                     Tables\Columns\TextColumn::make('user_ids')
@@ -186,9 +186,14 @@
                                     }
                                 }
                             }
+                            // $queryString = request()->getQueryString();
+                            
+                            // Gabungkan ke URL tujuan
+                            // return route('pdfdalamdaerah') . ($queryString ? "?{$queryString}" : '');
 
                             // Redirect ke route dengan query parameter terbaru
-                            return route('pdfdalamdaerah', $newQueryParams);
+                            // return route('pdfdalamdaerah', $newQueryParams);
+                            return url('/pdf-dalam-daerah') . '?' . http_build_query(request()->query());
                         })
                         ->openUrlInNewTab(),
                 ])
@@ -197,11 +202,70 @@
                     Tables\Actions\EditAction::make()
                         ->visible($isAdminOrSuper),
                     // Tombol cetak tetap tersedia untuk semua user
+                    // Action::make('print')
+                    //     ->label('Cetak')
+                    //     ->icon('heroicon-o-printer')
+                    //     ->url(fn (SppdDalamDaerah $record) => route('sppd.dalam-daerah.print', $record))
+                    //     ->openUrlInNewTab(),
                     Action::make('print')
-                        ->label('Cetak')
-                        ->icon('heroicon-o-printer')
-                        ->url(fn (SppdDalamDaerah $record) => route('sppd.dalam-daerah.print', $record))
-                        ->openUrlInNewTab(),
+                    ->label('Cetak')
+                    ->icon('heroicon-o-printer')
+                    ->requiresConfirmation()
+                    ->modalHeading('Pilih Tanggal Cetak')
+                    ->modalButton('Cetak')
+                    ->form([
+                        Forms\Components\DatePicker::make('tanggal_cetak')
+                            ->label('Tanggal Cetak')
+                            ->native(false)
+                            ->displayFormat('d/m/Y')
+                            ->required(),
+                        Forms\Components\Select::make('tanda_tangan')
+                            ->label('Pilih Tanda Tangan')
+                            ->options(function () {
+                                $user = auth()->user();
+                                $pangkatPembina = 'Pembina'; // Sesuaikan dengan pangkat pembina
+                                $similarPangkat = ['Pembina TK I, IV/b','Pembina', 'Pembina, IV/a']; // Tambahkan pangkat mirip lainnya
+                                
+                                // Ambil semua user dengan pangkat yang sesuai
+                                $users = User::whereHas('detailUser', function ($query) use ($similarPangkat) {
+                                $query->whereIn('pangkat_gol', $similarPangkat); // Filter berdasarkan pangkat
+                                })
+                                ->pluck('name', 'id') // Ambil nama dan ID user
+                                ->toArray();
+
+                                return $users;
+                            })
+                          ->default(function () {
+        // Pilih Kepala Dinas jika ada
+        $kepalaDinas = User::whereHas('detailUser', function ($query) {
+            $query->where('jabatan', 'Kepala Dinas');
+        })->first(); // Ambil Kepala Dinas pertama
+
+        if ($kepalaDinas) {
+            return $kepalaDinas->id; // Set default ke id Kepala Dinas
+        }
+
+        // Jika tidak ada Kepala Dinas, kembalikan user pertama dengan pangkat pembina
+        $pangkatPembina = 'Pembina';
+        $similarPangkat = ['Pembina TK I, IV/b', 'Pembina', 'Pembina, IV/a']; 
+        $user = User::whereHas('detailUser', function ($query) use ($similarPangkat) {
+            $query->whereIn('pangkat_gol', $similarPangkat);
+        })->first();
+
+        return $user ? $user->id : null; // Set default ke user pertama atau null
+    })
+    ->required()
+    ->reactive(), 
+                    ])
+                    ->openUrlInNewTab()
+                    ->action(function (SppdDalamDaerah $record, array $data) {
+                        $url = route('sppd.dalam-daerah.print', [
+                            'sppdDalamDaerah' => $record->id,
+                            'tanggal_cetak' => $data['tanggal_cetak'],
+                            'tanda_tangan' => $data['tanda_tangan'], // Pass tanda tangan ke URL
+                        ]);
+                        return redirect()->away($url);
+                    })
                 ])
                 ->bulkActions([
                     Tables\Actions\BulkActionGroup::make([

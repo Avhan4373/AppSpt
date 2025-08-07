@@ -14,7 +14,7 @@ class ListSppdDalamDaerahs extends ListRecords
     {
         try {
             $user = auth()->user();
-            $isAdminOrSuper = $user && $user->hasRole(['super_admin', 'admin']);
+            $isAdminOrSuper = $user && $user->hasRole(['super_admin', 'admin','user']);
         } catch (\Exception $e) {
             $isAdminOrSuper = false;
         }

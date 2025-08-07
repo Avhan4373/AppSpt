@@ -87,6 +87,10 @@ class SppdDalamDaerah extends Model
 
         return User::whereIn('id', $userIds)->pluck('name')->toArray();
     }
+     public function sppdDalamDaerahs()
+    {
+        return $this->hasMany(SppdDalamDaerah::class);
+    }
 
     protected static function boot()
     {
