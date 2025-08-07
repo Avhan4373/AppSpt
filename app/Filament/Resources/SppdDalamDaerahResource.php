@@ -65,14 +65,28 @@
                 ->schema([
                     $userField,
                     Forms\Components\TextInput::make('nomor_spt')
-                        ->default(SppdDalamDaerah::generateNomorSpt())
+                        ->label('Nomor SPT')
+                        ->placeholder('Pilih tanggal terlebih dahulu untuk generate nomor SPT')
                         ->required()
                         ->disabled()
-                        ->dehydrated(),
+                        ->dehydrated()
+                        ->reactive()
+                        ->visible(fn ($get) => $get('tanggal_spt') !== null),
                     Forms\Components\TextInput::make('tujuan_spt')
                         ->required(),
                     Forms\Components\DatePicker::make('tanggal_spt')
-                        ->required(),
+                        ->label('Tanggal SPT')
+                        ->required()
+                        ->reactive()
+                        ->afterStateUpdated(function ($state, $set, $get) {
+                            if ($state) {
+                                $tanggalSpt = \Carbon\Carbon::parse($state);
+                                $nomorSpt = SppdDalamDaerah::generateNomorSptByDate($tanggalSpt);
+                                $set('nomor_spt', $nomorSpt);
+                            } else {
+                                $set('nomor_spt', null);
+                            }
+                        }),
                     Forms\Components\Textarea::make('perihal')
                         ->required(),
                 ]);

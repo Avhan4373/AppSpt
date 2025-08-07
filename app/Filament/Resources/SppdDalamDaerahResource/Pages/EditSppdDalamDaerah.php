@@ -33,4 +33,26 @@ class EditSppdDalamDaerah extends EditRecord
         // ];
             
     }
+
+    protected function mutateFormDataBeforeFill(array $data): array
+    {
+        // Pastikan nomor_spt terisi jika tanggal_spt ada
+        if (isset($data['tanggal_spt']) && (!isset($data['nomor_spt']) || empty($data['nomor_spt']))) {
+            $tanggalSpt = \Carbon\Carbon::parse($data['tanggal_spt']);
+            $data['nomor_spt'] = \App\Models\SppdDalamDaerah::generateNomorSptByDate($tanggalSpt);
+        }
+        
+        return $data;
+    }
+
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        // Pastikan nomor_spt ter-generate jika tanggal_spt ada
+        if (isset($data['tanggal_spt'])) {
+            $tanggalSpt = \Carbon\Carbon::parse($data['tanggal_spt']);
+            $data['nomor_spt'] = \App\Models\SppdDalamDaerah::generateNomorSptByDate($tanggalSpt);
+        }
+        
+        return $data;
+    }
 }

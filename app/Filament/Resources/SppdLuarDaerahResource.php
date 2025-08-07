@@ -84,14 +84,29 @@ class SppdLuarDaerahResource extends Resource
                 $userIdField,
                 $userField,
                 Forms\Components\TextInput::make('nomor_spt')
-                    ->default(SppdLuarDaerah::generateNomorSpt())
+                    ->label('Nomor SPT')
+                    ->placeholder('Pilih tanggal berangkat terlebih dahulu untuk generate nomor SPT')
                     ->required()
-                    ->dehydrated(),
+                    ->dehydrated()
+                    ->reactive()
+                    ->visible(fn ($get) => $get('tanggal_berangkat') !== null),
                 Forms\Components\TextInput::make('tujuan_spt')
                     ->required(),
                 Forms\Components\DatePicker::make('tanggal_berangkat')
-                    ->required(),
+                    ->label('Tanggal Berangkat')
+                    ->required()
+                    ->reactive()
+                    ->afterStateUpdated(function ($state, $set) {
+                        if ($state) {
+                            $tanggalBerangkat = \Carbon\Carbon::parse($state);
+                            $nomorSpt = SppdLuarDaerah::generateNomorSptByDate($tanggalBerangkat);
+                            $set('nomor_spt', $nomorSpt);
+                        } else {
+                            $set('nomor_spt', null);
+                        }
+                    }),
                 Forms\Components\DatePicker::make('tanggal_kembali')
+                    ->label('Tanggal Kembali')
                     ->rules(['after_or_equal:tanggal_berangkat'])
                     ->required(),
                 Forms\Components\Textarea::make('perihal')

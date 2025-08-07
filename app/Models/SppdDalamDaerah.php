@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Helpers\NomorSuratHelper;
 
 class SppdDalamDaerah extends Model
 {
@@ -26,31 +27,26 @@ class SppdDalamDaerah extends Model
     {
         return $this->belongsTo(User::class);
     }
+    
     public static function generateNomorSpt()
     {
-        // Ambil nomor terakhir dari database
-        $lastRecord = SppdDalamDaerah::orderBy('id', 'desc')->first();
-
-        // Jika tidak ada data sebelumnya, mulai dari 001
-        if (!$lastRecord || !$lastRecord->nomor_spt) {
-            $newNumber = '001';
-        } else {
-            // Pastikan nomor_spt memiliki format yang benar
-            $parts = explode('/', $lastRecord->nomor_spt);
-            if (count($parts) >= 2) {
-                $lastNumber = intval($parts[1]); // Ambil bagian 001
-                $newNumber = str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT); // Tambahkan 1
-            } else {
-                // Jika format tidak sesuai, mulai dari 001
-                $newNumber = '001';
-            }
-        }
-
-        // Format nomor sesuai kebutuhan
-        $nomorSpt = "800.1.11.1/{$newNumber}/DD/" . date('Y'); // Tahun dinamis
-
-        return $nomorSpt;
+        return self::generateNomorSptByDate(now());
     }
+
+    // Method baru untuk generate nomor berdasarkan tanggal tertentu
+    public static function generateNomorSptByDate($tanggalSpt = null)
+    {
+        if (!$tanggalSpt) {
+            $tanggalSpt = now();
+        }
+        
+        return NomorSuratHelper::generateNomorSurat(
+            $tanggalSpt->format('Y-m-d'),
+            'DD',
+            self::class
+        );
+    }
+
     // Accessor untuk mengubah array string ke integer
     public function getUserIdsAttribute($value)
     {
@@ -87,7 +83,8 @@ class SppdDalamDaerah extends Model
 
         return User::whereIn('id', $userIds)->pluck('name')->toArray();
     }
-     public function sppdDalamDaerahs()
+    
+    public function sppdDalamDaerahs()
     {
         return $this->hasMany(SppdDalamDaerah::class);
     }
@@ -98,8 +95,23 @@ class SppdDalamDaerah extends Model
 
         // Generate nomor_spt secara otomatis sebelum data disimpan
         static::creating(function ($model) {
-            $model->nomor_spt = self::generateNomorSpt();
+            // Hanya generate nomor jika tanggal_spt sudah ada dan nomor_spt belum ada
+            if ($model->tanggal_spt && !$model->nomor_spt) {
+                $model->nomor_spt = self::generateNomorSptByDate($model->tanggal_spt);
+            }
+        });
+
+        // Update nomor_spt secara otomatis ketika tanggal_spt berubah
+        static::updating(function ($model) {
+            // Cek apakah tanggal_spt berubah
+            if ($model->isDirty('tanggal_spt')) {
+                $newTanggalSpt = $model->tanggal_spt;
+                
+                // Jika ada tanggal baru, generate nomor baru
+                if ($newTanggalSpt) {
+                    $model->nomor_spt = self::generateNomorSptByDate($newTanggalSpt);
+                }
+            }
         });
     }
-
 }

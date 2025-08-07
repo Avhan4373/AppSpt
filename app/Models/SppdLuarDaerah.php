@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Helpers\NomorSuratHelper;
 
 class SppdLuarDaerah extends Model
 {
@@ -34,30 +35,24 @@ class SppdLuarDaerah extends Model
     {
         return $this->hasMany(SppdLuarDaerah::class);
     }
+    
     public static function generateNomorSpt()
     {
-        // Ambil nomor terakhir dari database
-        $lastRecord = SppdLuarDaerah::orderBy('id', 'desc')->first();
+        return self::generateNomorSptByDate(now());
+    }
 
-        // Jika tidak ada data sebelumnya, mulai dari 001
-        if (!$lastRecord || !$lastRecord->nomor_spt) {
-            $newNumber = '001';
-        } else {
-            // Pastikan nomor_spt memiliki format yang benar
-            $parts = explode('/', $lastRecord->nomor_spt);
-            if (count($parts) >= 2) {
-                $lastNumber = intval($parts[1]); // Ambil bagian 001
-                $newNumber = str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT); // Tambahkan 1
-            } else {
-                // Jika format tidak sesuai, mulai dari 001
-                $newNumber = '001';
-            }
+    // Method baru untuk generate nomor berdasarkan tanggal tertentu
+    public static function generateNomorSptByDate($tanggalBerangkat = null)
+    {
+        if (!$tanggalBerangkat) {
+            $tanggalBerangkat = now();
         }
-
-        // Format nomor sesuai kebutuhan
-        $nomorSpt = "800.1.11.1/{$newNumber}/LD/" . date('Y'); // Tahun dinamis
-
-        return $nomorSpt;
+        
+        return NomorSuratHelper::generateNomorSurat(
+            $tanggalBerangkat->format('Y-m-d'),
+            'LD',
+            self::class
+        );
     }
 
     public function getUserIdsAttribute($value)
@@ -100,7 +95,10 @@ class SppdLuarDaerah extends Model
         parent::boot();
         // Generate nomor_spt secara otomatis sebelum data disimpan
         static::creating(function ($model) {
-            $model->nomor_spt = self::generateNomorSpt();
+            // Hanya generate nomor jika tanggal_berangkat sudah ada dan nomor_spt belum ada
+            if ($model->tanggal_berangkat && !$model->nomor_spt) {
+                $model->nomor_spt = self::generateNomorSptByDate($model->tanggal_berangkat);
+            }
         });
     }
 }
