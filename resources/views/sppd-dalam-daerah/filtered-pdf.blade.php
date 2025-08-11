@@ -46,7 +46,17 @@
 <body>
     <div class="header">
     <div class="title">LAPORAN SPPD DALAM DAERAH</div>
-    <div class="subtitle">Periode: {{ $filters['tanggal_spt']['tanggal_dari'] ?? 'Semua' }}</div>
+    @php
+        $periode = 'Semua';
+        if (!empty($filters['tanggal_spt']['tanggal_dari']) && !empty($filters['tanggal_spt']['tanggal_sampai'])) {
+            $periode = \Carbon\Carbon::parse($filters['tanggal_spt']['tanggal_dari'])->format('d-m-Y') . ' s/d ' . \Carbon\Carbon::parse($filters['tanggal_spt']['tanggal_sampai'])->format('d-m-Y');
+        } elseif (!empty($filters['tanggal_spt']['tanggal_dari'])) {
+            $periode = 'Mulai ' . \Carbon\Carbon::parse($filters['tanggal_spt']['tanggal_dari'])->format('d-m-Y');
+        } elseif (!empty($filters['tanggal_spt']['tanggal_sampai'])) {
+            $periode = 'Sampai ' . \Carbon\Carbon::parse($filters['tanggal_spt']['tanggal_sampai'])->format('d-m-Y');
+        }
+    @endphp
+    <div class="subtitle">Periode: {{ $periode }}</div>
 </div>
     <!--<h2>Daftar SPPD Dalam Daerah</h2>-->
     <table>
@@ -62,7 +72,7 @@
         <tbody>
             @foreach ($sppdList as $sppd)
                 <tr>
-                    <td>{{ $loop->iteration }}<</td>
+                    <td>{{ $loop->iteration }}</td>
                     <td>{{ $sppd->nomor_spt }}</td>
                     <td>
                         @php

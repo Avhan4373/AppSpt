@@ -114,5 +114,19 @@ class SppdDalamDaerah extends Model
                 }
             }
         });
+
+        // Setelah delete, renumber bulan berjalan agar nomor rapat kembali
+        static::deleted(function ($model) {
+            try {
+                if ($model->tanggal_spt) {
+                    $year = (int) $model->tanggal_spt->format('Y');
+                    $month = (int) $model->tanggal_spt->format('n');
+                    app(\App\Services\RenumberNomorSptService::class)
+                        ->renumberMonth('DD', $year, $month, true);
+                }
+            } catch (\Throwable $e) {
+                // Biarkan silent agar proses delete tidak gagal karena renumber
+            }
+        });
     }
 }

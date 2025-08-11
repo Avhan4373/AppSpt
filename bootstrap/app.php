@@ -16,6 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
         App\Console\Commands\DatabaseImport::class,
         App\Console\Commands\AppUpdateFromZip::class,
         App\Console\Commands\AppBackup::class,
+        App\Console\Commands\RenumberNomorSpt::class,
     ])
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([

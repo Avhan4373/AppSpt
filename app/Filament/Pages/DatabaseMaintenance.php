@@ -96,6 +96,62 @@ class DatabaseMaintenance extends Page
                         Notification::make()->title('Backup gagal: ' . $e->getMessage())->danger()->send();
                     }
                 }),
+            Actions\Action::make('renumber')
+                ->label('Renumber Nomor SPT')
+                ->icon('heroicon-o-arrow-path')
+                ->color('warning')
+                ->form([
+                    Forms\Components\Select::make('tipe')
+                        ->label('Tipe SPT')
+                        ->options(['DD' => 'Dalam Daerah (DD)', 'LD' => 'Luar Daerah (LD)'])
+                        ->default('DD')
+                        ->required(),
+                    Forms\Components\TextInput::make('year')
+                        ->label('Tahun')
+                        ->numeric()
+                        ->default(fn () => now()->year)
+                        ->required(),
+                    Forms\Components\Select::make('month')
+                        ->label('Bulan')
+                        ->options([
+                            1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April', 5 => 'Mei', 6 => 'Juni',
+                            7 => 'Juli', 8 => 'Agustus', 9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember',
+                        ])
+                        ->default(fn () => (int) now()->format('n'))
+                        ->required(),
+                    Forms\Components\Toggle::make('apply')
+                        ->label('Terapkan perubahan (matikan untuk dry-run)')
+                        ->default(false),
+                ])
+                ->action(function (array $data) {
+                    try {
+                        $options = [
+                            '--tipe' => $data['tipe'] ?? 'DD',
+                            '--year' => (int) ($data['year'] ?? now()->year),
+                            '--month' => (int) ($data['month'] ?? (int) now()->format('n')),
+                        ];
+                        if (!empty($data['apply'])) {
+                            $options['--apply'] = true;
+                        }
+
+                        $exit = Artisan::call('spt:renumber', $options);
+                        $output = Artisan::output();
+
+                        $title = $exit === 0 ? 'Renumber selesai' : 'Renumber selesai dengan peringatan';
+                        // Potong output jika terlalu panjang untuk notifikasi
+                        $snippet = strlen($output) > 1800 ? (substr($output, 0, 1800) . "\n... (dipotong)") : $output;
+
+                        Notification::make()
+                            ->title($title)
+                            ->body("Opsi: tipe={$options['--tipe']}, tahun={$options['--year']}, bulan={$options['--month']}, apply=" . (!empty($data['apply']) ? 'ya' : 'tidak') . "\n\n" . $snippet)
+                            ->success()
+                            ->send();
+                    } catch (\Throwable $e) {
+                        Notification::make()->title('Renumber gagal')->body($e->getMessage())->danger()->send();
+                    }
+                })
+                ->modalWidth('2xl')
+                ->modalSubmitActionLabel('Jalankan'),
         ];
     }
 

@@ -127,6 +127,11 @@ class SppdDalamDaerahController extends Controller
         });
     }
 
+    // Urutkan berdasarkan tanggal, lalu nomor_spt, lalu id agar deterministik
+    $query->orderBy('tanggal_spt', 'asc')
+          ->orderBy('nomor_spt', 'asc')
+          ->orderBy('id', 'asc');
+
     $sppdList = $query->get();
 
 
@@ -134,7 +139,10 @@ class SppdDalamDaerahController extends Controller
 // $pdf = \PDF::loadView('sppd-dalam-daerah.filtered-pdf', compact('sppdList', 'formattedFilters'));
 
     // Generate PDF dari view
-    $pdf = \PDF::loadView('sppd-dalam-daerah.filtered-pdf', compact('sppdList'));
+    $pdf = \PDF::loadView('sppd-dalam-daerah.filtered-pdf', [
+        'sppdList' => $sppdList,
+        'filters' => $filters,
+    ]);
 
     // return $pdf->download('SPPD-Dalam-Daerah-Terfilter.pdf');
     return $pdf->stream('SPPD-Dalam-Daerah-Terfilter.pdf');
