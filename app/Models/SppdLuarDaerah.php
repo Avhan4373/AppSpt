@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -9,7 +10,7 @@ use App\Helpers\NomorSuratHelper;
 
 class SppdLuarDaerah extends Model
 {
-    use HasFactory;
+    use HasFactory, LogsActivity;
     protected $fillable = [
         'user_id',
         'user_ids', // Jika Anda menambahkan kolom ini
@@ -93,6 +94,7 @@ class SppdLuarDaerah extends Model
     protected static function boot()
     {
         parent::boot();
+        
         // Generate nomor_spt secara otomatis sebelum data disimpan
         static::creating(function ($model) {
             // Hanya generate nomor jika tanggal_berangkat sudah ada dan nomor_spt belum ada

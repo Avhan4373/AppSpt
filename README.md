@@ -64,3 +64,126 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+# AppSpt_V1
+
+Aplikasi Sistem Penomoran Surat dan Perjalanan Dinas
+
+## Fitur Utama
+
+### 1. Sistem Penomoran Surat
+- Penomoran otomatis untuk surat keluar
+- Kategori, sub kategori, dan rincian kategori
+- Format penomoran yang fleksibel
+
+### 2. Manajemen Surat
+- Surat Masuk
+- Surat Keluar
+- Surat Izin
+
+### 3. Perjalanan Dinas
+- SPPD Dalam Daerah
+- SPPD Luar Daerah
+- Generate nomor SPT otomatis
+
+### 4. **Activity Logging System** 🆕
+- Mencatat semua aktivitas pengguna (login, logout, CRUD)
+- Interface Filament untuk melihat log aktivitas
+- Widget dashboard untuk aktivitas terbaru
+- Filtering dan searching log aktivitas
+- IP address dan user agent tracking
+- Keamanan: hanya admin yang bisa menghapus logs
+
+### 5. **Real-Time Activity Monitoring** 🆕
+- **Dashboard Widgets Real-Time**:
+  - Activity Stats: Statistik aktivitas hari ini, minggu ini, dan bulan ini
+  - Recent Activities: Daftar 15 aktivitas terbaru dengan polling 30 detik
+  - Activity Chart: Grafik aktivitas 7 hari terakhir dengan polling 60 detik
+  - Live Activity Feed: Feed aktivitas real-time dengan polling 15 detik
+- **Detail CRUD Tracking**: Mencatat create, update, delete, view dengan detail
+- **Real-Time Updates**: Widgets update otomatis setiap 15-60 detik
+- **Enhanced Analytics**: Statistik dan grafik aktivitas pengguna
+
+#### Cara Akses Activity Logs:
+1. **Dashboard**: 
+   - Widget "Activity Stats" menampilkan statistik aktivitas
+   - Widget "Recent Activities" menampilkan 15 aktivitas terbaru
+   - Widget "Activity Chart" menampilkan grafik 7 hari terakhir
+   - Widget "Live Activity Feed" menampilkan feed real-time
+2. **Menu System > Activity Logs**: Halaman lengkap untuk mengelola log aktivitas
+3. **Filtering**: Filter berdasarkan user, action, tanggal, dll
+4. **Search**: Pencarian berdasarkan description, user, dll
+
+#### Model yang Dilacak:
+- User (login/logout)
+- SuratKeluar (CRUD)
+- SuratMasuk (CRUD)
+- SppdDalamDaerah (CRUD)
+- SppdLuarDaerah (CRUD)
+
+#### Real-Time Features:
+- **Polling Intervals**: 15-60 detik untuk update otomatis
+- **Live Feed**: Feed aktivitas real-time dengan UI yang menarik
+- **Activity Charts**: Grafik interaktif untuk analisis tren
+- **Statistics**: Statistik real-time untuk monitoring
+
+## Teknologi
+
+- Laravel 11
+- Filament 3
+- MySQL
+- Tailwind CSS
+
+## Instalasi
+
+1. Clone repository
+2. Install dependencies: `composer install`
+3. Copy `.env.example` ke `.env`
+4. Generate key: `php artisan key:generate`
+5. Setup database di `.env`
+6. Run migrations: `php artisan migrate`
+7. Run seeders: `php artisan db:seed`
+8. Install npm dependencies: `npm install`
+9. Build assets: `npm run build`
+
+## Penggunaan
+
+1. Akses aplikasi di `http://localhost:8000`
+2. Login dengan kredensial default
+3. Mulai menggunakan fitur-fitur aplikasi
+
+## Dokumentasi
+
+- [Sistem Penomoran Surat](docs/SISTEM_PENOMORAN_SURAT.md)
+- [Activity Logging System](docs/ACTIVITY_LOGGING.md)
+
+## Testing
+
+Untuk testing fitur activity logging:
+```bash
+# Test basic activity logging
+php artisan test:activity-log --user=1 --action=login
+php artisan test:activity-log --user=1 --action=create
+php artisan test:activity-log --user=1 --action=custom
+
+# Test real-time activity creation
+php artisan test:realtime-activity --user=1 --count=5
+```
+
+## Real-Time Monitoring
+
+### Dashboard Widgets:
+1. **Activity Stats**: Statistik aktivitas hari ini, minggu ini, bulan ini
+2. **Recent Activities**: Tabel aktivitas terbaru dengan filter
+3. **Activity Chart**: Grafik aktivitas 7 hari terakhir
+4. **Live Activity Feed**: Feed aktivitas real-time
+
+### Polling Intervals:
+- Live Activity Feed: 15 detik
+- Recent Activities: 30 detik
+- Activity Stats: 30 detik
+- Activity Chart: 60 detik
+
+## License
+
+This project is licensed under the MIT License.

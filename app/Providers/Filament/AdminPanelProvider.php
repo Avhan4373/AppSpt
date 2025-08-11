@@ -3,6 +3,10 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Resources\SuratKeluarResource\Widgets\SuratKeluar;
+use App\Filament\Widgets\RecentActivities;
+use App\Filament\Widgets\ActivityStats;
+use App\Filament\Widgets\ActivityChart;
+use App\Filament\Widgets\LiveActivityFeed;
 use Filament\Http\Middleware\Authenticate;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -41,7 +45,10 @@ class AdminPanelProvider extends PanelProvider
             ->widgets([
 //                Widgets\AccountWidget::class,
 //                Widgets\FilamentInfoWidget::class,
-
+                ActivityStats::class,
+                RecentActivities::class,
+                ActivityChart::class,
+                LiveActivityFeed::class,
             ])
             ->middleware([
                 EncryptCookies::class,

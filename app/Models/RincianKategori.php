@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class RincianKategori extends Model
 {
+    use LogsActivity;
+
     protected $fillable = [
         'category_id',
         'sub_kategori_id',
