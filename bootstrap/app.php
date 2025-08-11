@@ -14,6 +14,8 @@ return Application::configure(basePath: dirname(__DIR__))
         App\Console\Commands\AppUpdate::class,
         App\Console\Commands\DatabaseBackup::class,
         App\Console\Commands\DatabaseImport::class,
+        App\Console\Commands\AppUpdateFromZip::class,
+        App\Console\Commands\AppBackup::class,
     ])
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([

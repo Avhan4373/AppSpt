@@ -5,6 +5,7 @@ use App\Http\Controllers\PdfController;
 use App\Http\Controllers\SppdDalamDaerahController;
 use App\Http\Controllers\SppdLuarDaerahController;
 use App\Http\Controllers\SuratIzinController;
+use App\Http\Controllers\BackupController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,6 +19,12 @@ Route::get('/perjalananPdf', [App\Http\Controllers\PdfController::class, 'perjal
     ->name('perjalananPdf');
 Route::get('/downloadSk', [App\Http\Controllers\PdfController::class, 'downloadSk'])
     ->name('downloadSk');
+// On-demand backup download (auth recommended via panel guard)
+Route::middleware(['web'])
+    ->group(function () {
+        Route::get('/admin/download-backup', [BackupController::class, 'download'])
+            ->name('admin.download-backup');
+    });
 
 Route::get('/pdfdalamdaerah', [PdfController::class, 'pdfdalamdaerah'])->name('pdfdalamdaerah');
 Route::get('/pdfluardaerah', [PdfController::class, 'pdfluardaerah'])->name('pdfluardaerah');
