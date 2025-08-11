@@ -37,6 +37,17 @@ class UpdateAplikasi extends Page
         ];
     }
 
+    public function mount(): void
+    {
+        // Ensure target directories exist for uploads
+        try {
+            Storage::disk(config('filesystems.default'))
+                ->makeDirectory('updates');
+        } catch (\Throwable $e) {
+            // ignore
+        }
+    }
+
     // No explicit public property needed; FileUpload stores directly to disk and returns path
 
     public static function canAccess(): bool
@@ -96,10 +107,13 @@ class UpdateAplikasi extends Page
                     Forms\Components\FileUpload::make('zipFile')
                         ->label('File ZIP update')
                         ->required()
-                        ->acceptedFileTypes(['application/zip', 'application/x-zip-compressed', '.zip'])
+                        ->acceptedFileTypes(['application/zip', 'application/x-zip-compressed', 'application/octet-stream', '.zip'])
+                        ->disk('local')
                         ->preserveFilenames()
                         ->directory('updates')
                         ->visibility('private')
+                        ->maxSize(512000)
+                        ->maxFiles(1)
                         ->downloadable()
                         ->openable(),
                 ])
