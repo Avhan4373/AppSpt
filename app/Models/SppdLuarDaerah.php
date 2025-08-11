@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Helpers\NomorSuratHelper;
+use Carbon\Carbon;
 
 class SppdLuarDaerah extends Model
 {
@@ -42,18 +43,64 @@ class SppdLuarDaerah extends Model
         return self::generateNomorSptByDate(now());
     }
 
-    // Method baru untuk generate nomor berdasarkan tanggal tertentu
+    // Method generate nomor berdasarkan tanggal tertentu dengan aturan:
+    // - Ambil nomor terakhir di bulan yang dipilih.
+    // - Jika bulan tersebut belum ada data, lanjutkan nomor dari bulan sebelumnya (di tahun yang sama), bukan reset ke 001.
+    // - Untuk tanggal yang sama di bulan yang sama, penanganan huruf tetap mengikuti helper.
     public static function generateNomorSptByDate($tanggalBerangkat = null)
     {
         if (!$tanggalBerangkat) {
             $tanggalBerangkat = now();
         }
-        
-        return NomorSuratHelper::generateNomorSurat(
-            $tanggalBerangkat->format('Y-m-d'),
-            'LD',
-            self::class
-        );
+
+        $tanggalObj = $tanggalBerangkat instanceof Carbon ? $tanggalBerangkat : Carbon::parse($tanggalBerangkat);
+        $year = (int) $tanggalObj->format('Y');
+        $month = (int) $tanggalObj->format('m');
+
+        // Cek apakah bulan ini sudah ada data
+        $monthHasRecords = self::whereYear('tanggal_berangkat', $year)
+            ->whereMonth('tanggal_berangkat', $month)
+            ->exists();
+
+        if ($monthHasRecords) {
+            // Delegasikan ke helper untuk logika dalam-bulan (termasuk huruf pada tanggal yang sama)
+            return NomorSuratHelper::generateNomorSurat(
+                $tanggalObj->format('Y-m-d'),
+                'LD',
+                self::class
+            );
+        }
+
+        // Jika belum ada data di bulan ini, cari nomor terbesar dari awal tahun s.d. akhir bulan sebelumnya
+        $firstDayOfMonth = Carbon::create($year, $month, 1)->startOfDay();
+        $previousRecords = self::whereYear('tanggal_berangkat', $year)
+            ->where('tanggal_berangkat', '<', $firstDayOfMonth)
+            ->get(['nomor_spt']);
+
+        $maxBaseNumber = 0;
+        foreach ($previousRecords as $record) {
+            if (empty($record->nomor_spt)) {
+                continue;
+            }
+            $parts = explode('/', $record->nomor_spt);
+            if (count($parts) < 2) {
+                continue;
+            }
+            $numberPart = $parts[1];
+            if (preg_match('/^(\d+)\.([a-z])$/', $numberPart, $m)) {
+                $base = (int) $m[1];
+                $maxBaseNumber = max($maxBaseNumber, $base);
+            } elseif (preg_match('/^(\d+)$/', $numberPart, $m)) {
+                $base = (int) $m[1];
+                $maxBaseNumber = max($maxBaseNumber, $base);
+            }
+        }
+
+        $nextBase = $maxBaseNumber + 1; // jika tidak ada record sebelumnya, akan menjadi 1
+        $newNumber = str_pad((string) $nextBase, 3, '0', STR_PAD_LEFT);
+
+        // Format akhir: 800.1.11.1/{nomor}/{LD}/{tahun}
+        return sprintf('800.1.11.1/%s/LD/%d', $newNumber, $year);
     }
 
     public function getUserIdsAttribute($value)

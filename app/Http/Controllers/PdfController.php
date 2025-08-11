@@ -175,6 +175,7 @@
             // Mulai query builder
             $query = SppdDalamDaerah::query()
                 ->with('user') // Eager load relasi user
+                // ->orderBy('tanggal_spt', 'asc');
                 ->orderBy('tanggal_spt', 'asc');
 
             // Filter berdasarkan role
@@ -199,8 +200,9 @@
                 $query->whereDate('tanggal_spt', '<=', $request->input('tanggal_sampai'));
             }
 
-            // Get data
+            // Get datas
             $sppdDalamDaerahs = $query->get();
+            
 
             \Log::info('Filtered Data:', $sppdDalamDaerahs->toArray());
             // Generate PDF

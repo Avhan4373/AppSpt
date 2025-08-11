@@ -10,6 +10,11 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
+    ->withCommands([
+        App\Console\Commands\AppUpdate::class,
+        App\Console\Commands\DatabaseBackup::class,
+        App\Console\Commands\DatabaseImport::class,
+    ])
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'activity.log' => \App\Http\Middleware\ActivityLogMiddleware::class,

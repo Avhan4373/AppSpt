@@ -68,7 +68,7 @@
                         ->label('Nomor SPT')
                         ->placeholder('Pilih tanggal terlebih dahulu untuk generate nomor SPT')
                         ->required()
-                        ->disabled()
+                        // ->disabled()
                         ->dehydrated()
                         ->reactive()
                         ->visible(fn ($get) => $get('tanggal_spt') !== null),
