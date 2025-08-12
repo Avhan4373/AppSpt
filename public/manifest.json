@@ -1,0 +1,22 @@
+{
+  "name": "App SPT",
+  "short_name": "AppSPT",
+  "id": "/?source=pwa",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#0ea5e9",
+  "background_color": "#ffffff",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "16x16 32x32 48x48 64x64",
+      "type": "image/x-icon"
+    }
+  ],
+  "description": "Aplikasi SPT dengan dukungan offline dan pemasangan (installable).",
+  "categories": ["productivity"]
+}
+
+

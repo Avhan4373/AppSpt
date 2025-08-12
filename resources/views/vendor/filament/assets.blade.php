@@ -19,9 +19,14 @@
 <!-- Tambahkan manifest.json -->
 <link rel="manifest" href="/manifest.json">
 
-<!-- Tambahkan service worker -->
+<!-- PWA meta -->
+<meta name="theme-color" content="#0ea5e9">
+<link rel="apple-touch-icon" href="/favicon.ico">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="AppSPT">
 
-<!-- Tambahkan service worker -->
+<!-- Service worker -->
 <script>
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
