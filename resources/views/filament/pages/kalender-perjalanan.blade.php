@@ -36,7 +36,7 @@
         </div>
 
         <div class="rounded-lg border overflow-hidden">
-            <div class="grid grid-cols-7 bg-gray-50 dark:bg-gray-900/40 text-sm font-medium">
+            <div class="grid grid-cols-7 bg-gray-50 dark:bg-gray-900/40 text-sm text-gray-600 dark:text-gray-300 font-medium">
                 <div class="p-2 text-center">Min</div>
                 <div class="p-2 text-center">Sen</div>
                 <div class="p-2 text-center">Sel</div>
@@ -52,11 +52,28 @@
                             @if ($cell === null)
                                 <div class="aspect-square p-2 bg-white dark:bg-gray-950"></div>
                             @else
-                                <div class="aspect-square p-2">
-                                    <div class="h-full w-full rounded-md border @if($cell['used']) bg-red-100 dark:bg-red-900/70 border-red-300 dark:border-red-500 ring-2 ring-red-300 dark:ring-red-500 shadow-sm dark:shadow-red-500/20 @else bg-white dark:bg-gray-950 @endif flex items-start justify-end p-1">
-                                        <span class="text-xs font-medium {{ $cell['used'] ? 'text-red-900 dark:text-white font-bold' : 'text-gray-600 dark:text-gray-200' }}">{{ $cell['day'] }}</span>
-                                    </div>
-                                </div>
+                            <div class="aspect-square p-2">
+    @php
+        $cellClasses = $cell['used']
+            ? 'bg-red-100 dark:bg-red-900/70
+               border-red-300 dark:border-red-500
+               ring-2 ring-red-300 dark:ring-red-500
+               shadow-sm dark:shadow-red-500/20
+               hover:bg-red-200 dark:hover:bg-red-800
+               transition-colors duration-200'
+            : 'bg-white dark:bg-gray-800
+               border-gray-300 dark:border-gray-600
+               hover:bg-gray-100 dark:hover:bg-gray-700
+               transition-colors duration-200';
+    @endphp
+
+    <div class="h-full w-full rounded-md border {{ $cellClasses }} flex items-start justify-end p-1">
+        <span class="text-xs font-medium {{ $cell['used'] ? 'text-red-900 dark:text-white font-bold' : 'text-gray-600 dark:text-gray-200' }}">
+            {{ $cell['day'] }}
+        </span>
+    </div>
+</div>
+
                             @endif
                         @endforeach
                     </div>
