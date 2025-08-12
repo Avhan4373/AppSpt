@@ -28,67 +28,95 @@ class NomorSuratHelper
         $records = $modelClass::whereDate($tanggalField, $tanggal)
             ->get();
 
-        // Jika tidak ada data untuk tanggal ini, cari nomor terakhir untuk TAHUN yang sama (kontinuitas tahunan)
+        // Jika tidak ada data untuk tanggal ini
         if ($records->isEmpty()) {
-            $yearRecords = $modelClass::whereYear($tanggalField, $currentYear)
-                ->orderBy($tanggalField, 'asc')
-                ->orderBy('id', 'asc')
-                ->get();
+            // Prioritaskan mengisi nomor yang hilang (gap) di bulan yang sama
+            $monthRecords = $modelClass::whereYear($tanggalField, $currentYear)
+                ->whereMonth($tanggalField, $currentMonth)
+                ->get(['nomor_spt']);
 
-            if ($yearRecords->isEmpty()) {
-                // Reset tahunan mulai 001
-                $newNumber = '001';
+            if ($monthRecords->isNotEmpty()) {
+                $usedBases = [];
+                foreach ($monthRecords as $record) {
+                    $nomor = $record->nomor_spt;
+                    if (empty($nomor)) {
+                        continue;
+                    }
+                    $parts = explode('/', $nomor);
+                    if (count($parts) < 2) {
+                        continue;
+                    }
+                    $numPart = $parts[1];
+                    if (preg_match('/^(\d+)$/', $numPart, $m)) {
+                        $usedBases[(int) $m[1]] = true;
+                    } elseif (preg_match('/^(\d+)\.[a-z]$/', $numPart, $m)) {
+                        $usedBases[(int) $m[1]] = true;
+                    }
+                }
+
+                if (! empty($usedBases)) {
+                    $minBase = min(array_keys($usedBases));
+                    $maxBase = max(array_keys($usedBases));
+
+                    $candidate = null;
+                    for ($i = $minBase; $i <= $maxBase; $i++) {
+                        if (! isset($usedBases[$i])) {
+                            $candidate = $i;
+                            break;
+                        }
+                    }
+
+                    if ($candidate === null) {
+                        $candidate = $maxBase + 1;
+                    }
+
+                    $newNumber = str_pad($candidate, 3, '0', STR_PAD_LEFT);
+                } else {
+                    $newNumber = '001';
+                }
             } else {
-                // Cari nomor terbesar di tahun berjalan
-                $sortedRecords = $yearRecords->sortBy(function ($record) use ($tanggalField) {
-                    return $record->{$tanggalField}->format('Y-m-d') . '_' . $record->id;
-                });
-                
-                // Cari nomor terbesar dari semua record yang sudah diurutkan berdasarkan tanggal
-                $maxNumber = '000';
-                $maxNumberWithLetter = null;
-                
-                foreach ($sortedRecords as $record) {
-                    if (!$record->nomor_spt) continue;
-                    
-                    $parts = explode('/', $record->nomor_spt);
-                    if (count($parts) >= 2) {
+                // Jika bulan ini belum ada data, lanjutkan kontinuitas tahunan (ambil nomor berikutnya dari tahun berjalan)
+                $yearRecords = $modelClass::whereYear($tanggalField, $currentYear)
+                    ->orderBy($tanggalField, 'asc')
+                    ->orderBy('id', 'asc')
+                    ->get();
+
+                if ($yearRecords->isEmpty()) {
+                    $newNumber = '001';
+                } else {
+                    $sortedRecords = $yearRecords->sortBy(function ($record) use ($tanggalField) {
+                        return $record->{$tanggalField}->format('Y-m-d') . '_' . $record->id;
+                    });
+
+                    $maxNumber = '000';
+                    $maxNumberWithLetter = null;
+                    foreach ($sortedRecords as $record) {
+                        if (!$record->nomor_spt) continue;
+                        $parts = explode('/', $record->nomor_spt);
+                        if (count($parts) < 2) continue;
                         $numberPart = $parts[1];
-                        
-                        // Cek apakah ada huruf di akhir
                         if (preg_match('/^(\d+)\.([a-z])$/', $numberPart, $matches)) {
-                            // Format: 088.a
                             $baseNumber = $matches[1];
                             $letter = $matches[2];
-                            
-                            // Jika base number lebih besar, update max
                             if (intval($baseNumber) > intval($maxNumber)) {
                                 $maxNumber = $baseNumber;
                                 $maxNumberWithLetter = $numberPart;
                             } elseif (intval($baseNumber) == intval($maxNumber)) {
-                                // Jika base number sama, bandingkan huruf
                                 if (!$maxNumberWithLetter || ord($letter) > ord(substr($maxNumberWithLetter, -1))) {
                                     $maxNumberWithLetter = $numberPart;
                                 }
                             }
                         } else {
-                            // Format: 088 (tanpa huruf)
                             if (intval($numberPart) > intval($maxNumber)) {
                                 $maxNumber = $numberPart;
                                 $maxNumberWithLetter = null;
                             }
                         }
                     }
-                }
-                
-                // Generate nomor berikutnya untuk tahun yang sama (berdasarkan base number terbesar di tahun tsb)
-                if ($maxNumberWithLetter) {
-                    // Ada nomor dengan huruf
-                    if (preg_match('/^(\d+)\.([a-z])$/', $maxNumberWithLetter, $matches)) {
+
+                    if ($maxNumberWithLetter && preg_match('/^(\d+)\.([a-z])$/', $maxNumberWithLetter, $matches)) {
                         $baseNumber = intval($matches[1]);
                         $lastLetter = $matches[2];
-                        
-                        // Jika huruf terakhir adalah 'z', tambah nomor dan mulai dari 'a'
                         if ($lastLetter === 'z') {
                             $newBaseNumber = $baseNumber + 1;
                             $newLetter = 'a';
@@ -96,14 +124,10 @@ class NomorSuratHelper
                             $newBaseNumber = $baseNumber;
                             $newLetter = chr(ord($lastLetter) + 1);
                         }
-                        
                         $newNumber = str_pad($newBaseNumber, 3, '0', STR_PAD_LEFT) . '.' . $newLetter;
                     } else {
                         $newNumber = str_pad(intval($maxNumber) + 1, 3, '0', STR_PAD_LEFT);
                     }
-                } else {
-                    // Tidak ada nomor dengan huruf, tambah 1
-                    $newNumber = str_pad(intval($maxNumber) + 1, 3, '0', STR_PAD_LEFT);
                 }
             }
             } else {

@@ -115,8 +115,8 @@ class SppdDalamDaerah extends Model
             }
         });
 
-        // Setelah delete, renumber bulan berjalan agar nomor rapat kembali
-        static::deleted(function ($model) {
+        // Setelah create, renumber bulan berjalan agar nomor terisi berurutan (isi celah)
+        static::created(function ($model) {
             try {
                 if ($model->tanggal_spt) {
                     $year = (int) $model->tanggal_spt->format('Y');
@@ -125,8 +125,33 @@ class SppdDalamDaerah extends Model
                         ->renumberMonth('DD', $year, $month, true);
                 }
             } catch (\Throwable $e) {
-                // Biarkan silent agar proses delete tidak gagal karena renumber
+                // Silent: jangan gagalkan proses create
             }
         });
+
+        // Setelah update: jika tanggal berubah, renumber bulan lama dan baru
+        static::updated(function ($model) {
+            try {
+                if ($model->wasChanged('tanggal_spt')) {
+                    $original = $model->getOriginal('tanggal_spt');
+                    if (! empty($original)) {
+                        $orig = \Carbon\Carbon::parse($original);
+                        app(\App\Services\RenumberNomorSptService::class)
+                            ->renumberMonth('DD', (int) $orig->format('Y'), (int) $orig->format('n'), true);
+                    }
+
+                    if ($model->tanggal_spt) {
+                        $year = (int) $model->tanggal_spt->format('Y');
+                        $month = (int) $model->tanggal_spt->format('n');
+                        app(\App\Services\RenumberNomorSptService::class)
+                            ->renumberMonth('DD', $year, $month, true);
+                    }
+                }
+            } catch (\Throwable $e) {
+                // Silent: jangan gagalkan proses update
+            }
+        });
+
+        // Tidak melakukan renumber pada delete agar nomor yang sudah ada tetap
     }
 }
