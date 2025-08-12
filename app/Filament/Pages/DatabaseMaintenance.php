@@ -32,7 +32,7 @@ class DatabaseMaintenance extends Page
         if (!$user) {
             return false;
         }
-        return $user->hasAnyRole(['super_admin', 'admin']);
+        return $user->hasAnyRole(['super_admin']);
     }
 
     protected function getHeaderActions(): array
