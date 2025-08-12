@@ -64,15 +64,22 @@ class RenumberNomorSptService
         // Tentukan starting base number sesuai aturan masing-masing tipe
         $startingBase = null;
         if ($tipe === 'DD') {
-            foreach ($records as $r) {
+            // Kontinuitas tahunan: mulai dari base number terbesar sebelum awal bulan + 1
+            $firstDayOfMonth = Carbon::create($year, $month, 1)->startOfDay();
+            $prevRecords = $modelClass::query()
+                ->whereYear($dateField, $year)
+                ->where($dateField, '<', $firstDayOfMonth)
+                ->get(['nomor_spt']);
+
+            $maxBefore = 0;
+            foreach ($prevRecords as $r) {
                 $b = $parseBase($r->nomor_spt);
                 if ($b !== null) {
-                    $startingBase = $startingBase === null ? $b : min($startingBase, $b);
+                    $maxBefore = max($maxBefore, $b);
                 }
             }
-            if ($startingBase === null) {
-                $startingBase = 1;
-            }
+
+            $startingBase = $maxBefore + 1;
         } else {
             $firstDayOfMonth = Carbon::create($year, $month, 1)->startOfDay();
             $prevRecords = $modelClass::query()
@@ -134,5 +141,6 @@ class RenumberNomorSptService
         return $changes;
     }
 }
+
 
 
