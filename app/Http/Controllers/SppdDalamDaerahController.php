@@ -127,10 +127,23 @@ class SppdDalamDaerahController extends Controller
         });
     }
 
-    // Urutkan berdasarkan tanggal, lalu nomor_spt, lalu id agar deterministik
-    $query->orderBy('tanggal_spt', 'asc')
-          ->orderBy('nomor_spt', 'asc')
-          ->orderBy('id', 'asc');
+    // Urutkan berdasarkan tanggal terlebih dahulu agar bulan lebih awal muncul sebelum yang lebih akhir,
+    // lalu base number dan suffix huruf untuk konsistensi dalam tanggal yang sama.
+    // number_segment = bagian ke-2 dari nomor_spt (setelah prefix), contoh: "008" atau "008.a"
+    // base_number = angka sebelum titik, contoh: 008
+    // suffix_letter = huruf setelah titik, kosong jika tidak ada
+    $query
+        ->orderBy('tanggal_spt', 'asc')
+        ->orderByRaw(
+            "CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(nomor_spt, '/', 2), '/', -1), '.', 1) AS UNSIGNED) ASC"
+        )
+        ->orderByRaw(
+            // Kosong ('') akan diurutkan sebelum 'a', 'b', dst sehingga 008 muncul sebelum 008.a
+            "CASE WHEN SUBSTRING_INDEX(SUBSTRING_INDEX(nomor_spt, '/', 2), '/', -1) LIKE '%.%'
+                  THEN SUBSTRING_INDEX(SUBSTRING_INDEX(nomor_spt, '/', 2), '.', -1)
+                  ELSE '' END ASC"
+        )
+        ->orderBy('id', 'asc');
 
     $sppdList = $query->get();
 

@@ -28,20 +28,19 @@ class NomorSuratHelper
         $records = $modelClass::whereDate($tanggalField, $tanggal)
             ->get();
 
-        // Jika tidak ada data untuk tanggal ini, cari nomor terakhir untuk bulan dan tahun yang sama
+        // Jika tidak ada data untuk tanggal ini, cari nomor terakhir untuk TAHUN yang sama (kontinuitas tahunan)
         if ($records->isEmpty()) {
-            $monthRecords = $modelClass::whereYear($tanggalField, $currentYear)
-                ->whereMonth($tanggalField, $currentMonth)
-                ->orderBy($tanggalField, 'asc') // Urutkan berdasarkan tanggal terlebih dahulu
-                ->orderBy('id', 'asc') // Kemudian berdasarkan ID untuk konsistensi
+            $yearRecords = $modelClass::whereYear($tanggalField, $currentYear)
+                ->orderBy($tanggalField, 'asc')
+                ->orderBy('id', 'asc')
                 ->get();
 
-            if ($monthRecords->isEmpty()) {
+            if ($yearRecords->isEmpty()) {
+                // Reset tahunan mulai 001
                 $newNumber = '001';
             } else {
-                // PERBAIKAN: Cari nomor terbesar berdasarkan urutan tanggal yang benar
-                // Urutkan berdasarkan tanggal terlebih dahulu, kemudian berdasarkan nomor
-                $sortedRecords = $monthRecords->sortBy(function ($record) use ($tanggalField) {
+                // Cari nomor terbesar di tahun berjalan
+                $sortedRecords = $yearRecords->sortBy(function ($record) use ($tanggalField) {
                     return $record->{$tanggalField}->format('Y-m-d') . '_' . $record->id;
                 });
                 
@@ -82,7 +81,7 @@ class NomorSuratHelper
                     }
                 }
                 
-                // Generate nomor berikutnya untuk bulan yang sama
+                // Generate nomor berikutnya untuk tahun yang sama (berdasarkan base number terbesar di tahun tsb)
                 if ($maxNumberWithLetter) {
                     // Ada nomor dengan huruf
                     if (preg_match('/^(\d+)\.([a-z])$/', $maxNumberWithLetter, $matches)) {
@@ -107,7 +106,7 @@ class NomorSuratHelper
                     $newNumber = str_pad(intval($maxNumber) + 1, 3, '0', STR_PAD_LEFT);
                 }
             }
-        } else {
+            } else {
             // Ada data untuk tanggal yang sama, cari nomor yang sama dan tambahkan huruf
             $sameDateNumbers = [];
             
@@ -180,11 +179,10 @@ class NomorSuratHelper
                     }
                 }
             } else {
-                // Tidak ada nomor yang sama, cari nomor terbesar untuk bulan yang sama
+                // Tidak ada nomor yang sama, cari nomor terbesar untuk tahun yang sama
                 $monthRecords = $modelClass::whereYear($tanggalField, $currentYear)
-                    ->whereMonth($tanggalField, $currentMonth)
-                    ->orderBy($tanggalField, 'asc') // Urutkan berdasarkan tanggal terlebih dahulu
-                    ->orderBy('id', 'asc') // Kemudian berdasarkan ID untuk konsistensi
+                    ->orderBy($tanggalField, 'asc')
+                    ->orderBy('id', 'asc')
                     ->get();
                 
                 $maxNumber = '000';

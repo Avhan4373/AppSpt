@@ -80,18 +80,21 @@ class RenumberNomorSpt extends Command
         };
 
         // Tentukan starting base number
-        $startingBase = null;
         if ($tipe === 'DD') {
-            // DD: reset bulanan. Mulai dari minimum base number bulan berjalan jika ada, selain itu 1
-            foreach ($records as $r) {
+            // DD: kontinuitas tahunan (tidak reset bulanan)
+            $firstDayOfMonth = Carbon::create($year, $month, 1)->startOfDay();
+            $prevRecords = $modelClass::query()
+                ->whereYear($dateField, $year)
+                ->where($dateField, '<', $firstDayOfMonth)
+                ->get(['nomor_spt']);
+            $maxBefore = 0;
+            foreach ($prevRecords as $r) {
                 $b = $parseBase($r->nomor_spt);
                 if ($b !== null) {
-                    $startingBase = $startingBase === null ? $b : min($startingBase, $b);
+                    $maxBefore = max($maxBefore, $b);
                 }
             }
-            if ($startingBase === null) {
-                $startingBase = 1;
-            }
+            $startingBase = $maxBefore + 1;
         } else {
             // LD: lanjutkan dari nomor terbesar sebelum awal bulan (kontinuitas tahunan)
             $firstDayOfMonth = Carbon::create($year, $month, 1)->startOfDay();
