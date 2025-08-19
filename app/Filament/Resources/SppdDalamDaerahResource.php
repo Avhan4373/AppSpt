@@ -16,6 +16,7 @@
     use Filament\Tables\Filters\SelectFilter;
     use Filament\Tables\Table;
     use App\Models\User;
+    use Closure;
     use Illuminate\Database\Eloquent\Builder;
     use Illuminate\Database\Eloquent\SoftDeletingScope;
     use Illuminate\Support\Facades\Auth;
@@ -42,10 +43,86 @@
             // Field untuk memilih user (single atau multiple)
             $userField = Forms\Components\Select::make('user_ids')
                 ->label('Pilih User')
-                ->options(User::pluck('name', 'id'))
+                ->options(function (Forms\Get $get, $livewire) {
+                    $date = $get('tanggal_spt');
+                    // Ambil id record saat edit agar tidak ikut terblokir oleh dirinya sendiri
+                    $recordId = property_exists($livewire, 'record') && $livewire->record ? $livewire->record->id : null;
+
+                    $blockedIds = [];
+                    if ($date) {
+                        $existing = \App\Models\SppdDalamDaerah::query()
+                            ->whereDate('tanggal_spt', $date)
+                            ->when($recordId, fn ($q) => $q->where('id', '!=', $recordId))
+                            ->get(['user_id', 'user_ids']);
+
+                        foreach ($existing as $row) {
+                            if (!empty($row->user_id)) {
+                                $blockedIds[] = (int) $row->user_id;
+                            }
+                            $uids = $row->user_ids;
+                            if (is_string($uids)) {
+                                $uids = json_decode($uids, true) ?: [];
+                            }
+                            if (is_array($uids)) {
+                                foreach ($uids as $uid) {
+                                    $blockedIds[] = (int) $uid;
+                                }
+                            }
+                        }
+                    }
+
+                    $blockedIds = array_values(array_unique(array_filter($blockedIds)));
+
+                    // Izinkan yang sudah terpilih saat ini (ketika edit atau memilih bertahap)
+                    $currentlySelected = (array) ($get('user_ids') ?? []);
+                    $exclude = array_values(array_diff($blockedIds, $currentlySelected));
+
+                    $query = User::query();
+                    if (!empty($exclude)) {
+                        $query->whereNotIn('id', $exclude);
+                    }
+
+                    return $query->pluck('name', 'id');
+                })
                 ->multiple()
                 ->searchable()
+                ->preload()
+                ->reactive()
                 ->required()
+                ->helperText('Nama yang tidak muncul berarti sudah terpakai pada tanggal tersebut.')
+                ->extraAttributes(['title' => 'User yang sudah dipakai pada tanggal yang sama tidak akan ditampilkan.'])
+                ->rule(function (Forms\Get $get, $livewire) {
+                    return function (string $attribute, $value, Closure $fail) use ($get, $livewire) {
+                        $date = $get('tanggal_spt');
+                        if (!$date) {
+                            return;
+                        }
+
+                        $selected = is_array($value) ? $value : (json_decode((string) $value, true) ?: []);
+                        $recordId = property_exists($livewire, 'record') && $livewire->record ? $livewire->record->id : null;
+
+                        if (empty($selected)) {
+                            return;
+                        }
+
+                        $conflictExists = \App\Models\SppdDalamDaerah::query()
+                            ->whereDate('tanggal_spt', $date)
+                            ->when($recordId, fn ($q) => $q->where('id', '!=', $recordId))
+                            ->where(function ($q) use ($selected) {
+                                $q->whereIn('user_id', $selected)
+                                  ->orWhere(function ($qq) use ($selected) {
+                                      foreach ($selected as $uid) {
+                                          $qq->orWhereRaw('JSON_CONTAINS(user_ids, ?)', ['"' . (int) $uid . '"']);
+                                      }
+                                  });
+                            })
+                            ->exists();
+
+                        if ($conflictExists) {
+                            $fail('Beberapa user sudah terpakai pada tanggal ini. Silakan pilih user lain.');
+                        }
+                    };
+                })
                 ->afterStateHydrated(function ($component, $state) {
                     if (is_string($state)) {
                         $decodedState = json_decode($state, true);

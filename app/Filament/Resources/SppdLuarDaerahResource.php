@@ -43,9 +43,49 @@ class SppdLuarDaerahResource extends Resource
         // Field untuk memilih user (single atau multiple)
         $userField = Forms\Components\Select::make('user_ids')
             ->label('Pilih User')
-            ->options(User::pluck('name', 'id'))
+            ->options(function (Forms\Get $get, $livewire) {
+                $date = $get('tanggal_berangkat');
+                $recordId = property_exists($livewire, 'record') && $livewire->record ? $livewire->record->id : null;
+
+                $blockedIds = [];
+                if ($date) {
+                    $existing = \App\Models\SppdLuarDaerah::query()
+                        ->whereDate('tanggal_berangkat', $date)
+                        ->when($recordId, fn ($q) => $q->where('id', '!=', $recordId))
+                        ->get(['user_id', 'user_ids']);
+
+                    foreach ($existing as $row) {
+                        if (!empty($row->user_id)) {
+                            $blockedIds[] = (int) $row->user_id;
+                        }
+                        $uids = $row->user_ids;
+                        if (is_string($uids)) {
+                            $uids = json_decode($uids, true) ?: [];
+                        }
+                        if (is_array($uids)) {
+                            foreach ($uids as $uid) {
+                                $blockedIds[] = (int) $uid;
+                            }
+                        }
+                    }
+                }
+
+                $blockedIds = array_values(array_unique(array_filter($blockedIds)));
+                $currentlySelected = (array) ($get('user_ids') ?? []);
+                $exclude = array_values(array_diff($blockedIds, $currentlySelected));
+
+                $query = User::query();
+                if (!empty($exclude)) {
+                    $query->whereNotIn('id', $exclude);
+                }
+
+                return $query->pluck('name', 'id');
+            })
             ->multiple()
             ->searchable()
+            ->helperText('Nama yang tidak muncul berarti sudah terpakai pada tanggal berangkat tersebut.')
+            ->extraAttributes(['title' => 'User yang sudah dipakai pada tanggal berangkat yang sama tidak akan ditampilkan.'])
+            ->preload()
             ->required()
             ->live()
             ->afterStateUpdated(function ($state, Forms\Set $set) {
@@ -60,6 +100,38 @@ class SppdLuarDaerahResource extends Resource
                         $component->state($decodedState);
                     }
                 }
+            })
+            ->rule(function (Forms\Get $get, $livewire) {
+                return function (string $attribute, $value, \Closure $fail) use ($get, $livewire) {
+                    $date = $get('tanggal_berangkat');
+                    if (!$date) {
+                        return;
+                    }
+
+                    $selected = is_array($value) ? $value : (json_decode((string) $value, true) ?: []);
+                    $recordId = property_exists($livewire, 'record') && $livewire->record ? $livewire->record->id : null;
+
+                    if (empty($selected)) {
+                        return;
+                    }
+
+                    $conflictExists = \App\Models\SppdLuarDaerah::query()
+                        ->whereDate('tanggal_berangkat', $date)
+                        ->when($recordId, fn ($q) => $q->where('id', '!=', $recordId))
+                        ->where(function ($q) use ($selected) {
+                            $q->whereIn('user_id', $selected)
+                              ->orWhere(function ($qq) use ($selected) {
+                                  foreach ($selected as $uid) {
+                                      $qq->orWhereRaw('JSON_CONTAINS(user_ids, ?)', ['"' . (int) $uid . '"']);
+                                  }
+                              });
+                        })
+                        ->exists();
+
+                    if ($conflictExists) {
+                        $fail('Beberapa user sudah terpakai pada tanggal berangkat ini. Silakan pilih user lain.');
+                    }
+                };
             });
 
         // Hidden field for user_id with immediate default value
