@@ -46,4 +46,6 @@ Route::middleware(['auth', 'role:super_admin|admin']) // Middleware dari Shield
 // Surat Izin
 Route::get('/surat-izin/download-pdf', [SuratIzinController::class, 'downloadPdf'])
     ->name('surat-izin.download-pdf');
+Route::get('/surat-izin/{suratIzin}/download-docx', [SuratIzinController::class, 'downloadDocx'])
+    ->name('surat-izin.download-docx');
 

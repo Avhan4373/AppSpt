@@ -59,14 +59,11 @@ class SuratIzinResource extends Resource
         return $table
             ->headerActions([
                 Action::make('suratIzinPdf')
-                    ->label('Download Surat Izin')
+                    ->label('Download PDF')
                     ->icon('heroicon-o-document-arrow-down')
                     ->url(function () {
-                        // Ambil query parameter terkini
                         $queryParams = request()->query('tableFilters');
                         $newQueryParams = [];
-
-                        // Format ulang parameter filter
                         if ($queryParams) {
                             foreach ($queryParams as $key => $filter) {
                                 if (is_array($filter)) {
@@ -82,8 +79,6 @@ class SuratIzinResource extends Resource
                                 }
                             }
                         }
-
-                        // Redirect ke route dengan query parameter terbaru
                         return route('surat-izin.download-pdf', $newQueryParams);
                     })
                     ->openUrlInNewTab(),
@@ -177,6 +172,11 @@ class SuratIzinResource extends Resource
             ->actions([
 //                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Action::make('downloadDocx')
+                    ->label('DOCX')
+                    ->icon('heroicon-o-arrow-down-tray')
+                    ->url(fn ($record) => route('surat-izin.download-docx', $record))
+                    ->openUrlInNewTab(),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
