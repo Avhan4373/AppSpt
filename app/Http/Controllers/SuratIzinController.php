@@ -59,14 +59,20 @@ class SuratIzinController extends Controller
         return $pdf->download('surat-izin-' . now()->format('Y-m-d') . '.pdf');
     }
 
-    public function downloadDocx(SuratIzin $suratIzin)
+    public function downloadDocx(SuratIzin $suratIzin, Request $request)
     {
+
+         // Ambil tanggal cetak dari query parameter
+    $tanggalCetak = $request->query('tanggal_cetak', now()->format('Y-m-d'));
+    $tanggalCetakCarbon = Carbon::parse($tanggalCetak);
+
         $suratIzin->loadMissing(['user.detailUser']);
         // Pilih template secara dinamis: gunakan `DATA/Template.docx` jika ada, jika tidak fallback ke file lama
         $defaultTemplate = base_path('DATA/Surat Izin Wa Sarimuna.docx');
         $preferredTemplate = base_path('DATA/Template.docx');
-        $templatePath = file_exists($preferredTemplate) ? $preferredTemplate : $defaultTemplate;
 
+        $templatePath = file_exists($preferredTemplate) ? $preferredTemplate : $defaultTemplate;
+        
         if (! file_exists($templatePath)) {
             abort(404, 'Template DOCX tidak ditemukan.');
         }
@@ -89,6 +95,16 @@ class SuratIzinController extends Controller
         $formatHari = fn ($date) => $date ? Carbon::parse($date)->locale('id')->translatedFormat('l') : '';
         $formatBulan = fn ($date) => $date ? Carbon::parse($date)->locale('id')->translatedFormat('F') : '';
 
+
+         // [PERUBAHAN UTAMA] Gunakan tanggal cetak untuk semua field yang berhubungan dengan "tanggal sekarang"
+    $formatIndoCetak = $tanggalCetakCarbon->locale('id')->translatedFormat('d F Y');
+    $formatHariCetak = $tanggalCetakCarbon->locale('id')->translatedFormat('l');
+    $formatBulanCetak = $tanggalCetakCarbon->locale('id')->translatedFormat('F');
+    $tahunCetak = $tanggalCetakCarbon->format('Y');
+
+
+    $tanggalCetak = $request->query('tanggal_cetak', now()->format('Y-m-d'));
+$tanggalCetakCarbon = Carbon::parse($tanggalCetak);
         // Mapping nilai data yang tersedia di sistem
         $valueByKey = [
             // Identitas
@@ -130,9 +146,10 @@ class SuratIzinController extends Controller
             // Metadata tanggal saat ini / surat
             'tahun' => now()->format('Y'),
             'bulan' => now()->locale('id')->translatedFormat('F'),
-            'tanggal_now' => now()->locale('id')->translatedFormat('d F Y'),
+            'tanggal_now' => $formatIndoCetak,
             'tanggal_hari_ini' => now()->locale('id')->translatedFormat('d F Y'),
-            'hari_now' => now()->locale('id')->translatedFormat('l'),
+            'hari_now' => $formatHariCetak,
+            'tanggal_cetak' => $formatIndoCetak,
 
             'tanggal_surat' => $formatIndo($suratIzin->created_at),
             'hari_surat' => $formatHari($suratIzin->created_at),
@@ -148,7 +165,8 @@ class SuratIzinController extends Controller
             $templateProcessor->setValue($rawKey, $value);
         }
 
-        $tempFile = storage_path('app/surat-izin-' . $suratIzin->id . '.docx');
+        // $tempFile = storage_path('app/surat-izin-' . $suratIzin->id . '.docx');
+        $tempFile = storage_path('app/surat-izin-' . $user->name . '.docx');
         $templateProcessor->saveAs($tempFile);
 
         // Hapus salinan template kerja setelah digunakan

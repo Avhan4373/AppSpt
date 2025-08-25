@@ -175,8 +175,23 @@ class SuratIzinResource extends Resource
                 Action::make('downloadDocx')
                     ->label('DOCX')
                     ->icon('heroicon-o-arrow-down-tray')
-                    ->url(fn ($record) => route('surat-izin.download-docx', $record))
-                    ->openUrlInNewTab(),
+                     ->form([
+                            Forms\Components\DatePicker::make('tanggal_cetak')
+                                ->label('Tanggal Cetak')
+                                ->required()
+                                ->default(now()) // Default ke tanggal hari ini
+                                ->closeOnDateSelection(),
+                        ])
+                      ->action(function (array $data, $record) {
+                    // Bangun URL dengan parameter tanggal_cetak
+                    $url = route('surat-izin.download-docx', $record) . '?' . http_build_query([
+                        'tanggal_cetak' => $data['tanggal_cetak'],
+                    ]);
+                    
+                    // Redirect ke URL dengan parameter
+                    return redirect($url);
+                })
+                ->openUrlInNewTab(), // Buka di tab baru saat diunduh
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
