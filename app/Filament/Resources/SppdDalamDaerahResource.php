@@ -50,12 +50,35 @@
 
                     $blockedIds = [];
                     if ($date) {
+                        // Check for conflicts within SppdDalamDaerah
                         $existing = \App\Models\SppdDalamDaerah::query()
                             ->whereDate('tanggal_spt', $date)
                             ->when($recordId, fn ($q) => $q->where('id', '!=', $recordId))
                             ->get(['user_id', 'user_ids']);
 
                         foreach ($existing as $row) {
+                            if (!empty($row->user_id)) {
+                                $blockedIds[] = (int) $row->user_id;
+                            }
+                            $uids = $row->user_ids;
+                            if (is_string($uids)) {
+                                $uids = json_decode($uids, true) ?: [];
+                            }
+                            if (is_array($uids)) {
+                                foreach ($uids as $uid) {
+                                    $blockedIds[] = (int) $uid;
+                                }
+                            }
+                        }
+                        
+                        // Check for conflicts with SppdLuarDaerah
+                        $existingLuar = \App\Models\SppdLuarDaerah::query()
+                            // ->whereDate('tanggal_berangkat', $date)
+                            ->whereDate('tanggal_berangkat', '<=', $date)
+                            ->whereDate('tanggal_kembali', '>=', $date)
+                            ->get(['user_id', 'user_ids']);
+
+                        foreach ($existingLuar as $row) {
                             if (!empty($row->user_id)) {
                                 $blockedIds[] = (int) $row->user_id;
                             }
@@ -123,6 +146,7 @@
                             $fail('Beberapa user sudah terpakai pada tanggal ini. Silakan pilih user lain.');
                             return;
                         }
+<<<<<<< HEAD
 
                         // Check for conflicts with SppdLuarDaerah
                         $conflictWithLuarDaerah = \App\Models\SppdLuarDaerah::query()
@@ -139,6 +163,25 @@
 
                         if ($conflictWithLuarDaerah) {
                             $fail('Beberapa user sudah terpakai di SPT Luar Daerah pada tanggal yang sama dan tidak dapat dipilih untuk SPT Dalam Daerah. Silakan pilih user lain.');
+=======
+                        
+                        // Check for conflicts with SppdLuarDaerah
+                        $conflictExistsLuar = \App\Models\SppdLuarDaerah::query()
+    ->whereDate('tanggal_berangkat', '<=', $date)
+    ->whereDate('tanggal_kembali', '>=', $date)
+    ->where(function ($q) use ($selected) {
+        $q->whereIn('user_id', $selected)
+          ->orWhere(function ($qq) use ($selected) {
+              foreach ($selected as $uid) {
+                  $qq->orWhereRaw('JSON_CONTAINS(user_ids, ?)', ['"' . (int) $uid . '"']);
+              }
+          });
+    })
+    ->exists();
+
+                        if ($conflictExistsLuar) {
+                            $fail('Beberapa user sudah terpakai pada tanggal ini di SPT Luar Daerah. Silakan pilih user lain.');
+>>>>>>> fitur6
                         }
                     };
                 })
@@ -241,12 +284,27 @@
                         }),
 
                     // Filter untuk user_id (hanya untuk admin atau super_admin)
-                    SelectFilter::make('user_id')
-                        ->label('User')
-                        ->relationship('user', 'name')
-                        ->searchable()
-                        ->preload()
-                        ->visible($isAdminOrSuper),
+                    // SelectFilter::make('user_id')
+                    //     ->label('User')
+                    //     ->relationship('user', 'name')
+                    //     ->searchable()
+                    //     ->preload()
+                    //     ->visible($isAdminOrSuper),
+                    SelectFilter::make('user')
+                    ->label('User')
+                    ->options(User::pluck('name', 'id'))
+                    ->searchable()
+                    ->preload()
+                    ->query(function (Builder $query, array $data) {
+                        if (!empty($data['value'])) {
+                            $userId = $data['value'];
+                            $query->where(function ($q) use ($userId) {
+                                $q->where('user_id', $userId)
+                                  ->orWhereRaw('JSON_CONTAINS(user_ids, ?)', ['"' . $userId . '"']);
+                            });
+                        }
+                    })
+                    ->visible($isAdminOrSuper),
 
                     // Filter untuk tanggal_spt
                     Filter::make('tanggal_spt')
