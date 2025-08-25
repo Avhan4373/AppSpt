@@ -15,7 +15,8 @@ class SuratIzin extends Model
         'nomor_surat',
         'dari_tanggal',
         'sampai_tanggal',
-        'alasan'
+        'alasan',
+        'alamat'
     ];
     protected static function boot()
     {
@@ -51,6 +52,7 @@ class SuratIzin extends Model
                 'dari_tanggal' => $this->dari_tanggal,
                 'sampai_tanggal' => $this->sampai_tanggal,
                 'alasan' => $this->alasan,
+                'alamat' => $this->alamat,
             ],
         ];
 
