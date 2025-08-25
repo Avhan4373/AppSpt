@@ -105,6 +105,7 @@
                             return;
                         }
 
+                        // Check for conflicts within SppdDalamDaerah
                         $conflictExists = \App\Models\SppdDalamDaerah::query()
                             ->whereDate('tanggal_spt', $date)
                             ->when($recordId, fn ($q) => $q->where('id', '!=', $recordId))
@@ -120,6 +121,24 @@
 
                         if ($conflictExists) {
                             $fail('Beberapa user sudah terpakai pada tanggal ini. Silakan pilih user lain.');
+                            return;
+                        }
+
+                        // Check for conflicts with SppdLuarDaerah
+                        $conflictWithLuarDaerah = \App\Models\SppdLuarDaerah::query()
+                            ->whereDate('tanggal_berangkat', $date)
+                            ->where(function ($q) use ($selected) {
+                                $q->whereIn('user_id', $selected)
+                                  ->orWhere(function ($qq) use ($selected) {
+                                      foreach ($selected as $uid) {
+                                          $qq->orWhereRaw('JSON_CONTAINS(user_ids, ?)', ['"' . (int) $uid . '"']);
+                                      }
+                                  });
+                            })
+                            ->exists();
+
+                        if ($conflictWithLuarDaerah) {
+                            $fail('Beberapa user sudah terpakai di SPT Luar Daerah pada tanggal yang sama dan tidak dapat dipilih untuk SPT Dalam Daerah. Silakan pilih user lain.');
                         }
                     };
                 })
