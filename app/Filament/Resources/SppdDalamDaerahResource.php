@@ -146,7 +146,7 @@
                             $fail('Beberapa user sudah terpakai pada tanggal ini. Silakan pilih user lain.');
                             return;
                         }
-<<<<<<< HEAD
+
 
                         // Check for conflicts with SppdLuarDaerah
                         $conflictWithLuarDaerah = \App\Models\SppdLuarDaerah::query()
@@ -163,7 +163,6 @@
 
                         if ($conflictWithLuarDaerah) {
                             $fail('Beberapa user sudah terpakai di SPT Luar Daerah pada tanggal yang sama dan tidak dapat dipilih untuk SPT Dalam Daerah. Silakan pilih user lain.');
-=======
                         
                         // Check for conflicts with SppdLuarDaerah
                         $conflictExistsLuar = \App\Models\SppdLuarDaerah::query()
@@ -181,7 +180,6 @@
 
                         if ($conflictExistsLuar) {
                             $fail('Beberapa user sudah terpakai pada tanggal ini di SPT Luar Daerah. Silakan pilih user lain.');
->>>>>>> fitur6
                         }
                     };
                 })

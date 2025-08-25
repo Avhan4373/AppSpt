@@ -76,6 +76,7 @@ class AppBackup extends Command
             'postcss.config.js',
             'phpunit.xml',
             'VERSION',
+            '.env.example',
         ];
 
         foreach ($pathsToBackup as $relative) {
@@ -117,6 +118,10 @@ class AppBackup extends Command
                 continue;
             }
             if (stripos($path, DIRECTORY_SEPARATOR.'node_modules'.DIRECTORY_SEPARATOR) !== false) {
+                continue;
+            }
+            // Skip .env file
+            if (basename($path) === '.env') {
                 continue;
             }
 
