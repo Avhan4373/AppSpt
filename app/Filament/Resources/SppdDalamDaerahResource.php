@@ -210,6 +210,7 @@
                     Forms\Components\Textarea::make('perihal')
                         ->required(),
                 ]);
+        
         }
 
         public static function table(Table $table): Table
