@@ -49,12 +49,33 @@ class SppdLuarDaerahResource extends Resource
 
                 $blockedIds = [];
                 if ($date) {
+                    // Check for conflicts within SppdLuarDaerah
                     $existing = \App\Models\SppdLuarDaerah::query()
                         ->whereDate('tanggal_berangkat', $date)
                         ->when($recordId, fn ($q) => $q->where('id', '!=', $recordId))
                         ->get(['user_id', 'user_ids']);
 
                     foreach ($existing as $row) {
+                        if (!empty($row->user_id)) {
+                            $blockedIds[] = (int) $row->user_id;
+                        }
+                        $uids = $row->user_ids;
+                        if (is_string($uids)) {
+                            $uids = json_decode($uids, true) ?: [];
+                        }
+                        if (is_array($uids)) {
+                            foreach ($uids as $uid) {
+                                $blockedIds[] = (int) $uid;
+                            }
+                        }
+                    }
+                    
+                    // Check for conflicts with SppdDalamDaerah
+                    $existingDalam = \App\Models\SppdDalamDaerah::query()
+                        ->whereDate('tanggal_spt', $date)
+                        ->get(['user_id', 'user_ids']);
+
+                    foreach ($existingDalam as $row) {
                         if (!empty($row->user_id)) {
                             $blockedIds[] = (int) $row->user_id;
                         }
@@ -115,6 +136,7 @@ class SppdLuarDaerahResource extends Resource
                         return;
                     }
 
+                    // Check for conflicts within SppdLuarDaerah
                     $conflictExists = \App\Models\SppdLuarDaerah::query()
                         ->whereDate('tanggal_berangkat', $date)
                         ->when($recordId, fn ($q) => $q->where('id', '!=', $recordId))
@@ -130,6 +152,24 @@ class SppdLuarDaerahResource extends Resource
 
                     if ($conflictExists) {
                         $fail('Beberapa user sudah terpakai pada tanggal berangkat ini. Silakan pilih user lain.');
+                        return;
+                    }
+                    
+                    // Check for conflicts with SppdDalamDaerah
+                    $conflictExistsDalam = \App\Models\SppdDalamDaerah::query()
+                        ->whereDate('tanggal_spt', $date)
+                        ->where(function ($q) use ($selected) {
+                            $q->whereIn('user_id', $selected)
+                              ->orWhere(function ($qq) use ($selected) {
+                                  foreach ($selected as $uid) {
+                                      $qq->orWhereRaw('JSON_CONTAINS(user_ids, ?)', ['"' . (int) $uid . '"']);
+                                  }
+                              });
+                        })
+                        ->exists();
+
+                    if ($conflictExistsDalam) {
+                        $fail('Beberapa user sudah terpakai pada tanggal ini di SPT Dalam Daerah. Silakan pilih user lain.');
                     }
                 };
             });
