@@ -49,3 +49,7 @@ Route::get('/surat-izin/download-pdf', [SuratIzinController::class, 'downloadPdf
 Route::get('/surat-izin/{suratIzin}/download-docx', [SuratIzinController::class, 'downloadDocx'])
     ->name('surat-izin.download-docx');
 
+
+Route::get('/pdf-luar-daerah/monthly-report', [\App\Http\Controllers\SppdLuarDaerahController::class, 'downloadMonthlyReport'])->name('sppd.luar-daerah.monthly-report');
+
+Route::get('/pdf-dalam-daerah/monthly-report', [\App\Http\Controllers\SppdDalamDaerahController::class, 'downloadMonthlyReport'])->name('sppd.dalam-daerah.monthly-report');

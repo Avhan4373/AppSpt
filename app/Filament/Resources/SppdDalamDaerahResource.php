@@ -305,7 +305,30 @@
                     CreateAction::make()
                         ->label('Add New')
                         ->visible(false),
-                    Action::make('pdfdalamdaerah')
+                    Action::make('download_monthly_report')
+                    ->label('Download Laporan Bulanan')
+                    ->color('info')
+                    ->icon('heroicon-o-document-arrow-down')
+                    ->form([
+                        Forms\Components\Select::make('bulan')
+                            ->label('Bulan')
+                            ->options([
+                                1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April',
+                                5 => 'Mei', 6 => 'Juni', 7 => 'Juli', 8 => 'Agustus',
+                                9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember',
+                            ])
+                            ->required(),
+                        Forms\Components\TextInput::make('tahun')
+                            ->label('Tahun')
+                            ->numeric()
+                            ->required()
+                            ->default(date('Y')),
+                    ])
+                    ->action(function (array $data) {
+                        $url = route('sppd.dalam-daerah.monthly-report', ['bulan' => $data['bulan'], 'tahun' => $data['tahun']]);
+                        return redirect()->to($url);
+                    }),
+                Action::make('pdfdalamdaerah')
                         ->label('Download PDF')
                         ->icon('heroicon-o-document-arrow-down')
                         ->url(function () {

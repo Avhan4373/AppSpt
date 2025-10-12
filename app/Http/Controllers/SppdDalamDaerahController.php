@@ -161,5 +161,46 @@ class SppdDalamDaerahController extends Controller
     return $pdf->stream('SPPD-Dalam-Daerah-Terfilter.pdf');
 }
 
+public function downloadMonthlyReport(Request $request)
+{
+    $request->validate([
+        'bulan' => 'required|integer|between:1,12',
+        'tahun' => 'required|integer',
+    ]);
+
+    $bulan = $request->input('bulan');
+    $tahun = $request->input('tahun');
+
+    $query = SppdDalamDaerah::query()
+        ->whereMonth('tanggal_spt', $bulan)
+        ->whereYear('tanggal_spt', $tahun);
+
+    $query
+        ->orderBy('tanggal_spt', 'asc')
+        ->orderByRaw(
+            "CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(nomor_spt, '/', 2), '/', -1), '.', 1) AS UNSIGNED) ASC"
+        )
+        ->orderByRaw(
+            "CASE WHEN SUBSTRING_INDEX(SUBSTRING_INDEX(nomor_spt, '/', 2), '/', -1) LIKE '%.%'
+                  THEN SUBSTRING_INDEX(SUBSTRING_INDEX(nomor_spt, '/', 2), '.', -1)
+                  ELSE '' END ASC"
+        )
+        ->orderBy('id', 'asc');
+
+    $sppdList = $query->get();
+
+    $pdf = \PDF::loadView('sppd-dalam-daerah.filtered-pdf', [
+        'sppdList' => $sppdList,
+        'filters' => [
+            'bulan_tahun' => [
+                'bulan' => $bulan,
+                'tahun' => $tahun,
+            ]
+        ],
+    ]);
+
+    return $pdf->stream('Laporan-Bulanan-SPPD-Dalam-Daerah-'.$bulan.'-'.$tahun.'.pdf');
+}
+
 
 }

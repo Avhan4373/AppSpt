@@ -292,7 +292,7 @@ class SppdLuarDaerahResource extends Resource
                     ->preload()
                     ->visible($isAdminOrSuper),
 
-                Filter::make('tanggal_spt')
+                Filter::make('tanggal_berangkat')
                     ->form([
                         Forms\Components\DatePicker::make('tanggal_dari')
                             ->label('Dari Tanggal'),
@@ -303,11 +303,11 @@ class SppdLuarDaerahResource extends Resource
                         return $query
                             ->when(
                                 $data['tanggal_dari'],
-                                fn (Builder $query, $tanggalDari): Builder => $query->whereDate('tanggal_spt', '>=', $tanggalDari),
+                                fn (Builder $query, $tanggalDari): Builder => $query->whereDate('tanggal_berangkat', '>=', $tanggalDari),
                             )
                             ->when(
                                 $data['tanggal_sampai'],
-                                fn (Builder $query, $tanggalSampai): Builder => $query->whereDate('tanggal_spt', '<=', $tanggalSampai),
+                                fn (Builder $query, $tanggalSampai): Builder => $query->whereDate('tanggal_berangkat', '<=', $tanggalSampai),
                             );
                     }),
             ])
@@ -315,6 +315,29 @@ class SppdLuarDaerahResource extends Resource
                 CreateAction::make()
                     ->label('Add New')
                     ->visible(false),
+                Action::make('download_monthly_report')
+                    ->label('Download Laporan Bulanan')
+                    ->icon('heroicon-o-document-arrow-down')
+                    ->color('info')
+                    ->form([
+                        Forms\Components\Select::make('bulan')
+                            ->label('Bulan')
+                            ->options([
+                                1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April',
+                                5 => 'Mei', 6 => 'Juni', 7 => 'Juli', 8 => 'Agustus',
+                                9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember',
+                            ])
+                            ->required(),
+                        Forms\Components\TextInput::make('tahun')
+                            ->label('Tahun')
+                            ->numeric()
+                            ->required()
+                            ->default(date('Y')),
+                    ])
+                    ->action(function (array $data) {
+                        $url = route('sppd.luar-daerah.monthly-report', ['bulan' => $data['bulan'], 'tahun' => $data['tahun']]);
+                        return redirect()->to($url);
+                    }),
                 Action::make('pdfluardaerah')
                     ->label('Download PDF')
                     ->icon('heroicon-o-document-arrow-down')
