@@ -27,7 +27,7 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
         th, td {
             border: 1px solid #000;
@@ -37,28 +37,44 @@
         th {
             background-color: #f0f0f0;
         }
-        .footer {
-            margin-top: 30px;
-            text-align: right;
+        .ttd-container {
+            width: 100%;
+            margin-top: 40px;
+        }
+        .ttd {
+            width: 250px;
+            text-align: center;
+            float: right;
+            margin-right: 50px;
+        }
+        .ttd p {
+            margin: 3px 0;
+        }
+        .nama {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        .nip {
+            margin-top: 2px;
         }
     </style>
 </head>
 <body>
     <div class="header">
-    <div class="title">LAPORAN SPPD DALAM DAERAH</div>
-    @php
-        $periode = 'Semua';
-        if (!empty($filters['tanggal_spt']['tanggal_dari']) && !empty($filters['tanggal_spt']['tanggal_sampai'])) {
-            $periode = \Carbon\Carbon::parse($filters['tanggal_spt']['tanggal_dari'])->format('d-m-Y') . ' s/d ' . \Carbon\Carbon::parse($filters['tanggal_spt']['tanggal_sampai'])->format('d-m-Y');
-        } elseif (!empty($filters['tanggal_spt']['tanggal_dari'])) {
-            $periode = 'Mulai ' . \Carbon\Carbon::parse($filters['tanggal_spt']['tanggal_dari'])->format('d-m-Y');
-        } elseif (!empty($filters['tanggal_spt']['tanggal_sampai'])) {
-            $periode = 'Sampai ' . \Carbon\Carbon::parse($filters['tanggal_spt']['tanggal_sampai'])->format('d-m-Y');
-        }
-    @endphp
-    <div class="subtitle">Periode: {{ $periode }}</div>
-</div>
-    <!--<h2>Daftar SPPD Dalam Daerah</h2>-->
+        <div class="title">LAPORAN SPPD DALAM DAERAH</div>
+        @php
+            $periode = 'Semua';
+            if (!empty($filters['tanggal_spt']['tanggal_dari']) && !empty($filters['tanggal_spt']['tanggal_sampai'])) {
+                $periode = \Carbon\Carbon::parse($filters['tanggal_spt']['tanggal_dari'])->format('d-m-Y') . ' s/d ' . \Carbon\Carbon::parse($filters['tanggal_spt']['tanggal_sampai'])->format('d-m-Y');
+            } elseif (!empty($filters['tanggal_spt']['tanggal_dari'])) {
+                $periode = 'Mulai ' . \Carbon\Carbon::parse($filters['tanggal_spt']['tanggal_dari'])->format('d-m-Y');
+            } elseif (!empty($filters['tanggal_spt']['tanggal_sampai'])) {
+                $periode = 'Sampai ' . \Carbon\Carbon::parse($filters['tanggal_spt']['tanggal_sampai'])->format('d-m-Y');
+            }
+        @endphp
+        <div class="subtitle">Periode: {{ $periode }}</div>
+    </div>
+
     <table>
         <thead>
             <tr>
@@ -87,5 +103,17 @@
             @endforeach
         </tbody>
     </table>
+
+    <div class="ttd-container">
+        <div class="ttd">
+            {{ \Carbon\Carbon::setlocale('id') }}
+            <p>Langara, {{ 
+                \Carbon\Carbon::now()->translatedFormat('d F Y') }}</p>
+            <p>Kasubag Umum Kepegawaian</p>
+            <br><br><br><br>
+            <p class="nama">RIANSYAH, S.P</p>
+            <p class="nip">NIP. 19950405 201903 1 003</p>
+        </div>
+    </div>
 </body>
 </html>

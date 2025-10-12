@@ -45,6 +45,7 @@ class SppdLuarDaerahResource extends Resource
             ->label('Pilih User')
             ->options(function (Forms\Get $get, $livewire) {
                 $date = $get('tanggal_berangkat');
+
                 $recordId = property_exists($livewire, 'record') && $livewire->record ? $livewire->record->id : null;
 
                 $blockedIds = [];
@@ -337,7 +338,7 @@ class SppdLuarDaerahResource extends Resource
                             }
                         }
 
-                        return route('pdfluardaerah', $newQueryParams);
+                        return url('/pdf-luar-daerah') . '?' . http_build_query(request()->query());
                     })
                     ->openUrlInNewTab(),
             ])

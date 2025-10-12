@@ -59,7 +59,7 @@ class SppdLuarDaerahController extends Controller
             $sppdLuarDaerah->lama_tugas_terbilang = 'Zero';
         }
         $validator = Validator::make($request->all(), [
-            'tanggal_cetak' => 'nullable|date_format:Y-m-d', // Validasi input dalam format YYYY-MM-DD
+            'tanggal_cetak' => 'nullable|date_format:Y-m-d', // Validasi input luar format YYYY-MM-DD
         ]);
     
         if ($validator->fails()) {
@@ -104,4 +104,69 @@ private function terbilang($angka)
 
     return $terbilang;
 }
+
+public function downloadFilteredPdf(Request $request)
+{
+    $query = SppdLuarDaerah::query();
+
+    $filters = $request->input('tableFilters', []);
+    
+    // dd($filters);
+
+    // Filter nomor_spt
+    if (!empty($filters['nomor_spt']['value'])) {
+        $query->where('nomor_spt', 'like', '%' . $filters['nomor_spt']['value'] . '%');
+    }
+
+    // Filter tanggal_spt
+    if (!empty($filters['tanggal_spt']['tanggal_dari'])) {
+        $query->whereDate('tanggal_spt', '>=', $filters['tanggal_spt']['tanggal_dari']);
+    }
+    if (!empty($filters['tanggal_spt']['tanggal_sampai'])) {
+        $query->whereDate('tanggal_spt', '<=', $filters['tanggal_spt']['tanggal_sampai']);
+    }
+
+    // Jika Anda ingin filter berdasarkan user_id
+    if (!empty($filters['user_id']['value'])) {
+        $userId = $filters['user_id']['value'];
+        $query->where(function ($q) use ($userId) {
+            $q->where('user_id', $userId)
+                ->orWhereRaw('JSON_CONTAINS(user_ids, ?)', ['"' . $userId . '"']);
+        });
+    }
+
+    // Urutkan berdasarkan tanggal terlebih dahulu agar bulan lebih awal muncul sebelum yang lebih akhir,
+    // lalu base number dan suffix huruf untuk konsistensi luar tanggal yang sama.
+    // number_segment = bagian ke-2 dari nomor_spt (setelah prefix), contoh: "008" atau "008.a"
+    // base_number = angka sebelum titik, contoh: 008
+    // suffix_letter = huruf setelah titik, kosong jika tidak ada
+    $query
+        ->orderBy('tanggal_spt', 'asc')
+        ->orderByRaw(
+            "CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(nomor_spt, '/', 2), '/', -1), '.', 1) AS UNSIGNED) ASC"
+        )
+        ->orderByRaw(
+            // Kosong ('') akan diurutkan sebelum 'a', 'b', dst sehingga 008 muncul sebelum 008.a
+            "CASE WHEN SUBSTRING_INDEX(SUBSTRING_INDEX(nomor_spt, '/', 2), '/', -1) LIKE '%.%'
+                  THEN SUBSTRING_INDEX(SUBSTRING_INDEX(nomor_spt, '/', 2), '.', -1)
+                  ELSE '' END ASC"
+        )
+        ->orderBy('id', 'asc');
+
+    $sppdList = $query->get();
+
+
+// Kirim ke PDF view
+// $pdf = \PDF::loadView('sppd-luar-daerah.filtered-pdf', compact('sppdList', 'formattedFilters'));
+
+    // Generate PDF dari view
+    $pdf = \PDF::loadView('sppd-luar-daerah.filtered-pdf', [
+        'sppdList' => $sppdList,
+        'filters' => $filters,
+    ]);
+
+    // return $pdf->download('SPPD-luar-Daerah-Terfilter.pdf');
+    return $pdf->stream('SPPD-luar-Daerah-Terfilter.pdf');
+}
+
 }

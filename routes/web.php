@@ -35,7 +35,7 @@ Route::get('sppd/luar-daerah/{sppdLuarDaerah}/print', [SppdLuarDaerahController:
     
 // Route::get('/pdf-dalam-daerah', [SppdDalamDaerahController::class, 'downloadFilteredPdf'])->name('pdfdalamdaerah');
 Route::get('/pdf-dalam-daerah', [SppdDalamDaerahController::class, 'downloadFilteredPdf'])->name('pdfdalamdaerah');
-
+Route::get('/pdf-luar-daerah', [SppdLuarDaerahController::class, 'downloadFilteredPdf'])->name('pdfluardaerah');
 
 Route::middleware(['auth', 'role:super_admin|admin']) // Middleware dari Shield
 ->group(function () {

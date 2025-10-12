@@ -250,6 +250,7 @@
                     Tables\Columns\TextColumn::make('perihal')->sortable()->searchable(),
                 ])
                 ->filters([
+
                     // Filter untuk nomor_spt
                     Filter::make('nomor_spt')
                         ->form([
@@ -264,14 +265,6 @@
                                     fn (Builder $query, $nomorSpt): Builder => $query->where('nomor_spt', 'like', "%{$nomorSpt}%"),
                                 );
                         }),
-
-                    // Filter untuk user_id (hanya untuk admin atau super_admin)
-                    // SelectFilter::make('user_id')
-                    //     ->label('User')
-                    //     ->relationship('user', 'name')
-                    //     ->searchable()
-                    //     ->preload()
-                    //     ->visible($isAdminOrSuper),
                     SelectFilter::make('user')
                     ->label('User')
                     ->options(User::pluck('name', 'id'))
