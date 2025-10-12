@@ -49,6 +49,7 @@ class SuratIzinController extends Controller
                 'dari_tanggal' => $surat->dari_tanggal,
                 'sampai_tanggal' => $surat->sampai_tanggal,
                 'alasan' => $surat->alasan,
+                'alamat' => $surat->alamat,
             ];
         });
 
@@ -142,6 +143,7 @@ $tanggalCetakCarbon = Carbon::parse($tanggalCetak);
             // Keterangan
             'alasan' => (string) ($suratIzin->alasan ?? ''),
             'keterangan' => (string) ($suratIzin->alasan ?? ''),
+            'alamat' => (string) ($suratIzin->alamat ?? ''), 
 
             // Metadata tanggal saat ini / surat
             'tahun' => now()->format('Y'),

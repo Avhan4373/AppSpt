@@ -59,7 +59,7 @@ class SppdLuarDaerahController extends Controller
             $sppdLuarDaerah->lama_tugas_terbilang = 'Zero';
         }
         $validator = Validator::make($request->all(), [
-            'tanggal_cetak' => 'nullable|date_format:Y-m-d', // Validasi input dalam format YYYY-MM-DD
+            'tanggal_cetak' => 'nullable|date_format:Y-m-d', // Validasi input luar format YYYY-MM-DD
         ]);
     
         if ($validator->fails()) {
@@ -104,4 +104,134 @@ private function terbilang($angka)
 
     return $terbilang;
 }
+
+public function downloadFilteredPdf(Request $request)
+{
+    $query = SppdLuarDaerah::query();
+
+    $filters = $request->input('tableFilters', []);
+    
+    // dd($filters);
+
+    // Filter nomor_spt
+    if (!empty($filters['nomor_spt']['value'])) {
+        $query->where('nomor_spt', 'like', '%' . $filters['nomor_spt']['value'] . '%');
+    }
+
+    // Filter tanggal_berangkat
+    if (!empty($filters['tanggal_berangkat']['tanggal_dari'])) {
+        $query->whereDate('tanggal_berangkat', '>=', $filters['tanggal_berangkat']['tanggal_dari']);
+    }
+    if (!empty($filters['tanggal_berangkat']['tanggal_sampai'])) {
+        $query->whereDate('tanggal_berangkat', '<=', $filters['tanggal_berangkat']['tanggal_sampai']);
+    }
+
+    // Jika Anda ingin filter berdasarkan user_id
+    if (!empty($filters['user_id']['value'])) {
+        $userId = $filters['user_id']['value'];
+        $query->where(function ($q) use ($userId) {
+            $q->where('user_id', $userId)
+                ->orWhereRaw('JSON_CONTAINS(user_ids, ?)', ['"' . $userId . '"']);
+        });
+    }
+
+    // Urutkan berdasarkan tanggal terlebih dahulu agar bulan lebih awal muncul sebelum yang lebih akhir,
+    // lalu base number dan suffix huruf untuk konsistensi luar tanggal yang sama.
+    // number_segment = bagian ke-2 dari nomor_spt (setelah prefix), contoh: "008" atau "008.a"
+    // base_number = angka sebelum titik, contoh: 008
+    // suffix_letter = huruf setelah titik, kosong jika tidak ada
+    $query
+        ->orderBy('tanggal_berangkat', 'asc')
+        ->orderByRaw(
+            "CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(nomor_spt, '/', 2), '/', -1), '.', 1) AS UNSIGNED) ASC"
+        )
+        ->orderByRaw(
+            // Kosong ('') akan diurutkan sebelum 'a', 'b', dst sehingga 008 muncul sebelum 008.a
+            "CASE WHEN SUBSTRING_INDEX(SUBSTRING_INDEX(nomor_spt, '/', 2), '/', -1) LIKE '%.%'
+                  THEN SUBSTRING_INDEX(SUBSTRING_INDEX(nomor_spt, '/', 2), '.', -1)
+                  ELSE '' END ASC"
+        )
+        ->orderBy('id', 'asc');
+
+    $sppdList = $query->get();
+
+
+// Kirim ke PDF view
+// $pdf = \PDF::loadView('sppd-luar-daerah.filtered-pdf', compact('sppdList', 'formattedFilters'));
+
+    // Generate PDF dari view
+    $pdf = Pdf::loadView('sppd-luar-daerah.filtered-pdf', [
+        'sppdList' => $sppdList,
+        'filters' => $filters,
+    ]);
+
+    // return $pdf->download('SPPD-luar-Daerah-Terfilter.pdf');
+    return $pdf->stream('SPPD-luar-Daerah-Terfilter.pdf');
+}
+
+public function printMonthlyReport(Request $request)
+{
+    $request->validate([
+        'month' => 'required|integer|between:1,12',
+        'year' => 'required|integer|min:1900',
+    ]);
+
+    $month = $request->input('month');
+    $year = $request->input('year');
+
+    $sppdList = SppdLuarDaerah::whereYear('tanggal_berangkat', $year)
+                                ->whereMonth('tanggal_berangkat', $month)
+                                ->orderBy('tanggal_berangkat', 'asc')
+                                ->get();
+
+    $pdf = Pdf::loadView('sppd-luar-daerah.monthly-report-pdf', [
+        'sppdList' => $sppdList,
+        'month' => $month,
+        'year' => $year,
+    ]);
+
+    return $pdf->stream('Laporan-Bulanan-SPPD-Luar-Daerah-'.$month.'-'.$year.'.pdf');
+}
+
+public function downloadMonthlyReport(Request $request)
+{
+    $request->validate([
+        'bulan' => 'required|integer|between:1,12',
+        'tahun' => 'required|integer',
+    ]);
+
+    $bulan = $request->input('bulan');
+    $tahun = $request->input('tahun');
+
+    $query = SppdLuarDaerah::query()
+        ->whereMonth('tanggal_berangkat', $bulan)
+        ->whereYear('tanggal_berangkat', $tahun);
+
+    $query
+        ->orderBy('tanggal_berangkat', 'asc')
+        ->orderByRaw(
+            "CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(nomor_spt, '/', 2), '/', -1), '.', 1) AS UNSIGNED) ASC"
+        )
+        ->orderByRaw(
+            "CASE WHEN SUBSTRING_INDEX(SUBSTRING_INDEX(nomor_spt, '/', 2), '/', -1) LIKE '%.%'
+                  THEN SUBSTRING_INDEX(SUBSTRING_INDEX(nomor_spt, '/', 2), '.', -1)
+                  ELSE '' END ASC"
+        )
+        ->orderBy('id', 'asc');
+
+    $sppdList = $query->get();
+
+    $pdf = Pdf::loadView('sppd-luar-daerah.filtered-pdf', [
+        'sppdList' => $sppdList,
+        'filters' => [
+            'bulan_tahun' => [
+                'bulan' => $bulan,
+                'tahun' => $tahun,
+            ]
+        ],
+    ]);
+
+    return $pdf->stream('Laporan-Bulanan-SPPD-'.$bulan.'-'.$tahun.'.pdf');
+}
+
 }

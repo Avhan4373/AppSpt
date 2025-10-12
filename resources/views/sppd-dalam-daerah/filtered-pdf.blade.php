@@ -27,7 +27,7 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
         th, td {
             border: 1px solid #000;
@@ -37,28 +37,48 @@
         th {
             background-color: #f0f0f0;
         }
-        .footer {
-            margin-top: 30px;
-            text-align: right;
+        .ttd-container {
+            width: 100%;
+            margin-top: 40px;
+        }
+        .ttd {
+            width: 250px;
+            text-align: center;
+            float: right;
+            margin-right: 50px;
+        }
+        .ttd p {
+            margin: 3px 0;
+        }
+        .nama {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        .nip {
+            margin-top: 2px;
         }
     </style>
 </head>
 <body>
     <div class="header">
-    <div class="title">LAPORAN SPPD DALAM DAERAH</div>
-    @php
-        $periode = 'Semua';
-        if (!empty($filters['tanggal_spt']['tanggal_dari']) && !empty($filters['tanggal_spt']['tanggal_sampai'])) {
-            $periode = \Carbon\Carbon::parse($filters['tanggal_spt']['tanggal_dari'])->format('d-m-Y') . ' s/d ' . \Carbon\Carbon::parse($filters['tanggal_spt']['tanggal_sampai'])->format('d-m-Y');
-        } elseif (!empty($filters['tanggal_spt']['tanggal_dari'])) {
-            $periode = 'Mulai ' . \Carbon\Carbon::parse($filters['tanggal_spt']['tanggal_dari'])->format('d-m-Y');
-        } elseif (!empty($filters['tanggal_spt']['tanggal_sampai'])) {
-            $periode = 'Sampai ' . \Carbon\Carbon::parse($filters['tanggal_spt']['tanggal_sampai'])->format('d-m-Y');
-        }
-    @endphp
-    <div class="subtitle">Periode: {{ $periode }}</div>
-</div>
-    <!--<h2>Daftar SPPD Dalam Daerah</h2>-->
+        <div class="title">LAPORAN SPPD DALAM DAERAH</div>
+        @php
+            \Carbon\Carbon::setLocale('id');
+            $periode = 'Semua';
+            if (isset($filters['tanggal_spt']['tanggal_dari'], $filters['tanggal_spt']['tanggal_sampai'])) {
+                $periode = \Carbon\Carbon::parse($filters['tanggal_spt']['tanggal_dari'])->translatedFormat('d F Y') . ' s/d ' . \Carbon\Carbon::parse($filters['tanggal_spt']['tanggal_sampai'])->translatedFormat('d F Y');
+            } elseif (isset($filters['tanggal_spt']['tanggal_dari'])) {
+                $periode = 'Mulai ' . \Carbon\Carbon::parse($filters['tanggal_spt']['tanggal_dari'])->translatedFormat('d F Y');
+            } elseif (isset($filters['tanggal_spt']['tanggal_sampai'])) {
+                $periode = 'Sampai ' . \Carbon\Carbon::parse($filters['tanggal_spt']['tanggal_sampai'])->translatedFormat('d F Y');
+            } elseif (isset($filters['bulan_tahun']) && is_array($filters['bulan_tahun']) && isset($filters['bulan_tahun']['bulan']) && isset($filters['bulan_tahun']['tahun'])) {
+                $namaBulan = \Carbon\Carbon::create()->month((int) $filters['bulan_tahun']['bulan'])->translatedFormat('F');
+                $periode = 'Bulan ' . $namaBulan . ' ' . $filters['bulan_tahun']['tahun'];
+            }
+        @endphp
+        <div class="subtitle">Periode: {{ $periode }}</div>
+    </div>
+
     <table>
         <thead>
             <tr>
@@ -87,5 +107,27 @@
             @endforeach
         </tbody>
     </table>
+
+    <div class="ttd-container">
+        @php
+            $kepalaDinas = \App\Models\User::whereHas('detailUser', function ($query) {
+                $query->where('jabatan', 'Kasubag Umum dan Kepegawaian');
+            })->first();
+        @endphp
+        <div class="ttd">
+            <p>Langara, {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</p>
+            @if ($kepalaDinas && $kepalaDinas->detailUser)
+                <p>{{ $kepalaDinas->detailUser->jabatan ?? 'Kasubag Umum dan Kepegawaian' }}</p>
+                <br><br><br><br>
+                <p class="nama">{{ $kepalaDinas->name }}</p>
+                <p class="nip">NIP. {{ $kepalaDinas->detailUser->nip ?? '-' }}</p>
+            @else
+                <p>Kepala Dinas</p>
+                <br><br><br><br>
+                <p class="nama">(Nama Kepala Dinas)</p>
+                <p class="nip">NIP. -</p>
+            @endif
+        </div>
+    </div>
 </body>
 </html>

@@ -49,8 +49,11 @@ class SuratIzinResource extends Resource
                 Forms\Components\DatePicker::make('sampai_tanggal')
                     ->required(),
                 Forms\Components\Textarea::make('alasan')
-                    ->required()
-                    ->columnSpanFull(),
+                    ->required(),
+                    // ->columnSpanFull(),
+                Forms\Components\Textarea::make('alamat')
+                    ->required(),
+                    // ->columnSpanFull(),
             ]);
     }
 
